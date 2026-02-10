@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# VS Code
+.vscode/
+
+# OS / OneDrive noise
+.DS_Store
+Thumbs.db
+desktop.ini
