@@ -5,8 +5,11 @@ from pydantic import BaseModel, Field
 
 
 # -------------------------
-# Quiz models
+# Quiz Models
 # -------------------------
+
+QuizType = Literal["mcq", "true_false"]
+
 
 class QuizOption(BaseModel):
     id: str
@@ -14,44 +17,65 @@ class QuizOption(BaseModel):
 
 
 class QuizQuestion(BaseModel):
-    id: str
     prompt: str
-    options: List[QuizOption]
+    options: Optional[List[QuizOption]] = None
     correct_option_id: str
     explanation: Optional[str] = None
 
 
-# -------------------------
-# Slide models
-# -------------------------
-
-SlideType = Literal[
-    "panel",
-    "engage_list",
-    "engage_button",
-    "quiz_mcq"
-]
-
-
-class Slide(BaseModel):
-    id: str
-    type: SlideType
-    locked: bool = True
-
-    header: Optional[str] = None
-
-    # Panel content
-    body: Optional[List[str]] = None
-
-    # Engage content
-    items: Optional[List[str]] = None
-
-    # Quiz content
-    questions: Optional[List[QuizQuestion]] = None
+class QuizSlide(BaseModel):
+    type: Literal["quiz"]
+    quiz_type: QuizType
+    questions: List[QuizQuestion]
 
 
 # -------------------------
-# Module root
+# Panel
+# -------------------------
+
+class PanelSlide(BaseModel):
+    type: Literal["panel"]
+    header: str
+    body: List[str]
+    image: Optional[str] = None
+
+
+# -------------------------
+# Engage 1 (Button Replace)
+# -------------------------
+
+class Engage1Item(BaseModel):
+    label: str
+    text: str
+    image: Optional[str] = None
+
+
+class Engage1Slide(BaseModel):
+    type: Literal["engage_1"]
+    header: str
+    items: List[Engage1Item]
+
+
+# -------------------------
+# Engage 2 (Progressive Build)
+# -------------------------
+
+class Engage2Slide(BaseModel):
+    type: Literal["engage_2"]
+    header: str
+    layers: List[str]
+    image: Optional[str] = None
+
+
+# -------------------------
+# Unified Slide Union
+# -------------------------
+
+Slide = PanelSlide | Engage1Slide | Engage2Slide | QuizSlide
+
+
+# -------------------------
+# Module Root
 # -------------------------
 
 class Module(BaseModel):
