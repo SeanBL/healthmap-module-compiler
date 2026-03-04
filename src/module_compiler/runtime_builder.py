@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import List
 
-from .raw_models import RawSlide
-from .schema import (
+from .models.raw_models import RawSlide
+from .models.schema import (
     Module,
     PanelSlide,
     Engage1Slide,
@@ -12,6 +12,7 @@ from .schema import (
     QuizSlide,
     QuizQuestion,
     QuizOption,
+    Engage2Layer,
 )
 
 
@@ -51,6 +52,7 @@ def convert_slide(raw: RawSlide):
 
     if raw.slide_type == "engage1":
         items = []
+
         for item in raw.engage1_items or []:
             text_blocks = blocks_to_strings(item.body)
             combined_text = "\n".join(text_blocks)
@@ -63,18 +65,45 @@ def convert_slide(raw: RawSlide):
                 )
             )
 
+        intro_text = ""
+        if raw.engage1_intro:
+            intro_blocks = blocks_to_strings(raw.engage1_intro)
+            intro_text = "\n".join(intro_blocks)
+
         return Engage1Slide(
             type="engage_1",
             header=raw.header,
+            intro=intro_text,
+            intro_image=raw.engage1_intro_image,
             items=items,
         )
 
     if raw.slide_type == "engage2":
+
+        intro_text = ""
+        intro_image = raw.engage2_intro_image
+
+        if raw.engage2_intro:
+            intro_blocks = blocks_to_strings(raw.engage2_intro)
+            intro_text = "\n".join(intro_blocks)
+
+        layers = []
+
+        for block in raw.engage2_layers or []:
+            layers.append(
+                Engage2Layer(
+                    text=block.text,
+                    image=block.image,
+                )
+            )
+
         return Engage2Slide(
             type="engage_2",
             header=raw.header,
-            layers=raw.engage2_layers or [],
-            image=raw.image,
+            intro=intro_text,
+            intro_image=intro_image,
+            layers=layers,
+            button_label=raw.engage2_button_label or "Continue",
         )
 
     if raw.slide_type == "quiz":
@@ -97,6 +126,7 @@ def convert_slide(raw: RawSlide):
 
         return QuizSlide(
             type="quiz",
+            quiz_scope=raw.quiz_scope or "inline",
             quiz_type=raw.quiz_type or "mcq",
             questions=questions,
         )

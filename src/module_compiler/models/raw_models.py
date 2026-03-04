@@ -41,11 +41,17 @@ class RawSlide(BaseModel):
     body: Optional[List[Block]] = None
 
     # engage1
+    engage1_intro: Optional[List[Block]] = None
+    engage1_intro_image: Optional[str] = None
     engage1_items: Optional[List[RawEngage1Item]] = None
 
     # engage2
-    engage2_layers: Optional[List[str]] = None  # each layer is plain text for now
+    engage2_intro: Optional[List[Block]] = None
+    engage2_intro_image: Optional[str] = None
+    engage2_layers: Optional[List[Block]] = None
+    engage2_button_label: Optional[str] = None
 
     # quiz
     quiz_questions: Optional[List[RawQuizQuestion]] = None
     quiz_type: Optional[Literal["mcq", "true_false"]] = None
+    quiz_scope: Optional[str] = None

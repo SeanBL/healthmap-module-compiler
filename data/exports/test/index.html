@@ -1,0 +1,54 @@
+<head>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+
+    <header id="module-header">
+      <h1 id="module-title"></h1>
+    </header>
+
+    <main id="slide-container">
+      <!-- Slides render here -->
+    </main>
+
+    <footer id="navigation">
+      <button id="menu-btn">&#9776;</button>
+      <button id="prev-btn">Previous</button>
+      <span id="slide-counter"></span>
+      <button id="next-btn">Next</button>
+    </footer>
+
+  </div>
+
+  <!-- Overlay Drawer -->
+  <div id="drawer-overlay">
+    <div id="drawer">
+      <div class="drawer-header">
+        <button id="drawer-close">✕</button>
+      </div>
+
+      <div class="drawer-tabs">
+        <button id="tab-menu" class="active">Menu</button>
+        <button id="tab-resources">Resources</button>
+      </div>
+
+      <div id="drawer-content">
+        <!-- Slide list OR Resources list rendered here -->
+      </div>
+    </div>
+  </div>
+
+  <div id="resume-overlay">
+    <div id="resume-modal">
+      <h2>Resume Module?</h2>
+      <p>You previously started this module.</p>
+      <div class="resume-actions">
+        <button id="resume-continue">Continue</button>
+        <button id="resume-restart">Restart</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="runtime.js"></script>
+</body>

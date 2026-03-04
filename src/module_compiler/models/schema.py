@@ -25,6 +25,7 @@ class QuizQuestion(BaseModel):
 
 class QuizSlide(BaseModel):
     type: Literal["quiz"]
+    quiz_scope: Literal["inline", "application", "final"] = "inline"
     quiz_type: QuizType
     questions: List[QuizQuestion]
 
@@ -53,6 +54,8 @@ class Engage1Item(BaseModel):
 class Engage1Slide(BaseModel):
     type: Literal["engage_1"]
     header: str
+    intro: str
+    intro_image: Optional[str] = None
     items: List[Engage1Item]
 
 
@@ -60,12 +63,18 @@ class Engage1Slide(BaseModel):
 # Engage 2 (Progressive Build)
 # -------------------------
 
+class Engage2Layer(BaseModel):
+    text: str
+    image: Optional[str] = None
+
+
 class Engage2Slide(BaseModel):
     type: Literal["engage_2"]
     header: str
-    layers: List[str]
-    image: Optional[str] = None
-
+    intro: str
+    intro_image: Optional[str] = None
+    layers: List[Engage2Layer]
+    button_label: Optional[str] = Field(default="Continue")
 
 # -------------------------
 # Unified Slide Union

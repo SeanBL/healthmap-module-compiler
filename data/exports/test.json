@@ -1,0 +1,61 @@
+{
+  "module_id": "test",
+  "version": "1.0",
+  "slides": [
+    {
+      "type": "panel",
+      "header": "How to Use the Fetal Kick Count Chart",
+      "body": [
+        "The best time to count kicks is whenever your baby is typically the most active. Ask the client if she feels the baby moving around a lot at a certain time each day? If the baby doesn’t have a predictable pattern, after dinner is a good time to try."
+      ],
+      "image": null
+    },
+    {
+      "type": "engage_2",
+      "header": "How to Use the Fetal Kick Count Chart (continued)",
+      "intro": "To fill out the card, follow these steps:",
+      "intro_image": null,
+      "layers": [
+        {
+          "text": "Lie down on her side or relax in a comfortable chair.",
+          "image": null
+        },
+        {
+          "text": "Make a note of the time.",
+          "image": null
+        },
+        {
+          "text": "Pay attention only to her baby’s movements. Count any movement that she can feel (except hiccups). Any twist, kick, or turn is 1 movement.",
+          "image": null
+        },
+        {
+          "text": "After you count 10 movements, check the time and record on the card how many minutes it took. If the baby does not kick or move within 1 hour, advise her to do some or all of the following things and then try again",
+          "image": null
+        },
+        {
+          "text": "Eat or drink something, like fruit or juice.",
+          "image": null
+        },
+        {
+          "text": "Lie on her left side.",
+          "image": null
+        },
+        {
+          "text": "Walk around for 5 minutes.",
+          "image": null
+        }
+      ],
+      "button_label": "Next"
+    },
+    {
+      "type": "panel",
+      "header": "Conclusion",
+      "body": [
+        "For Community Health Workers (CHWs), recognizing urgent maternal warning signs during pregnancy is a critical skill that can help prevent serious complications and maternal mortality. Training on these signs should cover physical and mental health indicators, enabling CHWs to know when to escalate a client's concerns to a healthcare provider.",
+        "Be aware of urgent maternal warning signs and symptoms during pregnancy and in the year after delivery.",
+        "Seek medical care immediately if you experience any signs or symptoms that are listed."
+      ],
+      "image": null
+    }
+  ]
+}

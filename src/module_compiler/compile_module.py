@@ -1,0 +1,273 @@
+from __future__ import annotations
+import re
+import json
+from pathlib import Path
+import argparse
+import shutil
+
+from .stage1.structural_extractor import extract_raw_slides
+from .stage2.normalize import normalize_slides
+from .runtime_builder import build_module
+
+STRICT_ASSET_MODE = True  # Fail-fast if asset missing
+
+
+def compile_module(input_path: Path, output_path: Path) -> None:
+    # Step 1: Structural extraction
+    raw_slides = extract_raw_slides(input_path)
+
+    # Step 2: Normalize (Stage 2)
+    normalized_slides = normalize_slides(raw_slides)
+
+    # Debug counts
+    print(f"Stage 1 slides: {len(raw_slides)}")
+    print(f"Stage 2 slides: {len(normalized_slides)}")
+
+    # Step 3: Build runtime module
+    module = build_module(
+        module_id=input_path.stem,
+        raw_slides=normalized_slides,
+    )
+
+    # Step 4: Write JSON (development output copy)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(
+        json.dumps(module.model_dump(), indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+    # Step 5: Package runtime
+    package_runtime(module, input_path)
+
+    print(f"✅ Compiled module: {input_path.name}")
+    print(f"📄 Slides: {len(module.slides)}")
+    print(f"📦 Output: {output_path}")
+
+
+# --------------------------------------------------
+# 🔹 Asset Utilities
+# --------------------------------------------------
+
+def normalize_filename(name: str) -> str:
+    name = name.strip().lower()
+    name = re.sub(r"\s+", "-", name)
+    name = re.sub(r"[^a-z0-9\-_.]", "", name)
+    return name
+
+
+def collect_image_references(module):
+    images = set()
+
+    for slide in module.slides:
+
+        if hasattr(slide, "image") and slide.image:
+            images.add(slide.image)
+
+        if hasattr(slide, "intro_image") and slide.intro_image:
+            images.add(slide.intro_image)
+
+        if slide.type == "engage_1":
+            for item in slide.items:
+                if item.image:
+                    images.add(item.image)
+
+        if slide.type == "engage_2":
+            for layer in slide.layers:
+                if layer.image:
+                    images.add(layer.image)
+
+    return images
+
+
+def stage3_audit(module, export_assets_dir: Path):
+    print("\n🔍 Stage 3 Validation Audit")
+    print("--------------------------------------------------")
+
+    referenced = collect_image_references(module)
+    exported = {p.name for p in export_assets_dir.iterdir() if p.is_file()}
+
+    errors = 0
+
+    # Check missing references
+    for img in referenced:
+        if img not in exported:
+            print(f"❌ JSON references missing asset: {img}")
+            errors += 1
+
+    # Check normalization + unused
+    for asset in exported:
+        if asset != normalize_filename(asset):
+            print(f"❌ Asset not normalized: {asset}")
+            errors += 1
+
+        if asset not in referenced:
+            print(f"⚠️ Unused exported asset: {asset}")
+
+    if errors == 0:
+        print("✅ Stage 3 audit passed")
+    else:
+        raise RuntimeError("❌ Stage 3 audit failed")
+
+    print("--------------------------------------------------\n")
+
+
+# --------------------------------------------------
+# 🔹 Runtime Packaging
+# --------------------------------------------------
+
+def package_runtime(module, input_path: Path) -> None:
+    BASE_DIR = Path(__file__).resolve().parent
+    PROJECT_ROOT = BASE_DIR.parents[1]
+
+    templates_dir = BASE_DIR / "stage3" / "templates"
+    assets_source_dir = PROJECT_ROOT / "data" / "assets"
+    export_dir = PROJECT_ROOT / "data" / "exports" / input_path.stem
+    export_assets_dir = export_dir / "assets"
+
+    # Clean export folder
+    if export_dir.exists():
+        shutil.rmtree(export_dir)
+
+    export_dir.mkdir(parents=True, exist_ok=True)
+    export_assets_dir.mkdir(parents=True, exist_ok=True)
+
+    # Copy runtime templates
+    for filename in ["index.html", "runtime_core.js", "runtime_drawer.js", "runtime_engage.js", "runtime_resume.js", "runtime.js", "runtime_state.js", "runtime_quiz.js", "styles.css"]:
+        shutil.copy(templates_dir / filename, export_dir / filename)
+
+    # --------------------------------------------------
+    # 🔹 Asset Processing
+    # --------------------------------------------------
+
+    used_images = collect_image_references(module)
+
+    # Build case-insensitive lookup
+    source_files = list(assets_source_dir.iterdir())
+    asset_lookup = {}
+
+    for p in source_files:
+        if p.is_file():
+            key = p.stem.lower()
+            if key in asset_lookup:
+                print(f"⚠️ WARNING: Duplicate asset stem detected: {p.stem}")
+            asset_lookup[key] = p
+
+    filename_map = {}
+
+    for img_name in used_images:
+
+        key = img_name.lower()
+
+        if key not in asset_lookup:
+            msg = f"Missing asset: '{img_name}'"
+
+            if STRICT_ASSET_MODE:
+                raise RuntimeError(f"❌ {msg}")
+            else:
+                print(f"⚠️ WARNING: {msg}")
+                continue
+
+        source_path = asset_lookup[key]
+
+        normalized_name = normalize_filename(source_path.name)
+        target_path = export_assets_dir / normalized_name
+
+        shutil.copy(source_path, target_path)
+
+        filename_map[img_name] = normalized_name
+
+    # --------------------------------------------------
+    # 🔹 Update module object with normalized filenames
+    # --------------------------------------------------
+
+    for slide in module.slides:
+
+        if hasattr(slide, "image") and slide.image in filename_map:
+            slide.image = filename_map[slide.image]
+
+        if hasattr(slide, "intro_image") and slide.intro_image in filename_map:
+            slide.intro_image = filename_map[slide.intro_image]
+
+        if slide.type == "engage_1":
+            for item in slide.items:
+                if item.image in filename_map:
+                    item.image = filename_map[item.image]
+
+        if slide.type == "engage_2":
+            for layer in slide.layers:
+                if layer.image in filename_map:
+                    layer.image = filename_map[layer.image]
+
+    # --------------------------------------------------
+    # 🔹 Write final module.json
+    # --------------------------------------------------
+
+    (export_dir / "module.json").write_text(
+        json.dumps(module.model_dump(), indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+    # --------------------------------------------------
+    # 🔹 Stage 3 Audit
+    # --------------------------------------------------
+
+    stage3_audit(module, export_assets_dir)
+
+    print(f"📦 Runtime package created at: {export_dir}")
+
+
+# --------------------------------------------------
+# CLI
+# --------------------------------------------------
+
+def _auto_detect_input() -> Path:
+    project_root = Path(__file__).resolve().parents[2]
+    raw_dir = project_root / "data" / "raw"
+
+    if not raw_dir.exists():
+        raise SystemExit(f"❌ data/raw directory not found at {raw_dir}")
+
+    docx_files = list(raw_dir.glob("*.docx"))
+
+    if len(docx_files) == 0:
+        raise SystemExit("❌ No .docx files found in data/raw")
+
+    if len(docx_files) > 1:
+        names = "\n".join(str(p.name) for p in docx_files)
+        raise SystemExit(
+            f"❌ Multiple .docx files found in data/raw:\n{names}\n"
+            "Please specify --in explicitly."
+        )
+
+    return docx_files[0]
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Compile Word blueprint into runtime JSON"
+    )
+    parser.add_argument("--in", dest="input_path", required=False)
+    parser.add_argument("--out", dest="output_path", required=False)
+    parser.add_argument("--debug", action="store_true")
+
+    args = parser.parse_args()
+
+    if args.input_path:
+        input_path = Path(args.input_path)
+    else:
+        input_path = _auto_detect_input()
+        print(f"📄 Auto-detected input: {input_path.name}")
+
+    if not input_path.exists():
+        raise SystemExit(f"❌ Input file not found: {input_path}")
+
+    if args.output_path:
+        output_path = Path(args.output_path)
+    else:
+        output_path = Path("data") / "exports" / f"{input_path.stem}.json"
+
+    compile_module(input_path, output_path)
+
+
+if __name__ == "__main__":
+    main()
