@@ -7,7 +7,7 @@ from ..models.raw_models import (
     RawQuizQuestion,
     RawQuizOption,
 )
-from ..models.blocks import ParagraphBlock
+from ..models.blocks import ParagraphBlock, BulletsBlock
 
 
 # ==========================================================
@@ -102,23 +102,45 @@ def _normalize_slide_type(slide: RawSlide) -> RawSlide:
 def _normalize_panel(slide: RawSlide) -> RawSlide:
     body = slide.body or []
 
-    normalized_blocks: List[ParagraphBlock] = []
+    normalized_blocks = []
 
     for block in body:
-        if not isinstance(block, ParagraphBlock):
+
+        # Handle ParagraphBlock
+        if isinstance(block, ParagraphBlock):
+            text = block.text.strip()
+
+            if text:
+                normalized_blocks.append(
+                    ParagraphBlock(
+                        type="paragraph",
+                        text=text,
+                        image=block.image
+                    )
+                )
+
+        # Handle BulletsBlock ✅ NEW
+        elif isinstance(block, BulletsBlock):
+            items = [
+                item.strip()
+                for item in block.items
+                if item and item.strip()
+            ]
+
+            if items:
+                normalized_blocks.append(
+                    BulletsBlock(
+                        type="bullets",
+                        items=items
+                    )
+                )
+
+        else:
             raise ValueError(
                 f"Panel slide {slide.slide_id} contains invalid block type"
             )
 
-        text = block.text.strip()
-
-        if text:
-            normalized_blocks.append(
-                ParagraphBlock(type="paragraph", text=text)
-            )
-
     return slide.model_copy(update={"body": normalized_blocks})
-
 
 # ==========================================================
 # Quiz Normalization

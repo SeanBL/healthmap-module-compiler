@@ -16,28 +16,29 @@ function renderQuiz(slide, container) {
   scopeLabel.textContent = scope === "final" ? "Final Quiz" : "Knowledge Check";
   wrapper.appendChild(scopeLabel);
 
-  if (!Array.isArray(slide.questions) || slide.questions.length === 0) {
-    const p = document.createElement("p");
-    p.textContent = "No quiz questions found.";
-    wrapper.appendChild(p);
-    container.appendChild(wrapper);
-    return;
-  }
+  const q = slide.questions?.[0];
 
-  slide.questions.forEach((q, qIndex) => {
-    const block = renderQuizQuestionBlock(slide, q, qIndex, RuntimeState.currentIndex, scope);
+  if (!q) {
+    const p = document.createElement("p");
+    p.textContent = "Quiz question missing.";
+    wrapper.appendChild(p);
+  } else {
+
+    const block = renderQuizQuestionBlock(
+        slide,
+        q,
+        0,
+        RuntimeState.currentIndex,
+        scope
+    );
+
     wrapper.appendChild(block);
-  });
+
+  }
 
   // If final scope: show running score box
   if (scope === "final") {
     ensureFinalShufflePlan();
-    const scoreBox = document.createElement("div");
-    scoreBox.className = "quiz-final-score";
-    scoreBox.id = "final-score-box";
-    wrapper.appendChild(scoreBox);
-
-    recomputeFinalScoreAndRender();
   }
 
   container.appendChild(wrapper);
@@ -85,6 +86,16 @@ function renderQuizQuestionBlock(slide, q, qIndex, slideIndex, scope) {
       const byId = new Map(options.map(o => [o.id, o]));
       orderedOptions = order.map(id => byId.get(id)).filter(Boolean);
     }
+  } else {
+    ensureGlobalShufflePlan();
+
+    const key = inlineKey(slideIndex, qIndex);
+    const order = RuntimeState.shuffle.optionOrder[key];
+
+    if (order && order.length) {
+      const byId = new Map(options.map(o => [o.id, o]));
+      orderedOptions = order.map(id => byId.get(id)).filter(Boolean);
+    }
   }
 
   orderedOptions.forEach((opt) => {
@@ -95,7 +106,7 @@ function renderQuizQuestionBlock(slide, q, qIndex, slideIndex, scope) {
     input.type = "radio";
     input.name = `q_${slideIndex}_${qIndex}`;
     input.value = opt.id;
-    input.disabled = state.submitted;
+    input.disabled = state.submitted || RuntimeState.reviewMode === true;
 
     if (state.selectedOptionId === opt.id) input.checked = true;
 
@@ -120,7 +131,7 @@ function renderQuizQuestionBlock(slide, q, qIndex, slideIndex, scope) {
   const submitBtn = document.createElement("button");
   submitBtn.className = "quiz-submit";
   submitBtn.textContent = state.submitted ? "Submitted" : "Submit";
-  submitBtn.disabled = state.submitted;
+  submitBtn.disabled = state.submitted || RuntimeState.reviewMode === true;
 
   const feedback = document.createElement("div");
   feedback.className = "quiz-feedback";
@@ -159,6 +170,16 @@ function renderQuizQuestionBlock(slide, q, qIndex, slideIndex, scope) {
     if (scope === "final") {
       recomputeFinalScoreAndRender();
     }
+
+    updateNavigationUI();
+
+    // Auto-scroll to feedback so learner sees explanation
+    setTimeout(() => {
+      feedback.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }, 100);
   });
 
   actions.appendChild(submitBtn);
@@ -242,7 +263,35 @@ function renderFinalResults(container) {
   title.textContent = "Results";
   wrapper.appendChild(title);
 
-  // Score circle + percent
+  // Grid container
+  const grid = document.createElement("div");
+  grid.className = "results-grid";
+
+  const left = document.createElement("div");
+  left.className = "results-left";
+
+  const divider = document.createElement("div");
+  divider.className = "results-divider";
+
+  const right = document.createElement("div");
+  right.className = "results-right";
+
+  // -------------------------
+  // LEFT SIDE
+  // -------------------------
+
+  // Completion icon
+  const icon = document.createElement("div");
+  icon.className = "results-icon";
+
+  icon.innerHTML = `
+    <svg viewBox="0 0 52 52" class="checkmark">
+      <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+      <path class="checkmark-check" fill="none" d="M14 27l7 7 16-16"/>
+    </svg>
+  `;
+
+  // Score
   const score = document.createElement("div");
   score.className = "results-score";
 
@@ -257,59 +306,58 @@ function renderFinalResults(container) {
   score.appendChild(percentText);
   score.appendChild(scoreLabel);
 
-  wrapper.appendChild(score);
+  // Add icon ABOVE score
+  left.appendChild(icon);
+  left.appendChild(score);
 
   // Correct count
   const correctBox = document.createElement("div");
   correctBox.className = "results-correct";
   correctBox.textContent = `${correct} / ${total} Questions Correct`;
-  wrapper.appendChild(correctBox);
 
   // Passing score
   const passing = document.createElement("div");
   passing.className = "results-passmark";
   passing.textContent = "Passing Score: 80%";
-  wrapper.appendChild(passing);
 
-  // Pass / Fail message
+  left.appendChild(correctBox);
+  left.appendChild(passing);
+
+  // -------------------------
+  // RIGHT SIDE
+  // -------------------------
+
   const message = document.createElement("div");
-  message.className = passed
-    ? "results-pass"
-    : "results-fail";
+  message.className = passed ? "results-pass" : "results-fail";
 
   message.textContent = passed
-    ? "🎉 Congratulations, you passed!"
+    ? "🎉 Congratulations! You passed the quiz!"
     : "You did not reach the passing score.";
-
-  wrapper.appendChild(message);
 
   // Buttons container
   const buttons = document.createElement("div");
   buttons.className = "results-buttons";
 
-  // Save CME button
   const saveBtn = document.createElement("button");
   saveBtn.className = "results-btn primary";
   saveBtn.textContent = "Save Score for CME";
   saveBtn.onclick = saveScoreForCme;
 
-  // Review button
   const reviewBtn = document.createElement("button");
   reviewBtn.className = "results-btn secondary";
   reviewBtn.textContent = "Review Quiz";
   reviewBtn.onclick = () => {
+    RuntimeState.reviewMode = true;
     RuntimeState.currentIndex = findFirstFinalQuizSlide();
     saveProgress();
     renderSlide();
   };
 
-  // Retry button
   const retryBtn = document.createElement("button");
   retryBtn.className = "results-btn dark";
   retryBtn.textContent = "Retry Quiz";
   retryBtn.onclick = resetFinalQuizOnly;
 
-  // Back to module
   const backBtn = document.createElement("button");
   backBtn.className = "results-btn dark";
   backBtn.textContent = "Back to Module";
@@ -325,7 +373,18 @@ function renderFinalResults(container) {
   buttons.appendChild(retryBtn);
   buttons.appendChild(backBtn);
 
-  wrapper.appendChild(buttons);
+  right.appendChild(message);
+  right.appendChild(buttons);
+
+  // -------------------------
+  // Assemble Layout
+  // -------------------------
+
+  grid.appendChild(left);
+  grid.appendChild(divider);
+  grid.appendChild(right);
+
+  wrapper.appendChild(grid);
 
   container.appendChild(wrapper);
 }
@@ -341,6 +400,8 @@ function findFirstFinalQuizSlide() {
 }
 
 function resetFinalQuizOnly() {
+
+  RuntimeState.reviewMode = false;
 
   RuntimeState.final = {
     total: 0,
@@ -452,17 +513,100 @@ function recomputeFinalScoreAndRender() {
 
   saveProgress();
 
-  renderFinalScoreBox();
   notifyFlutterIfComplete();
   if (!RuntimeState.final.completed) {
     RuntimeUI.resultsShown = false;
   }
 
   if (RuntimeState.final.completed && !RuntimeUI.resultsShown) {
+
     RuntimeUI.resultsShown = true;
+
+    RuntimeState.currentIndex = getResultsSlideIndex();
+
+    saveProgress();
     renderSlide();
     return;
   }
+}
+
+function getResultsSlideIndex() {
+
+  let lastFinal = -1;
+
+  RuntimeState.slides.forEach((slide, index) => {
+    if (slide.type === "quiz" && (slide.quiz_scope || "inline") === "final") {
+      lastFinal = index;
+    }
+  });
+
+  if (lastFinal === -1) return null;
+
+  return lastFinal + 1; // virtual results slide
+}
+
+// -------------------------
+// Save Score Confirmation
+// -------------------------
+function showCmeConfirmationModal() {
+  // Remove existing modal if it somehow already exists
+  document.getElementById("cme-overlay")?.remove();
+
+  const overlay = document.createElement("div");
+  overlay.id = "cme-overlay";
+  overlay.className = "active";
+
+  const modal = document.createElement("div");
+  modal.id = "cme-modal";
+
+  const title = document.createElement("h3");
+  title.textContent = "Score Saved";
+
+  const message = document.createElement("p");
+  message.innerHTML = `
+    Your score has been successfully saved for CME credit.<br><br>
+    You may now submit your score from the CME Credits Tracker Page on HealthMAP.
+  `;
+
+  const actions = document.createElement("div");
+  actions.className = "cme-actions";
+
+  const okBtn = document.createElement("button");
+  okBtn.className = "results-btn primary";
+  okBtn.textContent = "OK";
+
+  okBtn.addEventListener("click", () => {
+    overlay.remove();
+
+    // ✅ Reset quiz + shuffle
+    clearFinalQuizFromLocalStorage();
+
+    // ✅ Exit review mode completely
+    RuntimeState.reviewMode = false;
+
+    // ✅ Send user to BEGINNING of module
+    RuntimeState.currentIndex = 0;
+
+    // (Optional but recommended)
+    RuntimeUI.resultsShown = false;
+
+    saveProgress();
+    renderSlide();
+  });
+
+  actions.appendChild(okBtn);
+  modal.appendChild(title);
+  modal.appendChild(message);
+  modal.appendChild(actions);
+  overlay.appendChild(modal);
+
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) {
+      overlay.remove();
+    }
+  });
+
+  document.body.appendChild(overlay);
 }
 
 // -------------------------
@@ -482,17 +626,28 @@ async function saveScoreForCme() {
     saved_at: new Date().toISOString()
   };
 
-  const response = await window.flutter_inappwebview.callHandler(
-    "saveCmeScore",
-    payload
-  );
+  try {
+    const response = await window.flutter_inappwebview.callHandler(
+      "saveCmeScore",
+      payload
+    );
 
-  if (response?.status === "ok") {
-    clearFinalQuizFromLocalStorage();
+    console.log("CME SAVE RESPONSE:", response);
+
+    showCmeConfirmationModal();
+
+  } catch (error) {
+    console.error("Failed to save CME score:", error);
   }
 }
 
 function clearFinalQuizFromLocalStorage() {
+  // Reset inline quiz shuffle
+  RuntimeState.shuffle = {
+    seed: null,
+    optionOrder: {}
+  };
+
   // Clear only FINAL quiz state
   RuntimeState.final = {
     total: 0,
@@ -546,6 +701,35 @@ function newAttemptSeed() {
 
 function finalKey(slideIndex, qIndex) {
   return `${slideIndex}:${qIndex}`;
+}
+
+function inlineKey(slideIndex, qIndex) {
+  return `${slideIndex}:${qIndex}`;
+}
+
+function ensureGlobalShufflePlan() {
+  if (typeof RuntimeState.shuffle?.seed === "number") return;
+
+  RuntimeState.shuffle.seed = newAttemptSeed();
+
+  const rand = seededRng(RuntimeState.shuffle.seed);
+
+  RuntimeState.shuffle.optionOrder = {};
+
+  RuntimeState.slides.forEach((slide, slideIndex) => {
+    if (slide.type !== "quiz") return;
+    if (!Array.isArray(slide.questions)) return;
+
+    slide.questions.forEach((q, qIndex) => {
+      const options = normalizeOptions(slide, q);
+      const optionIds = options.map(o => o.id);
+
+      RuntimeState.shuffle.optionOrder[inlineKey(slideIndex, qIndex)] =
+        seededShuffleArray(optionIds, rand);
+    });
+  });
+
+  saveProgress();
 }
 
 function ensureFinalShufflePlan() {

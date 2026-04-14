@@ -1,12 +1,22 @@
 {
-  "module_id": "test2",
+  "module_title": "test2",
+  "module_id": "1111",
   "version": "1.0",
+  "resources": [
+    {
+      "title": "PHCFM 15 3204",
+      "file": "PHCFM-15-3204.pdf"
+    }
+  ],
   "slides": [
     {
       "type": "panel",
       "header": "Acknowledgements",
       "body": [
-        "WiRED wishes to thank the World Health Organization on whose recommendations this module is based. We also wish to acknowledge the contributions of the Center for Disease Control and a number of independent authors who have studied effective community outbreak preparation. All our sources are listed in the Reference section of this module."
+        {
+          "type": "paragraph",
+          "text": "WiRED wishes to thank the World Health Organization on whose recommendations this module is based. We also wish to acknowledge the contributions of the Center for Disease Control and a number of independent authors who have studied effective community outbreak preparation. All our sources are listed in the Reference section of this module."
+        }
       ],
       "image": null
     },
@@ -14,10 +24,22 @@
       "type": "panel",
       "header": "Introduction",
       "body": [
-        "In many parts of the world today, the systems that once protected public health are no longer reliable.",
-        "Climate change has intensified floods, droughts, and heat waves.",
-        "Conflict and political instability have disrupted supply chains. Funding cuts have closed clinics, halted vaccination programs, and forced trained professionals to leave their posts.",
-        "In many communities, doctors and nurses are no longer present, or they arrive too late"
+        {
+          "type": "paragraph",
+          "text": "In many parts of the world today, the systems that once protected public health are no longer reliable."
+        },
+        {
+          "type": "paragraph",
+          "text": "Climate change has intensified floods, droughts, and heat waves."
+        },
+        {
+          "type": "paragraph",
+          "text": "Conflict and political instability have disrupted supply chains. Funding cuts have closed clinics, halted vaccination programs, and forced trained professionals to leave their posts."
+        },
+        {
+          "type": "paragraph",
+          "text": "In many communities, doctors and nurses are no longer present, or they arrive too late"
+        }
       ],
       "image": null
     },
@@ -25,8 +47,14 @@
       "type": "panel",
       "header": "Introduction (continued)",
       "body": [
-        "Under these very real conditions, the roles of community health are expanding as you become ever more important to the health and wellbeing of your community.",
-        "You are becoming the first line of defense, the early warning system, and often the only source of organized health response when disease outbreaks occur."
+        {
+          "type": "paragraph",
+          "text": "Under these very real conditions, the roles of community health are expanding as you become ever more important to the health and wellbeing of your community."
+        },
+        {
+          "type": "paragraph",
+          "text": "You are becoming the first line of defense, the early warning system, and often the only source of organized health response when disease outbreaks occur."
+        }
       ],
       "image": null
     },
@@ -34,9 +62,18 @@
       "type": "panel",
       "header": "Introduction (continued)",
       "body": [
-        "For many years, WiRED has been preparing CHWs to serve their communities with basic clinical services and health training.",
-        "CHWs have saved many lives by discovering unhealthy living conditions, addressing illness and injury and following up on people receiving higher-level care.",
-        "Moreover, CHWs have taught hundreds of thousands of people how to live healthier lives and avoid disease. Thus, their role in illness prevention is key!"
+        {
+          "type": "paragraph",
+          "text": "For many years, WiRED has been preparing CHWs to serve their communities with basic clinical services and health training."
+        },
+        {
+          "type": "paragraph",
+          "text": "CHWs have saved many lives by discovering unhealthy living conditions, addressing illness and injury and following up on people receiving higher-level care."
+        },
+        {
+          "type": "paragraph",
+          "text": "Moreover, CHWs have taught hundreds of thousands of people how to live healthier lives and avoid disease. Thus, their role in illness prevention is key!"
+        }
       ],
       "image": null
     },
@@ -44,8 +81,14 @@
       "type": "panel",
       "header": "Introduction (continued)",
       "body": [
-        "Because of increasing threats from climate and the other dangers we noted above, CHWs will, in the future, become ever more important to the health of their communities.",
-        "You will be called on to assist more people and to address more issues people will face with this growing list of health challenges."
+        {
+          "type": "paragraph",
+          "text": "Because of increasing threats from climate and the other dangers we noted above, CHWs will, in the future, become ever more important to the health of their communities."
+        },
+        {
+          "type": "paragraph",
+          "text": "You will be called on to assist more people and to address more issues people will face with this growing list of health challenges."
+        }
       ],
       "image": null
     },
@@ -53,8 +96,14 @@
       "type": "panel",
       "header": "Introduction (continued)",
       "body": [
-        "This course is one of several initiatives to elevate the skills of CHWs and to prepare them for their increasingly important roles in community health.",
-        "It is about giving you practical, evidence-based skills to help you anticipate outbreaks, reduce harm, slow the spread of disease and protect lives, including your own."
+        {
+          "type": "paragraph",
+          "text": "This course is one of several initiatives to elevate the skills of CHWs and to prepare them for their increasingly important roles in community health."
+        },
+        {
+          "type": "paragraph",
+          "text": "It is about giving you practical, evidence-based skills to help you anticipate outbreaks, reduce harm, slow the spread of disease and protect lives, including your own."
+        }
       ],
       "image": null
     },
@@ -62,9 +111,14 @@
       "type": "panel",
       "header": "Objectives",
       "body": [
-        "• Define and distinguish between outbreaks, epidemics, and pandemics, and explain why early action matters.",
-        "• Explain the difference between prevention and preparedness and describe how both reduce illness, deaths, and community disruption.",
-        "• Describe why prevention is essential in low-resource emergencies, including its role in protecting fragile health systems and vulnerable populations."
+        {
+          "type": "bullets",
+          "items": [
+            "Define and distinguish between outbreaks, epidemics, and pandemics, and explain why early action matters.",
+            "Explain the difference between prevention and preparedness and describe how both reduce illness, deaths, and community disruption.",
+            "Describe why prevention is essential in low-resource emergencies, including its role in protecting fragile health systems and vulnerable populations."
+          ]
+        }
       ],
       "image": null
     },
@@ -72,10 +126,15 @@
       "type": "panel",
       "header": "Objectives (continued)",
       "body": [
-        "• Recognize early warning signs of a potential outbreak using community-based surveillance and pattern recognition.",
-        "• Document and report suspected outbreaks promptly using simple, practical observation and reporting methods.",
-        "• Apply practical prevention strategies during an outbreak, including hygiene promotion, safe water and food practices, and behavior-change messaging.",
-        "• Communicate clearly and effectively with communities to reduce fear, misinformation, stigma, and panic during health emergencies."
+        {
+          "type": "bullets",
+          "items": [
+            "Recognize early warning signs of a potential outbreak using community-based surveillance and pattern recognition.",
+            "Document and report suspected outbreaks promptly using simple, practical observation and reporting methods.",
+            "Apply practical prevention strategies during an outbreak, including hygiene promotion, safe water and food practices, and behavior-change messaging.",
+            "Communicate clearly and effectively with communities to reduce fear, misinformation, stigma, and panic during health emergencies."
+          ]
+        }
       ],
       "image": null
     },
@@ -83,10 +142,15 @@
       "type": "panel",
       "header": "Objectives (continued)",
       "body": [
-        "• Provide basic supportive care and appropriate referrals within the CHW scope of practice during an outbreak.",
-        "• Identify and prioritize care for the most vulnerable populations when resources are scarce.",
-        "• Protect their own health and safety by applying infection-prevention measures and ethical self-monitoring practices.",
-        "• Support community recovery and resilience by reflecting on lessons learned and strengthening preparedness for future emergencies."
+        {
+          "type": "bullets",
+          "items": [
+            "Provide basic supportive care and appropriate referrals within the CHW scope of practice during an outbreak.",
+            "Identify and prioritize care for the most vulnerable populations when resources are scarce.",
+            "Protect their own health and safety by applying infection-prevention measures and ethical self-monitoring practices.",
+            "Support community recovery and resilience by reflecting on lessons learned and strengthening preparedness for future emergencies."
+          ]
+        }
       ],
       "image": null
     },
@@ -94,8 +158,14 @@
       "type": "panel",
       "header": "What is an outbreak?",
       "body": [
-        "Throughout this module, we will be using the term “Outbreak.” Let’s define it, so we know what we’re dealing with.",
-        "What is an outbreak? An outbreak is the occurrence of more cases of a specific illness than normally expected in a community over a given period of time. Outbreaks can begin suddenly or develop gradually."
+        {
+          "type": "paragraph",
+          "text": "Throughout this module, we will be using the term “Outbreak.” Let’s define it, so we know what we’re dealing with."
+        },
+        {
+          "type": "paragraph",
+          "text": "What is an outbreak? An outbreak is the occurrence of more cases of a specific illness than normally expected in a community over a given period of time. Outbreaks can begin suddenly or develop gradually."
+        }
       ],
       "image": null
     },
@@ -103,9 +173,18 @@
       "type": "panel",
       "header": "What is an outbreak? (continued)",
       "body": [
-        "They may involve infectious diseases spread through person-to-person contact, such as Covid or the flu.",
-        "They can occur because of contaminated water or food. They can spread by animals, such as rabies. They can infect people through vectors such as mosquitoes that transmit malaria.",
-        "Outbreaks are often intensified by overcrowding, poor sanitation, limited access to clean water. They can be made worse by disrupted health services, and delays in detection and response."
+        {
+          "type": "paragraph",
+          "text": "They may involve infectious diseases spread through person-to-person contact, such as Covid or the flu."
+        },
+        {
+          "type": "paragraph",
+          "text": "They can occur because of contaminated water or food. They can spread by animals, such as rabies. They can infect people through vectors such as mosquitoes that transmit malaria."
+        },
+        {
+          "type": "paragraph",
+          "text": "Outbreaks are often intensified by overcrowding, poor sanitation, limited access to clean water. They can be made worse by disrupted health services, and delays in detection and response."
+        }
       ],
       "image": null
     },
@@ -113,8 +192,14 @@
       "type": "panel",
       "header": "What is an outbreak? (continued)",
       "body": [
-        "If not controlled early through prevention, surveillance, and timely action, an outbreak can expand into a widespread epidemic.",
-        "This places severe strain on individuals, families, and health systems, including on CHWs who work directly in the communities that may be infected."
+        {
+          "type": "paragraph",
+          "text": "If not controlled early through prevention, surveillance, and timely action, an outbreak can expand into a widespread epidemic."
+        },
+        {
+          "type": "paragraph",
+          "text": "This places severe strain on individuals, families, and health systems, including on CHWs who work directly in the communities that may be infected."
+        }
       ],
       "image": null
     },
@@ -122,10 +207,22 @@
       "type": "panel",
       "header": "Three terms",
       "body": [
-        "In this module, we talk about “outbreaks,” but you will occasionally hear two other terms that are related, but not identical. Let’s note them here, then turn all our attention back to outbreaks.",
-        "Outbreaks are local and small. For instance, a salmonella spike at one town.",
-        "Epidemics are regional and large. For instance, a number of flu cases across the entire region of East Africa.",
-        "Pandemics are global. For instance, COVID-19 spreading across every continent."
+        {
+          "type": "paragraph",
+          "text": "In this module, we talk about “outbreaks,” but you will occasionally hear two other terms that are related, but not identical. Let’s note them here, then turn all our attention back to outbreaks."
+        },
+        {
+          "type": "paragraph",
+          "text": "Outbreaks are local and small. For instance, a salmonella spike at one town."
+        },
+        {
+          "type": "paragraph",
+          "text": "Epidemics are regional and large. For instance, a number of flu cases across the entire region of East Africa."
+        },
+        {
+          "type": "paragraph",
+          "text": "Pandemics are global. For instance, COVID-19 spreading across every continent."
+        }
       ],
       "image": null
     },
@@ -133,8 +230,14 @@
       "type": "panel",
       "header": "What is a health emergency and why preparation matters",
       "body": [
-        "A health emergency is not defined by how frightening it feels. It is defined by how quickly a situation overwhelms normal coping capacity.",
-        "An outbreak becomes an emergency when illness spreads faster than people can respond, when basic services stop functioning or when fear and misinformation begin to cause harm to people in the community."
+        {
+          "type": "paragraph",
+          "text": "A health emergency is not defined by how frightening it feels. It is defined by how quickly a situation overwhelms normal coping capacity."
+        },
+        {
+          "type": "paragraph",
+          "text": "An outbreak becomes an emergency when illness spreads faster than people can respond, when basic services stop functioning or when fear and misinformation begin to cause harm to people in the community."
+        }
       ],
       "image": null
     },
@@ -142,9 +245,18 @@
       "type": "panel",
       "header": "What is a health emergency and why preparation matters (continued)",
       "body": [
-        "Research from outbreaks shows that the first days and weeks matter more than later interventions.",
-        "An outbreak is like a brush fire. You have a better chance of putting it out early than if you wait until it engulfs the field.",
-        "Better still, as we will see, with good prevention practices you might be able to head off the fire from ever starting!"
+        {
+          "type": "paragraph",
+          "text": "Research from outbreaks shows that the first days and weeks matter more than later interventions."
+        },
+        {
+          "type": "paragraph",
+          "text": "An outbreak is like a brush fire. You have a better chance of putting it out early than if you wait until it engulfs the field."
+        },
+        {
+          "type": "paragraph",
+          "text": "Better still, as we will see, with good prevention practices you might be able to head off the fire from ever starting!"
+        }
       ],
       "image": null
     },
@@ -175,7 +287,14 @@
           ],
           "correct_option_id": "C",
           "explanation": "An outbreak is identified by cases of a specific illness occurring in a community at a level above what is normally expected over a given period of time."
-        },
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "quiz_scope": "inline",
+      "quiz_type": "mcq",
+      "questions": [
         {
           "prompt": "Which statement best describes how an outbreak can start over time?",
           "options": [
@@ -198,7 +317,14 @@
           ],
           "correct_option_id": "A",
           "explanation": "Outbreaks do not have a single fixed onset pattern; they may start suddenly or develop gradually."
-        },
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "quiz_scope": "inline",
+      "quiz_type": "mcq",
+      "questions": [
         {
           "prompt": "A community health worker is teaching volunteers how illnesses can spread during an outbreak. Which option best reflects the range of transmission pathways that may be involved?",
           "options": [
@@ -228,9 +354,18 @@
       "type": "panel",
       "header": "Preparedness vs. Prevention",
       "body": [
-        "In community health, prevention focuses on stopping a health threat from occurring in the first place. This may be through practices such as vaccinations, good hygiene, handwashing, mask wearing, avoiding large groups.",
-        "Preparedness ensures a community has the plans, supplies, and training to respond effectively if a threat actually strikes.",
-        "Put simply, prevention aims to avoid the crisis, whereas preparedness aims to minimize the damage when a crisis is unavoidable."
+        {
+          "type": "paragraph",
+          "text": "In community health, prevention focuses on stopping a health threat from occurring in the first place. This may be through practices such as vaccinations, good hygiene, handwashing, mask wearing, avoiding large groups."
+        },
+        {
+          "type": "paragraph",
+          "text": "Preparedness ensures a community has the plans, supplies, and training to respond effectively if a threat actually strikes."
+        },
+        {
+          "type": "paragraph",
+          "text": "Put simply, prevention aims to avoid the crisis, whereas preparedness aims to minimize the damage when a crisis is unavoidable."
+        }
       ],
       "image": null
     },
@@ -238,9 +373,18 @@
       "type": "panel",
       "header": "The Importance of Prevention in Preparedness",
       "body": [
-        "Throughout this and other CHW training courses, prevention takes center stage. Preventing an illness is better than having to treat an illness, of course.",
-        "With climate change that causes environmental distress and with severe cuts to global health strategies, prevention becomes even more important.",
-        "Before we get to the larger topic of preparedness, we will spend a little time looking at the importance of prevention as part of the overall preparedness strategies."
+        {
+          "type": "paragraph",
+          "text": "Throughout this and other CHW training courses, prevention takes center stage. Preventing an illness is better than having to treat an illness, of course."
+        },
+        {
+          "type": "paragraph",
+          "text": "With climate change that causes environmental distress and with severe cuts to global health strategies, prevention becomes even more important."
+        },
+        {
+          "type": "paragraph",
+          "text": "Before we get to the larger topic of preparedness, we will spend a little time looking at the importance of prevention as part of the overall preparedness strategies."
+        }
       ],
       "image": null
     },
@@ -248,9 +392,18 @@
       "type": "panel",
       "header": "Why is Prevention Necessary?",
       "body": [
-        "Why does prevention in advance of a health emergency matter?",
-        "When medicines, vaccines, trained clinicians, and hospital care are limited, or disappear entirely during a crisis, preventing illness and injury becomes the primary way to save lives and preserve community stability.",
-        "The importance of prevention in emergency preparedness rests on several interconnected factors that we will review next."
+        {
+          "type": "paragraph",
+          "text": "Why does prevention in advance of a health emergency matter?"
+        },
+        {
+          "type": "paragraph",
+          "text": "When medicines, vaccines, trained clinicians, and hospital care are limited, or disappear entirely during a crisis, preventing illness and injury becomes the primary way to save lives and preserve community stability."
+        },
+        {
+          "type": "paragraph",
+          "text": "The importance of prevention in emergency preparedness rests on several interconnected factors that we will review next."
+        }
       ],
       "image": null
     },
@@ -258,9 +411,18 @@
       "type": "panel",
       "header": "Prevention reduces demand on fragile health systems",
       "body": [
-        "Low-resource health systems often operate at or beyond capacity even in normal times.",
-        "During an emergency, such as an outbreak, climate-related disaster, or abrupt funding cuts, health facilities can quickly become overwhelmed or inaccessible.",
-        "Prevention reduces the number of people who become sick or injured in the first place, preserving scarce services for those who cannot be prevented from becoming ill. These may include people with severe disease, the very young or very old, obstetric emergencies or trauma."
+        {
+          "type": "paragraph",
+          "text": "Low-resource health systems often operate at or beyond capacity even in normal times."
+        },
+        {
+          "type": "paragraph",
+          "text": "During an emergency, such as an outbreak, climate-related disaster, or abrupt funding cuts, health facilities can quickly become overwhelmed or inaccessible."
+        },
+        {
+          "type": "paragraph",
+          "text": "Prevention reduces the number of people who become sick or injured in the first place, preserving scarce services for those who cannot be prevented from becoming ill. These may include people with severe disease, the very young or very old, obstetric emergencies or trauma."
+        }
       ],
       "image": null
     },
@@ -268,8 +430,14 @@
       "type": "panel",
       "header": "Prevention reduces demand on fragile health systems (continued)",
       "body": [
-        "In practical terms, every prevented case of diarrhea, respiratory infection, malaria, or injury is one fewer person competing for limited beds, medicines, transport, and staff time.",
-        "So, prevention addresses a community’s capacity to aid the most vulnerable."
+        {
+          "type": "paragraph",
+          "text": "In practical terms, every prevented case of diarrhea, respiratory infection, malaria, or injury is one fewer person competing for limited beds, medicines, transport, and staff time."
+        },
+        {
+          "type": "paragraph",
+          "text": "So, prevention addresses a community’s capacity to aid the most vulnerable."
+        }
       ],
       "image": null
     },
@@ -277,10 +445,22 @@
       "type": "panel",
       "header": "Prevention remains effective when treatment options fail",
       "body": [
-        "Emergencies often disrupt supply chains for medicines, vaccines, diagnostics and equipment.",
-        "Prevention strategies such as hand hygiene, safe water practices, vector control, safe food handling, and early symptom recognition, do not depend on advanced technology or continuous supply chains. They can be maintained locally using knowledge, behavior, and community action.",
-        "This makes prevention the most resilient health strategy when external support is delayed, reduced, or withdrawn.",
-        "WiRED strongly emphasizes “Behavioral Prevention” as key to community preparations in environments with limited medicines and vaccines. Basic behaviors—how we observe healthy measures—can prevent disease."
+        {
+          "type": "paragraph",
+          "text": "Emergencies often disrupt supply chains for medicines, vaccines, diagnostics and equipment."
+        },
+        {
+          "type": "paragraph",
+          "text": "Prevention strategies such as hand hygiene, safe water practices, vector control, safe food handling, and early symptom recognition, do not depend on advanced technology or continuous supply chains. They can be maintained locally using knowledge, behavior, and community action."
+        },
+        {
+          "type": "paragraph",
+          "text": "This makes prevention the most resilient health strategy when external support is delayed, reduced, or withdrawn."
+        },
+        {
+          "type": "paragraph",
+          "text": "WiRED strongly emphasizes “Behavioral Prevention” as key to community preparations in environments with limited medicines and vaccines. Basic behaviors—how we observe healthy measures—can prevent disease."
+        }
       ],
       "image": null
     },
@@ -288,11 +468,26 @@
       "type": "panel",
       "header": "Prevention protects the most vulnerable first",
       "body": [
-        "We noted earlier that prevention saves treatment capacities for the most vulnerable.",
-        "In addition to that, prevention is how stronger community members can help more vulnerable members from being exposed to disease in the first place.",
-        "Certain groups can be especially harmed during emergencies: infants and young children and pregnant women. Also, older adults, people with disabilities, and those with chronic illness or malnutrition.",
-        "People in these groups are the least able to withstand illness or delayed care.",
-        "Preventive actions offer protection before people reach a crisis point when care may no longer be available."
+        {
+          "type": "paragraph",
+          "text": "We noted earlier that prevention saves treatment capacities for the most vulnerable."
+        },
+        {
+          "type": "paragraph",
+          "text": "In addition to that, prevention is how stronger community members can help more vulnerable members from being exposed to disease in the first place."
+        },
+        {
+          "type": "paragraph",
+          "text": "Certain groups can be especially harmed during emergencies: infants and young children and pregnant women. Also, older adults, people with disabilities, and those with chronic illness or malnutrition."
+        },
+        {
+          "type": "paragraph",
+          "text": "People in these groups are the least able to withstand illness or delayed care."
+        },
+        {
+          "type": "paragraph",
+          "text": "Preventive actions offer protection before people reach a crisis point when care may no longer be available."
+        }
       ],
       "image": null
     },
@@ -300,10 +495,22 @@
       "type": "panel",
       "header": "Prevention slows disease spread and buys time",
       "body": [
-        "In infectious disease emergencies, prevention slows transmission. Even modest reductions in spread can “buy time” for communities and health systems.",
-        "It may provide additional time to organize care, secure supplies, train workers, correct misinformation and adapt services.",
-        "This time buffer can mean the difference between a manageable emergency and a cascading collapse of services.",
-        "Slowing disease spread also reduces fear and panic, which themselves can worsen health outcomes."
+        {
+          "type": "paragraph",
+          "text": "In infectious disease emergencies, prevention slows transmission. Even modest reductions in spread can “buy time” for communities and health systems."
+        },
+        {
+          "type": "paragraph",
+          "text": "It may provide additional time to organize care, secure supplies, train workers, correct misinformation and adapt services."
+        },
+        {
+          "type": "paragraph",
+          "text": "This time buffer can mean the difference between a manageable emergency and a cascading collapse of services."
+        },
+        {
+          "type": "paragraph",
+          "text": "Slowing disease spread also reduces fear and panic, which themselves can worsen health outcomes."
+        }
       ],
       "image": null
     },
@@ -311,9 +518,18 @@
       "type": "panel",
       "header": "Prevention is cost-effective and resource-efficient",
       "body": [
-        "Prevention almost always costs less than treatment. In low-resource settings, this difference is critical.",
-        "Soap, clean water practices, community education, bed nets, environmental cleanup, and behavior change interventions are far less expensive than hospital care, antibiotics, intravenous fluids, or emergency transport.",
-        "When funding is limited or uncertain, prevention allows communities to stretch resources further. This can avoid high health costs, or worse, death because those costs cannot be covered."
+        {
+          "type": "paragraph",
+          "text": "Prevention almost always costs less than treatment. In low-resource settings, this difference is critical."
+        },
+        {
+          "type": "paragraph",
+          "text": "Soap, clean water practices, community education, bed nets, environmental cleanup, and behavior change interventions are far less expensive than hospital care, antibiotics, intravenous fluids, or emergency transport."
+        },
+        {
+          "type": "paragraph",
+          "text": "When funding is limited or uncertain, prevention allows communities to stretch resources further. This can avoid high health costs, or worse, death because those costs cannot be covered."
+        }
       ],
       "image": null
     },
@@ -321,9 +537,18 @@
       "type": "panel",
       "header": "Prevention strengthens community self-reliance",
       "body": [
-        "Emergency prevention strategies rely heavily on community knowledge, trust, and collective action. When communities understand why prevention matters and how to act, they are less dependent on external responders and better able to protect themselves.",
-        "This self-reliance is particularly important when emergencies occur during times of political instability, conflict, or international funding cuts.",
-        "The CHWs’ role in community self-reliance is critical. This is one of your most important responsibilities!"
+        {
+          "type": "paragraph",
+          "text": "Emergency prevention strategies rely heavily on community knowledge, trust, and collective action. When communities understand why prevention matters and how to act, they are less dependent on external responders and better able to protect themselves."
+        },
+        {
+          "type": "paragraph",
+          "text": "This self-reliance is particularly important when emergencies occur during times of political instability, conflict, or international funding cuts."
+        },
+        {
+          "type": "paragraph",
+          "text": "The CHWs’ role in community self-reliance is critical. This is one of your most important responsibilities!"
+        }
       ],
       "image": null
     },
@@ -331,9 +556,18 @@
       "type": "panel",
       "header": "Prevention reduces secondary and indirect harms",
       "body": [
-        "Health emergencies cause indirect damage beyond the immediate illness or injury. When caregivers are sick, children may miss school, food production may drop, income may be lost, and social structures may weaken.",
-        "Preventing illness helps maintain caregiving capacity, economic activity, and social cohesion—critical factors for recovery.",
-        "In this way, prevention supports not only health, but overall community resilience."
+        {
+          "type": "paragraph",
+          "text": "Health emergencies cause indirect damage beyond the immediate illness or injury. When caregivers are sick, children may miss school, food production may drop, income may be lost, and social structures may weaken."
+        },
+        {
+          "type": "paragraph",
+          "text": "Preventing illness helps maintain caregiving capacity, economic activity, and social cohesion—critical factors for recovery."
+        },
+        {
+          "type": "paragraph",
+          "text": "In this way, prevention supports not only health, but overall community resilience."
+        }
       ],
       "image": null
     },
@@ -341,9 +575,18 @@
       "type": "panel",
       "header": "Prevention supports trust that requires effective communication",
       "body": [
-        "As we have stressed in many portions of these CHW training programs, communication is central to just about everything a health worker does.",
-        "Teaching, explaining, guiding, instructing, even treating a sick or injured person all have good communication at their center.",
-        "People look up to their trusted CHWs. They are in a special position within the community. Their clear, consistent prevention messaging builds confidence and counters misinformation."
+        {
+          "type": "paragraph",
+          "text": "As we have stressed in many portions of these CHW training programs, communication is central to just about everything a health worker does."
+        },
+        {
+          "type": "paragraph",
+          "text": "Teaching, explaining, guiding, instructing, even treating a sick or injured person all have good communication at their center."
+        },
+        {
+          "type": "paragraph",
+          "text": "People look up to their trusted CHWs. They are in a special position within the community. Their clear, consistent prevention messaging builds confidence and counters misinformation."
+        }
       ],
       "image": null
     },
@@ -351,8 +594,14 @@
       "type": "panel",
       "header": "Prevention supports trust that requires effective communication (continued)",
       "body": [
-        "When people see that preventive actions are practical and effective, they are more likely to cooperate, seek care early, and follow guidance during an emergency.",
-        "Trust becomes an essential asset when difficult decisions must be made or resources must be prioritized."
+        {
+          "type": "paragraph",
+          "text": "When people see that preventive actions are practical and effective, they are more likely to cooperate, seek care early, and follow guidance during an emergency."
+        },
+        {
+          "type": "paragraph",
+          "text": "Trust becomes an essential asset when difficult decisions must be made or resources must be prioritized."
+        }
       ],
       "image": null
     },
@@ -360,9 +609,18 @@
       "type": "panel",
       "header": "Prevention is ethically essential in scarcity",
       "body": [
-        "When resources are scarce, preventing avoidable suffering is a moral imperative.",
-        "Prevention reduces the need to make impossible choices about who receives limited care.",
-        "It supports fairness by offering protection to everyone, not only those who manage to reach a health facility or who have the means to purchase treatments not available to others."
+        {
+          "type": "paragraph",
+          "text": "When resources are scarce, preventing avoidable suffering is a moral imperative."
+        },
+        {
+          "type": "paragraph",
+          "text": "Prevention reduces the need to make impossible choices about who receives limited care."
+        },
+        {
+          "type": "paragraph",
+          "text": "It supports fairness by offering protection to everyone, not only those who manage to reach a health facility or who have the means to purchase treatments not available to others."
+        }
       ],
       "image": null
     },
@@ -393,7 +651,14 @@
           ],
           "correct_option_id": "D",
           "explanation": "Prevention is defined by acting before a health threat occurs to avert the crisis, while preparedness is oriented toward limiting the impact when a crisis happens and cannot be fully avoided."
-        },
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "quiz_scope": "inline",
+      "quiz_type": "mcq",
+      "questions": [
         {
           "prompt": "Which set of elements best describes what community health preparedness involves for responding effectively when a health threat occurs?",
           "options": [
@@ -416,7 +681,14 @@
           ],
           "correct_option_id": "B",
           "explanation": "Preparedness is defined by having the planning, material resources, and training in place so the community can respond effectively if a threat strikes."
-        },
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "quiz_scope": "inline",
+      "quiz_type": "mcq",
+      "questions": [
         {
           "prompt": "In an infectious disease emergency, measures that only partially reduce transmission can still be valuable because they can create a time buffer for communities and health systems to respond.",
           "options": [
@@ -438,9 +710,18 @@
       "type": "panel",
       "header": "From Prevention to Preparedness",
       "body": [
-        "While strong disease prevention reduces everyday health risks, no community is fully protected from outbreaks that cannot be seen coming or that may arrive without warning.",
-        "Preparedness helps communities anticipate outbreaks by strengthening local systems for early detection, communication, resource accumulation and coordinated response.",
-        "When communities are prepared, they can act quickly to limit spread, protect vulnerable people, and reduce fear and disruption during an outbreak."
+        {
+          "type": "paragraph",
+          "text": "While strong disease prevention reduces everyday health risks, no community is fully protected from outbreaks that cannot be seen coming or that may arrive without warning."
+        },
+        {
+          "type": "paragraph",
+          "text": "Preparedness helps communities anticipate outbreaks by strengthening local systems for early detection, communication, resource accumulation and coordinated response."
+        },
+        {
+          "type": "paragraph",
+          "text": "When communities are prepared, they can act quickly to limit spread, protect vulnerable people, and reduce fear and disruption during an outbreak."
+        }
       ],
       "image": null
     },
@@ -448,9 +729,18 @@
       "type": "panel",
       "header": "From Prevention to Preparedness (continued)",
       "body": [
-        "CHWs play a critical role in outbreak preparedness. They develop the skills to recognize early warning signs, act quickly, and protect lives when prevention measures are no longer enough.",
-        "Moreover, they are key in helping communities put outbreak responses in place well before an outbreak arrives.",
-        "In the next section, we look at the key elements of preparedness from the CHW’s perspective."
+        {
+          "type": "paragraph",
+          "text": "CHWs play a critical role in outbreak preparedness. They develop the skills to recognize early warning signs, act quickly, and protect lives when prevention measures are no longer enough."
+        },
+        {
+          "type": "paragraph",
+          "text": "Moreover, they are key in helping communities put outbreak responses in place well before an outbreak arrives."
+        },
+        {
+          "type": "paragraph",
+          "text": "In the next section, we look at the key elements of preparedness from the CHW’s perspective."
+        }
       ],
       "image": null
     },
@@ -458,9 +748,18 @@
       "type": "panel",
       "header": "Building readiness before illness strikes",
       "body": [
-        "Preparedness is strongest when it is collective, not individual.",
-        "Research from disaster medicine and outbreak response consistently shows that communities that discuss emergencies before they occur respond faster and with less panic.",
-        "As a CHW, your role is to help communities prepare mentally, socially, and practically through education and training."
+        {
+          "type": "paragraph",
+          "text": "Preparedness is strongest when it is collective, not individual."
+        },
+        {
+          "type": "paragraph",
+          "text": "Research from disaster medicine and outbreak response consistently shows that communities that discuss emergencies before they occur respond faster and with less panic."
+        },
+        {
+          "type": "paragraph",
+          "text": "As a CHW, your role is to help communities prepare mentally, socially, and practically through education and training."
+        }
       ],
       "image": null
     },
@@ -468,14 +767,38 @@
       "type": "panel",
       "header": "Building readiness before illness strikes (continued)",
       "body": [
-        "Preparations begin with conversations and communications. These are key traits of CHWs—teaching people about possible health problems and how to prepare for them.",
-        "People need to understand that outbreaks can happen, that help may be delayed, and that local action matters.",
-        "Preparedness includes identifying:",
-        "Trusted community leaders",
-        "Safe spaces for temporary isolation",
-        "Ways to communicate quickly, even if phones or power fail",
-        "Methods to protect water and food supplies",
-        "Identifying outside health and medical resources that may be required if a serious outbreak occurs."
+        {
+          "type": "paragraph",
+          "text": "Preparations begin with conversations and communications. These are key traits of CHWs—teaching people about possible health problems and how to prepare for them."
+        },
+        {
+          "type": "paragraph",
+          "text": "People need to understand that outbreaks can happen, that help may be delayed, and that local action matters."
+        },
+        {
+          "type": "paragraph",
+          "text": "Preparedness includes identifying:"
+        },
+        {
+          "type": "paragraph",
+          "text": "Trusted community leaders"
+        },
+        {
+          "type": "paragraph",
+          "text": "Safe spaces for temporary isolation"
+        },
+        {
+          "type": "paragraph",
+          "text": "Ways to communicate quickly, even if phones or power fail"
+        },
+        {
+          "type": "paragraph",
+          "text": "Methods to protect water and food supplies"
+        },
+        {
+          "type": "paragraph",
+          "text": "Identifying outside health and medical resources that may be required if a serious outbreak occurs."
+        }
       ],
       "image": null
     },
@@ -483,9 +806,18 @@
       "type": "panel",
       "header": "Building readiness before illness strikes (continued)",
       "body": [
-        "It also includes addressing fear and stigma. We learned from Ebola and COVID-19 outbreaks that stigma drives disease underground, making outbreaks worse. When people fear punishment or shame, they hide symptoms.",
-        "In their preparedness messaging, CHWs should emphasize care, dignity, and mutual protection. A message telling people that “we’re all in this together, and no one will be left behind.”",
-        "Communities that trust their CHWs are more likely to follow guidance when it matters most."
+        {
+          "type": "paragraph",
+          "text": "It also includes addressing fear and stigma. We learned from Ebola and COVID-19 outbreaks that stigma drives disease underground, making outbreaks worse. When people fear punishment or shame, they hide symptoms."
+        },
+        {
+          "type": "paragraph",
+          "text": "In their preparedness messaging, CHWs should emphasize care, dignity, and mutual protection. A message telling people that “we’re all in this together, and no one will be left behind.”"
+        },
+        {
+          "type": "paragraph",
+          "text": "Communities that trust their CHWs are more likely to follow guidance when it matters most."
+        }
       ],
       "image": null
     },
@@ -493,12 +825,26 @@
       "type": "panel",
       "header": "Early detection",
       "body": [
-        "Outbreaks are not always immediately evident, but they typically begin with patterns. For instance:",
-        "One person with a fever is not an outbreak.",
-        "Three people with similar symptoms in the same week may cause concern and call for extra surveillance.",
-        "Ten people is a warning!",
-        "Research shows that community-based surveillance, which includes simple, local observation is often faster and more effective than formal reporting systems. As a CHW, you are uniquely positioned to notice changes.",
-        "In WiRED’s CHW Basic Training Curriculum we offer an entire module in community health surveillance. Students studying this Preparedness module may wish to review the surveillance module."
+        {
+          "type": "paragraph",
+          "text": "Outbreaks are not always immediately evident, but they typically begin with patterns. For instance:"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "One person with a fever is not an outbreak.",
+            "Three people with similar symptoms in the same week may cause concern and call for extra surveillance.",
+            "Ten people is a warning!"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Research shows that community-based surveillance, which includes simple, local observation is often faster and more effective than formal reporting systems. As a CHW, you are uniquely positioned to notice changes."
+        },
+        {
+          "type": "paragraph",
+          "text": "In WiRED’s CHW Basic Training Curriculum we offer an entire module in community health surveillance. Students studying this Preparedness module may wish to review the surveillance module."
+        }
       ],
       "image": null
     },
@@ -506,15 +852,42 @@
       "type": "panel",
       "header": "Early detection (continued)",
       "body": [
-        "Here are several pointers about community health surveillance that are worth keeping in mind:",
-        "You should pay attention to increases in:",
-        "Fever, cough, difficulty breathing",
-        "Diarrhea or vomiting",
-        "Unusual rashes",
-        "Sudden deaths",
-        "Illness clustered in families, schools, or workplaces",
-        "You do not need laboratory confirmation to raise concern. The goal is early action, not perfect diagnosis.",
-        "When you notice a pattern, document it. Write down dates, symptoms, ages, and locations. Even simple records can show trends. Immediately report your findings to your CHW supervisor."
+        {
+          "type": "paragraph",
+          "text": "Here are several pointers about community health surveillance that are worth keeping in mind:"
+        },
+        {
+          "type": "paragraph",
+          "text": "You should pay attention to increases in:"
+        },
+        {
+          "type": "paragraph",
+          "text": "Fever, cough, difficulty breathing"
+        },
+        {
+          "type": "paragraph",
+          "text": "Diarrhea or vomiting"
+        },
+        {
+          "type": "paragraph",
+          "text": "Unusual rashes"
+        },
+        {
+          "type": "paragraph",
+          "text": "Sudden deaths"
+        },
+        {
+          "type": "paragraph",
+          "text": "Illness clustered in families, schools, or workplaces"
+        },
+        {
+          "type": "paragraph",
+          "text": "You do not need laboratory confirmation to raise concern. The goal is early action, not perfect diagnosis."
+        },
+        {
+          "type": "paragraph",
+          "text": "When you notice a pattern, document it. Write down dates, symptoms, ages, and locations. Even simple records can show trends. Immediately report your findings to your CHW supervisor."
+        }
       ],
       "image": null
     },
@@ -522,11 +895,26 @@
       "type": "panel",
       "header": "Early detection (continued)",
       "body": [
-        "CHW supervisors are advised to reach out to a clinician or health officials for further guidance.",
-        "Early reporting combined with early community action can dramatically reduce outbreak size.",
-        "Such action may include isolation, but CHWs can also stress hygiene promotion and teach people about behavioral prevention methods, such as hand washing and avoiding large groups.",
-        "Depending on the severity of the illnesses you observe, officials or clinicians may have more resources available to determine additional steps to address illness and increase prevention training among community members.",
-        "Silence delays response. Surveillance saves lives."
+        {
+          "type": "paragraph",
+          "text": "CHW supervisors are advised to reach out to a clinician or health officials for further guidance."
+        },
+        {
+          "type": "paragraph",
+          "text": "Early reporting combined with early community action can dramatically reduce outbreak size."
+        },
+        {
+          "type": "paragraph",
+          "text": "Such action may include isolation, but CHWs can also stress hygiene promotion and teach people about behavioral prevention methods, such as hand washing and avoiding large groups."
+        },
+        {
+          "type": "paragraph",
+          "text": "Depending on the severity of the illnesses you observe, officials or clinicians may have more resources available to determine additional steps to address illness and increase prevention training among community members."
+        },
+        {
+          "type": "paragraph",
+          "text": "Silence delays response. Surveillance saves lives."
+        }
       ],
       "image": null
     },
@@ -557,7 +945,14 @@
           ],
           "correct_option_id": "B",
           "explanation": "Strong prevention lowers everyday health risks, but it does not eliminate the possibility of outbreaks that arrive without warning; therefore, preparedness remains important."
-        },
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "quiz_scope": "inline",
+      "quiz_type": "mcq",
+      "questions": [
         {
           "prompt": "Which set of local capacities is strengthened by outbreak preparedness to help a community anticipate an outbreak?",
           "options": [
@@ -580,7 +975,14 @@
           ],
           "correct_option_id": "A",
           "explanation": "Preparedness is described as strengthening local systems for early detection, communication, accumulating resources, and coordinating response so communities can anticipate outbreaks."
-        },
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "quiz_scope": "inline",
+      "quiz_type": "mcq",
+      "questions": [
         {
           "prompt": "A community health worker notices several people in the same neighborhood developing similar symptoms over a few days. What principle should guide the CHW’s decision about whether to raise concern and report the pattern?",
           "options": [
@@ -610,9 +1012,18 @@
       "type": "panel",
       "header": "Responding when an outbreak occurs",
       "body": [
-        "CHW are often the first and sometimes the only organized health response when an illness outbreak occurs.",
-        "Your actions can slow transmission, save lives, and maintain trust in the health system.",
-        "Next, we will consider several important steps that describe a practical, field-ready sequence you can follow during an outbreak. These recognize limited supplies, fragile infrastructure, and high community reliance on your guidance."
+        {
+          "type": "paragraph",
+          "text": "CHW are often the first and sometimes the only organized health response when an illness outbreak occurs."
+        },
+        {
+          "type": "paragraph",
+          "text": "Your actions can slow transmission, save lives, and maintain trust in the health system."
+        },
+        {
+          "type": "paragraph",
+          "text": "Next, we will consider several important steps that describe a practical, field-ready sequence you can follow during an outbreak. These recognize limited supplies, fragile infrastructure, and high community reliance on your guidance."
+        }
       ],
       "image": null
     },
@@ -620,14 +1031,38 @@
       "type": "panel",
       "header": "Responding when an outbreak occurs (continued)",
       "body": [
-        "When unusual illness begins to appear, your first responsibility is to recognize the illness and confirm its presence.",
-        "Remember, we noted that an outbreak typically occurs in patterns, often starting slowly and building among community members.",
-        "You may notice a sudden increase in people with similar symptoms, hearing repeated reports from households, schools, or markets, or seeing more severe illness than usual.",
-        "CHWs should pay close attention to patterns:",
-        "Who is getting sick,",
-        "Where they live, and",
-        "How quickly symptoms are spreading.",
-        "Even without laboratory confirmation, recognizing that “something is different” is critical!"
+        {
+          "type": "paragraph",
+          "text": "When unusual illness begins to appear, your first responsibility is to recognize the illness and confirm its presence."
+        },
+        {
+          "type": "paragraph",
+          "text": "Remember, we noted that an outbreak typically occurs in patterns, often starting slowly and building among community members."
+        },
+        {
+          "type": "paragraph",
+          "text": "You may notice a sudden increase in people with similar symptoms, hearing repeated reports from households, schools, or markets, or seeing more severe illness than usual."
+        },
+        {
+          "type": "paragraph",
+          "text": "CHWs should pay close attention to patterns:"
+        },
+        {
+          "type": "paragraph",
+          "text": "Who is getting sick,"
+        },
+        {
+          "type": "paragraph",
+          "text": "Where they live, and"
+        },
+        {
+          "type": "paragraph",
+          "text": "How quickly symptoms are spreading."
+        },
+        {
+          "type": "paragraph",
+          "text": "Even without laboratory confirmation, recognizing that “something is different” is critical!"
+        }
       ],
       "image": null
     },
@@ -635,13 +1070,27 @@
       "type": "panel",
       "header": "Responding when an outbreak occurs (continued)",
       "body": [
-        "Once an outbreak is suspected, CHWs should report promptly through established channels (usually starting with the CHW supervisor or local clinician), even if information is incomplete.",
-        "Early reporting allows supervisors, clinics, or district health authorities to confirm an outbreak and mobilize support.",
-        "CHWs should share clear, factual observations:",
-        "The number of cases",
-        "Key symptoms and locations",
-        "Any recent events that might explain spread, for example, flooding, food shortages, large group gatherings or migration.",
-        "Delays in reporting can cost lives."
+        {
+          "type": "paragraph",
+          "text": "Once an outbreak is suspected, CHWs should report promptly through established channels (usually starting with the CHW supervisor or local clinician), even if information is incomplete."
+        },
+        {
+          "type": "paragraph",
+          "text": "Early reporting allows supervisors, clinics, or district health authorities to confirm an outbreak and mobilize support."
+        },
+        {
+          "type": "paragraph",
+          "text": "CHWs should share clear, factual observations:"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The number of cases",
+            "Key symptoms and locations",
+            "Any recent events that might explain spread, for example, flooding, food shortages, large group gatherings or migration.",
+            "Delays in reporting can cost lives."
+          ]
+        }
       ],
       "image": null
     },
@@ -649,10 +1098,22 @@
       "type": "panel",
       "header": "Responding when an outbreak occurs (continued)",
       "body": [
-        "At the same time, CHWs should protect themselves and their families.",
-        "This includes consistent hand hygiene, appropriate use of available personal protective equipment (e.g. masks and gloves), minimizing direct contact when possible and following safe practices for home visits.",
-        "A sick or frightened CHW cannot help the community, and CHWs must model the protective behaviors they promote with others.",
-        "See the upcoming section for more details on CHWs protecting themselves."
+        {
+          "type": "paragraph",
+          "text": "At the same time, CHWs should protect themselves and their families."
+        },
+        {
+          "type": "paragraph",
+          "text": "This includes consistent hand hygiene, appropriate use of available personal protective equipment (e.g. masks and gloves), minimizing direct contact when possible and following safe practices for home visits."
+        },
+        {
+          "type": "paragraph",
+          "text": "A sick or frightened CHW cannot help the community, and CHWs must model the protective behaviors they promote with others."
+        },
+        {
+          "type": "paragraph",
+          "text": "See the upcoming section for more details on CHWs protecting themselves."
+        }
       ],
       "image": null
     },
@@ -660,11 +1121,26 @@
       "type": "panel",
       "header": "Responding when an outbreak occurs (continued)",
       "body": [
-        "Next, CHWs should begin rapid community assessment and simple case identification. Using basic case definitions provided by supervisors, they should identify specific groups within the community who may be most vulnerable.",
-        "Identify them specifically, if possible, by name, address and phone if available, so you can contact them directly if necessary.",
-        "Identify people who are ill",
-        "Identify those at highest risk (infants, pregnant women, elderly, people with chronic illness).",
-        "Identify those with danger signs or symptoms you have noted. They may require urgent referral."
+        {
+          "type": "paragraph",
+          "text": "Next, CHWs should begin rapid community assessment and simple case identification. Using basic case definitions provided by supervisors, they should identify specific groups within the community who may be most vulnerable."
+        },
+        {
+          "type": "paragraph",
+          "text": "Identify them specifically, if possible, by name, address and phone if available, so you can contact them directly if necessary."
+        },
+        {
+          "type": "paragraph",
+          "text": "Identify people who are ill"
+        },
+        {
+          "type": "paragraph",
+          "text": "Identify those at highest risk (infants, pregnant women, elderly, people with chronic illness)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Identify those with danger signs or symptoms you have noted. They may require urgent referral."
+        }
       ],
       "image": null
     },
@@ -672,9 +1148,18 @@
       "type": "panel",
       "header": "Responding when an outbreak occurs (continued)",
       "body": [
-        "Simple household mapping or informal lists can help track the spread of illness and prioritize care.",
-        "As cases are identified, CHWs should focus on immediate risk reduction and prevention of further transmission to others in the community.",
-        "This includes educating families on practical actions such as handwashing, safe water use, food hygiene, respiratory etiquette, isolation of sick individuals when feasible and safe care practices within the home."
+        {
+          "type": "paragraph",
+          "text": "Simple household mapping or informal lists can help track the spread of illness and prioritize care."
+        },
+        {
+          "type": "paragraph",
+          "text": "As cases are identified, CHWs should focus on immediate risk reduction and prevention of further transmission to others in the community."
+        },
+        {
+          "type": "paragraph",
+          "text": "This includes educating families on practical actions such as handwashing, safe water use, food hygiene, respiratory etiquette, isolation of sick individuals when feasible and safe care practices within the home."
+        }
       ],
       "image": null
     },
@@ -682,9 +1167,18 @@
       "type": "panel",
       "header": "Responding when an outbreak occurs (continued)",
       "body": [
-        "Much of this information might have been provided before an outbreak, when even the possibility of an outbreak might have been suspected. If so, that makes the CHWs’ job easier and that argues for good preparedness.",
-        "Whether the community was prepared earlier with information or not, CHWs should now be sure to provide and reinforce the messaging.",
-        "It should be simple, culturally appropriate, and consistent, emphasizing what people can do even when resources are scarce."
+        {
+          "type": "paragraph",
+          "text": "Much of this information might have been provided before an outbreak, when even the possibility of an outbreak might have been suspected. If so, that makes the CHWs’ job easier and that argues for good preparedness."
+        },
+        {
+          "type": "paragraph",
+          "text": "Whether the community was prepared earlier with information or not, CHWs should now be sure to provide and reinforce the messaging."
+        },
+        {
+          "type": "paragraph",
+          "text": "It should be simple, culturally appropriate, and consistent, emphasizing what people can do even when resources are scarce."
+        }
       ],
       "image": null
     },
@@ -715,7 +1209,14 @@
           ],
           "correct_option_id": "B",
           "explanation": "CHWs are described as frequently being the first organized responders during outbreaks, and in some settings they may be the only organized health response available."
-        },
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "quiz_scope": "inline",
+      "quiz_type": "mcq",
+      "questions": [
         {
           "prompt": "When a community health worker first notices an unusual cluster of illness in the community, what is their initial responsibility?",
           "options": [
@@ -738,7 +1239,14 @@
           ],
           "correct_option_id": "B",
           "explanation": "The first step for a CHW when unusual illness appears is to recognize the illness and confirm that it is present, before moving on to other response activities."
-        },
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "quiz_scope": "inline",
+      "quiz_type": "mcq",
+      "questions": [
         {
           "prompt": "If you suspect an outbreak but your information is still incomplete, you should still notify the health system through the usual reporting pathway without waiting to gather every detail.",
           "options": [
@@ -760,9 +1268,18 @@
       "type": "panel",
       "header": "Importance of communication",
       "body": [
-        "We want to emphasize again how important CHWs are in community communication and trust-building.",
-        "Key to the success of all CHW activities is their cultivation of trust. A solid reputation for accurate, reliable information, developed well in advance of an outbreak, will increase the likelihood that community members will follow the CHW’s advice and guidance. In other words, community members will believe CHWs and follow their advice.",
-        "These perceptions of trust become critical when the community is under stress, when illness is at the door."
+        {
+          "type": "paragraph",
+          "text": "We want to emphasize again how important CHWs are in community communication and trust-building."
+        },
+        {
+          "type": "paragraph",
+          "text": "Key to the success of all CHW activities is their cultivation of trust. A solid reputation for accurate, reliable information, developed well in advance of an outbreak, will increase the likelihood that community members will follow the CHW’s advice and guidance. In other words, community members will believe CHWs and follow their advice."
+        },
+        {
+          "type": "paragraph",
+          "text": "These perceptions of trust become critical when the community is under stress, when illness is at the door."
+        }
       ],
       "image": null
     },
@@ -770,10 +1287,22 @@
       "type": "panel",
       "header": "Importance of communication (continued)",
       "body": [
-        "Why? This is when fear and misinformation spread quickly. When observing prevention practices may be a matter of life or death.",
-        "CHWs may need to step in to correct harmful rumors, convince people to avoid dangerous remedies and explain what is known and unknown about the illness.",
-        "All this relies on good communication and good communication depends on the trust a community places on the CHWs.",
-        "With trust assumed, CHWs can employ clear, calm communication to reduce panic, stigma, and resistance to care or prevention measures."
+        {
+          "type": "paragraph",
+          "text": "Why? This is when fear and misinformation spread quickly. When observing prevention practices may be a matter of life or death."
+        },
+        {
+          "type": "paragraph",
+          "text": "CHWs may need to step in to correct harmful rumors, convince people to avoid dangerous remedies and explain what is known and unknown about the illness."
+        },
+        {
+          "type": "paragraph",
+          "text": "All this relies on good communication and good communication depends on the trust a community places on the CHWs."
+        },
+        {
+          "type": "paragraph",
+          "text": "With trust assumed, CHWs can employ clear, calm communication to reduce panic, stigma, and resistance to care or prevention measures."
+        }
       ],
       "image": null
     },
@@ -781,10 +1310,22 @@
       "type": "panel",
       "header": "Responding when an outbreak occurs – Providing support and care",
       "body": [
-        "In addition to communicating with community members about the urgency of response to the outbreak, CHWs will provide more direct intervention to assist community members.",
-        "They will be called upon to support care and referral.",
-        "They may provide basic supportive care within their scope of training. This may include oral rehydration, fever management guidance, nutrition assistance and symptom support with over-the-counter medicines.",
-        "They also may monitor vital signs and the condition of infected people as they work through the illness."
+        {
+          "type": "paragraph",
+          "text": "In addition to communicating with community members about the urgency of response to the outbreak, CHWs will provide more direct intervention to assist community members."
+        },
+        {
+          "type": "paragraph",
+          "text": "They will be called upon to support care and referral."
+        },
+        {
+          "type": "paragraph",
+          "text": "They may provide basic supportive care within their scope of training. This may include oral rehydration, fever management guidance, nutrition assistance and symptom support with over-the-counter medicines."
+        },
+        {
+          "type": "paragraph",
+          "text": "They also may monitor vital signs and the condition of infected people as they work through the illness."
+        }
       ],
       "image": null
     },
@@ -792,8 +1333,14 @@
       "type": "panel",
       "header": "Responding when an outbreak occurs – Providing support and care (continued)",
       "body": [
-        "Higher-level healthcare resources are likely to be overrun during an outbreak, but if the CHW sees that a patient at home with the illness is facing worsening conditions, it is important that the CHW make provisions to bring the patient to a clinic or central treatment facility.",
-        "As we have often stated, CHWs are bridges to higher-level care, and this is especially important in an outbreak. CHW supervisors will establish criteria that flag patients who must move to the next level of care."
+        {
+          "type": "paragraph",
+          "text": "Higher-level healthcare resources are likely to be overrun during an outbreak, but if the CHW sees that a patient at home with the illness is facing worsening conditions, it is important that the CHW make provisions to bring the patient to a clinic or central treatment facility."
+        },
+        {
+          "type": "paragraph",
+          "text": "As we have often stated, CHWs are bridges to higher-level care, and this is especially important in an outbreak. CHW supervisors will establish criteria that flag patients who must move to the next level of care."
+        }
       ],
       "image": null
     },
@@ -801,8 +1348,14 @@
       "type": "panel",
       "header": "Responding when an outbreak occurs – Providing support and care (continued)",
       "body": [
-        "CHWs should help families navigate transport challenges and encourage care-seeking at the earliest point possible given prevailing conditions of the outbreak.",
-        "That’s a delicate balance: bringing patients to higher-level treatment when not necessary can overload the system. Waiting too long can threaten the life of the patient."
+        {
+          "type": "paragraph",
+          "text": "CHWs should help families navigate transport challenges and encourage care-seeking at the earliest point possible given prevailing conditions of the outbreak."
+        },
+        {
+          "type": "paragraph",
+          "text": "That’s a delicate balance: bringing patients to higher-level treatment when not necessary can overload the system. Waiting too long can threaten the life of the patient."
+        }
       ],
       "image": null
     },
@@ -810,8 +1363,14 @@
       "type": "panel",
       "header": "Responding when an outbreak occurs – Providing support and care (continued)",
       "body": [
-        "In cases where the outbreak evolves and outside assistance arrives CHWs can assist with ongoing prevention efforts, such as vaccination campaigns, distribution of supplies, or reinforcement of behavior-change messages.",
-        "(Note that WiRED offers a vaccination training program that teaches advanced CHWs the skills needed to set up a vaccination clinic and administer inoculations. Administrators should contact WiRED for details.)"
+        {
+          "type": "paragraph",
+          "text": "In cases where the outbreak evolves and outside assistance arrives CHWs can assist with ongoing prevention efforts, such as vaccination campaigns, distribution of supplies, or reinforcement of behavior-change messages."
+        },
+        {
+          "type": "paragraph",
+          "text": "(Note that WiRED offers a vaccination training program that teaches advanced CHWs the skills needed to set up a vaccination clinic and administer inoculations. Administrators should contact WiRED for details.)"
+        }
       ],
       "image": null
     },
@@ -819,9 +1378,18 @@
       "type": "panel",
       "header": "Caring for the most vulnerable when resources are scarce",
       "body": [
-        "CHWs are to care for people in an outbreak as we have just discussed, but outbreaks do not affect everyone equally. It’s important to recognize that some people are more vulnerable than others.",
-        "They may be more likely to become sick, more likely to suffer from the illness and may be less likely to care for themselves during an outbreak.",
-        "CHWs should be aware of these more vulnerable people in their community and be sure to check in on them and give them special attention."
+        {
+          "type": "paragraph",
+          "text": "CHWs are to care for people in an outbreak as we have just discussed, but outbreaks do not affect everyone equally. It’s important to recognize that some people are more vulnerable than others."
+        },
+        {
+          "type": "paragraph",
+          "text": "They may be more likely to become sick, more likely to suffer from the illness and may be less likely to care for themselves during an outbreak."
+        },
+        {
+          "type": "paragraph",
+          "text": "CHWs should be aware of these more vulnerable people in their community and be sure to check in on them and give them special attention."
+        }
       ],
       "image": null
     },
@@ -829,9 +1397,18 @@
       "type": "panel",
       "header": "Caring for the most vulnerable when resources are scarce (continued)",
       "body": [
-        "Who are these more vulnerable people? The elderly, young children, pregnant people, and people with chronic illness. They are likely to be at higher risk of severe outcomes.",
-        "Evidence shows that targeted protection of vulnerable groups reduces mortality even when overall transmission continues.",
-        "CHWs may prioritize them for clean water, food, information, and reduced exposure. They may need more frequent vital signs measurement and symptoms checking and if they get sick they may require higher-level care sooner than others."
+        {
+          "type": "paragraph",
+          "text": "Who are these more vulnerable people? The elderly, young children, pregnant people, and people with chronic illness. They are likely to be at higher risk of severe outcomes."
+        },
+        {
+          "type": "paragraph",
+          "text": "Evidence shows that targeted protection of vulnerable groups reduces mortality even when overall transmission continues."
+        },
+        {
+          "type": "paragraph",
+          "text": "CHWs may prioritize them for clean water, food, information, and reduced exposure. They may need more frequent vital signs measurement and symptoms checking and if they get sick they may require higher-level care sooner than others."
+        }
       ],
       "image": null
     },
@@ -862,7 +1439,14 @@
           ],
           "correct_option_id": "B",
           "explanation": "CHWs have a central role in communicating with the community and building trust, which supports effective outbreak response."
-        },
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "quiz_scope": "inline",
+      "quiz_type": "mcq",
+      "questions": [
         {
           "prompt": "A community health worker (CHW) program wants to increase the chance that community members will follow CHW guidance when an outbreak begins. Which approach best supports that goal?",
           "options": [
@@ -885,7 +1469,14 @@
           ],
           "correct_option_id": "A",
           "explanation": "Success of CHW activities depends on cultivating trust, and that trust is strengthened when CHWs have already built a reputation for accurate, reliable information well before an outbreak begins."
-        },
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "quiz_scope": "inline",
+      "quiz_type": "mcq",
+      "questions": [
         {
           "prompt": "In an outbreak, community stress can accelerate the spread of fear and false information, which increases the importance of community trust in CHWs.",
           "options": [
@@ -907,9 +1498,18 @@
       "type": "panel",
       "header": "Mental Health Considerations",
       "body": [
-        "Don’t ignore mental health. Outbreaks cause fear, grief, and isolation. They also increase anxiety, depression, and trauma.",
-        "CHWs are not therapists, but listening, validating feelings, and maintaining human connection are powerful protective factors.",
-        "WiRED offers a number of modules on mental health topics for CHWs and even a special study series for CHWs with a particular interest in mental health during outbreaks and at more normal times."
+        {
+          "type": "paragraph",
+          "text": "Don’t ignore mental health. Outbreaks cause fear, grief, and isolation. They also increase anxiety, depression, and trauma."
+        },
+        {
+          "type": "paragraph",
+          "text": "CHWs are not therapists, but listening, validating feelings, and maintaining human connection are powerful protective factors."
+        },
+        {
+          "type": "paragraph",
+          "text": "WiRED offers a number of modules on mental health topics for CHWs and even a special study series for CHWs with a particular interest in mental health during outbreaks and at more normal times."
+        }
       ],
       "image": null
     },
@@ -917,10 +1517,22 @@
       "type": "panel",
       "header": "Protecting CHWs -- you cannot help if you are sick",
       "body": [
-        "CHWs are well trained to protect their community – to prepare their community for an outbreak and then to help people during the outbreak as we have discussed.",
-        "Like doctors and nurses—all health workers--you must also protect yourselves. You aren’t able to help others if you are sick yourselves.",
-        "Reports from multiple outbreaks show that all health workers are at higher risk of infection than the general population, especially when supplies are limited.",
-        "They walk into infected communities to help the sick and that exposes them to the pathogens that cause the illness."
+        {
+          "type": "paragraph",
+          "text": "CHWs are well trained to protect their community – to prepare their community for an outbreak and then to help people during the outbreak as we have discussed."
+        },
+        {
+          "type": "paragraph",
+          "text": "Like doctors and nurses—all health workers--you must also protect yourselves. You aren’t able to help others if you are sick yourselves."
+        },
+        {
+          "type": "paragraph",
+          "text": "Reports from multiple outbreaks show that all health workers are at higher risk of infection than the general population, especially when supplies are limited."
+        },
+        {
+          "type": "paragraph",
+          "text": "They walk into infected communities to help the sick and that exposes them to the pathogens that cause the illness."
+        }
       ],
       "image": null
     },
@@ -928,8 +1540,14 @@
       "type": "panel",
       "header": "Protecting CHWs -- you cannot help if you are sick (continued)",
       "body": [
-        "Apart from the personal suffering to an infected health worker, when you fall ill, entire response systems collapse.",
-        "If you have a certificate from WiRED’s Basic CHW Training program, you know a lot about how illnesses spread. Entire blocks focused on water-borne, air-borne, food-borne, vector-borne illness and more. So, you know a lot about infectious spread through a population."
+        {
+          "type": "paragraph",
+          "text": "Apart from the personal suffering to an infected health worker, when you fall ill, entire response systems collapse."
+        },
+        {
+          "type": "paragraph",
+          "text": "If you have a certificate from WiRED’s Basic CHW Training program, you know a lot about how illnesses spread. Entire blocks focused on water-borne, air-borne, food-borne, vector-borne illness and more. So, you know a lot about infectious spread through a population."
+        }
       ],
       "image": null
     },
@@ -937,34 +1555,68 @@
       "type": "panel",
       "header": "Protecting CHWs -- you cannot help if you are sick (continued)",
       "body": [
-        "That said, let’s take a quick review:",
-        "Most outbreak-causing diseases spread in one or more of three ways:",
-        "Through the air in droplets or aerosols",
-        "Through direct contact with bodily fluids",
-        "Through contaminated food, water, or surfaces",
-        "You do not need to know the name of a disease to reduce your risk. You need to assume that any person with fever, cough, diarrhea, rash, or unexplained weakness may be infectious."
+        {
+          "type": "paragraph",
+          "text": "That said, let’s take a quick review:"
+        },
+        {
+          "type": "paragraph",
+          "text": "Most outbreak-causing diseases spread in one or more of three ways:"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Through the air in droplets or aerosols",
+            "Through direct contact with bodily fluids",
+            "Through contaminated food, water, or surfaces"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "You do not need to know the name of a disease to reduce your risk. You need to assume that any person with fever, cough, diarrhea, rash, or unexplained weakness may be infectious."
+        }
       ],
       "image": null
     },
     {
       "type": "engage_1",
       "header": "Protecting CHWs -- you cannot help if you are sick (continued)",
-      "intro": "Simply put, the aim to avoid illness is to minimize exposure to the conditions that are contributing to the outbreak.",
+      "intro": [
+        {
+          "type": "paragraph",
+          "text": "Simply put, the aim to avoid illness is to minimize exposure to the conditions that are contributing to the outbreak."
+        }
+      ],
       "intro_image": "avoid.png",
       "items": [
         {
           "label": "Hand Hygiene",
-          "text": "Hand hygiene is one of the most effective interventions ever studied. The use of plastic gloves is highly effective, but so is alcohol-based hand rubs or soap and water. They significantly reduce transmission, even in crowded, low-resource environments.",
+          "text": [
+            {
+              "type": "paragraph",
+              "text": "Hand hygiene is one of the most effective interventions ever studied. The use of plastic gloves is highly effective, but so is alcohol-based hand rubs or soap and water. They significantly reduce transmission, even in crowded, low-resource environments."
+            }
+          ],
           "image": "hygiene.png"
         },
         {
           "label": "Use Masks",
-          "text": "Masks, when properly worn, reduce respiratory transmission. N-95 masks are excellent but even simple cloth masks reduce spread when used consistently. Masks protect you and others. When everyone uses them, risk drops dramatically.",
+          "text": [
+            {
+              "type": "paragraph",
+              "text": "Masks, when properly worn, reduce respiratory transmission. N-95 masks are excellent but even simple cloth masks reduce spread when used consistently. Masks protect you and others. When everyone uses them, risk drops dramatically."
+            }
+          ],
           "image": "masks.png"
         },
         {
           "label": "Maintain Distance",
-          "text": "Distance matters. The closer and longer the contact, the higher the risk. Keeping even one to two meters of distance, when possible, reduces transmission substantially.",
+          "text": [
+            {
+              "type": "paragraph",
+              "text": "Distance matters. The closer and longer the contact, the higher the risk. Keeping even one to two meters of distance, when possible, reduces transmission substantially."
+            }
+          ],
           "image": "distance.png"
         }
       ]
@@ -973,8 +1625,14 @@
       "type": "panel",
       "header": "Protecting CHWs -- you cannot help if you are sick (continued)",
       "body": [
-        "Self-monitoring is essential. If you develop symptoms, you must step back from direct contact. Continuing to work while sick, though often driven by dedication, has been shown repeatedly to accelerate outbreaks.",
-        "Protecting yourself is not selfish. It is an ethical responsibility to your community."
+        {
+          "type": "paragraph",
+          "text": "Self-monitoring is essential. If you develop symptoms, you must step back from direct contact. Continuing to work while sick, though often driven by dedication, has been shown repeatedly to accelerate outbreaks."
+        },
+        {
+          "type": "paragraph",
+          "text": "Protecting yourself is not selfish. It is an ethical responsibility to your community."
+        }
       ],
       "image": "self-monitoring.png"
     },
@@ -982,9 +1640,18 @@
       "type": "panel",
       "header": "Protecting CHWs -- you cannot help if you are sick (continued)",
       "body": [
-        "We urge all supervisors to encourage their CHW teams to review WiRED’s modules on infectious diseases periodically, and especially if an outbreak is expected.",
-        "Using the modules, CHWs might also offer community presentations on infectious diseases in advance of an outbreak. WiRED also offers five brief animations, designed to teach students and families about infectious diseases. They are available without cost for downloading to phones.",
-        "PDF: Infectious disease training material here"
+        {
+          "type": "paragraph",
+          "text": "We urge all supervisors to encourage their CHW teams to review WiRED’s modules on infectious diseases periodically, and especially if an outbreak is expected."
+        },
+        {
+          "type": "paragraph",
+          "text": "Using the modules, CHWs might also offer community presentations on infectious diseases in advance of an outbreak. WiRED also offers five brief animations, designed to teach students and families about infectious diseases. They are available without cost for downloading to phones."
+        },
+        {
+          "type": "paragraph",
+          "text": "PDF: Infectious disease training material here"
+        }
       ],
       "image": null
     },
@@ -1015,7 +1682,14 @@
           ],
           "correct_option_id": "D",
           "explanation": "Outbreaks are described as producing fear, grief, and isolation and as increasing anxiety, depression, and trauma, making option A the best match."
-        },
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "quiz_scope": "inline",
+      "quiz_type": "mcq",
+      "questions": [
         {
           "prompt": "During an outbreak, a community health worker wants to support a distressed community member but is concerned they are “not qualified to do mental health care.” Which approach best reflects the CHW’s appropriate supportive role?",
           "options": [
@@ -1038,7 +1712,14 @@
           ],
           "correct_option_id": "D",
           "explanation": "CHWs are not expected to function as therapists, but they can still reduce harm by listening, validating feelings, and maintaining human connection, which are described as protective factors."
-        },
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "quiz_scope": "inline",
+      "quiz_type": "mcq",
+      "questions": [
         {
           "prompt": "In outbreak response training, CHWs are taught that most diseases responsible for outbreaks spread through one or more of three broad routes. Which set below matches those three routes?",
           "options": [
@@ -1068,9 +1749,18 @@
       "type": "panel",
       "header": "Recovery, Learning and Resilience",
       "body": [
-        "An outbreak does not end when cases decline. Even for mild outbreaks, recovery includes restoring trust, addressing loss, and learning from experience.",
-        "Communities that reflect on what worked and what failed are better prepared for the next emergency.",
-        "CHW teams can help document lessons learned, rebuild preventive practices, and strengthen preparedness over time."
+        {
+          "type": "paragraph",
+          "text": "An outbreak does not end when cases decline. Even for mild outbreaks, recovery includes restoring trust, addressing loss, and learning from experience."
+        },
+        {
+          "type": "paragraph",
+          "text": "Communities that reflect on what worked and what failed are better prepared for the next emergency."
+        },
+        {
+          "type": "paragraph",
+          "text": "CHW teams can help document lessons learned, rebuild preventive practices, and strengthen preparedness over time."
+        }
       ],
       "image": null
     },
@@ -1078,9 +1768,18 @@
       "type": "panel",
       "header": "Recovery, Learning and Resilience (continued)",
       "body": [
-        "Depending on the outbreak and the health system overall, CHWS may integrate their experiences and data collection efforts into larger country-wide or region-wide data gathering programs.",
-        "Much of the data you collected in preparation of the outbreak and during the outbreak can become valuable markers for the effectiveness of planning and implementation of community assistance programs.",
-        "Resilience is not endurance alone. It is adaptation informed by evidence."
+        {
+          "type": "paragraph",
+          "text": "Depending on the outbreak and the health system overall, CHWS may integrate their experiences and data collection efforts into larger country-wide or region-wide data gathering programs."
+        },
+        {
+          "type": "paragraph",
+          "text": "Much of the data you collected in preparation of the outbreak and during the outbreak can become valuable markers for the effectiveness of planning and implementation of community assistance programs."
+        },
+        {
+          "type": "paragraph",
+          "text": "Resilience is not endurance alone. It is adaptation informed by evidence."
+        }
       ],
       "image": null
     },
@@ -1088,9 +1787,18 @@
       "type": "panel",
       "header": "Closing Message",
       "body": [
-        "You are working at the front lines of some of the greatest public health challenges of our time.",
-        "The scientific evidence is clear: well-trained community health workers save lives during emergencies, even when resources are scarce and systems fail.",
-        "Your knowledge, your presence, and your leadership matter more than ever."
+        {
+          "type": "paragraph",
+          "text": "You are working at the front lines of some of the greatest public health challenges of our time."
+        },
+        {
+          "type": "paragraph",
+          "text": "The scientific evidence is clear: well-trained community health workers save lives during emergencies, even when resources are scarce and systems fail."
+        },
+        {
+          "type": "paragraph",
+          "text": "Your knowledge, your presence, and your leadership matter more than ever."
+        }
       ],
       "image": null
     },
@@ -1098,11 +1806,16 @@
       "type": "panel",
       "header": "Conclusions",
       "body": [
-        "Disease outbreaks are increasing in frequency and severity due to climate change, conflict, population displacement, and weakened public health systems.",
-        "In many communities, formal health services may be absent, delayed, or overwhelmed, making local action essential.",
-        "Community health workers are often the first, and sometimes only, organized health response during an outbreak.",
-        "Outbreaks are defined by patterns, not by single cases; early recognition of unusual illness trends is critical.",
-        "Distinguishing between outbreaks, epidemics, and pandemics helps CHWs understand scale and response urgency."
+        {
+          "type": "bullets",
+          "items": [
+            "Disease outbreaks are increasing in frequency and severity due to climate change, conflict, population displacement, and weakened public health systems.",
+            "In many communities, formal health services may be absent, delayed, or overwhelmed, making local action essential.",
+            "Community health workers are often the first, and sometimes only, organized health response during an outbreak.",
+            "Outbreaks are defined by patterns, not by single cases; early recognition of unusual illness trends is critical.",
+            "Distinguishing between outbreaks, epidemics, and pandemics helps CHWs understand scale and response urgency."
+          ]
+        }
       ],
       "image": null
     },
@@ -1110,11 +1823,16 @@
       "type": "panel",
       "header": "Conclusions (continued)",
       "body": [
-        "The first days and weeks of an outbreak matter most; early action can prevent escalation into a larger crisis.",
-        "Prevention remains the foundation of preparedness and is often more effective than treatment in low-resource settings.",
-        "Preventive actions reduce demand on fragile health systems, preserving care for those with severe illness or urgent needs.",
-        "Prevention strategies remain effective even when medicines, vaccines, and supplies are disrupted or unavailable.",
-        "Behavioral prevention—such as hand hygiene, safe water practices, food safety, masking, and distancing—can significantly reduce disease spread."
+        {
+          "type": "bullets",
+          "items": [
+            "The first days and weeks of an outbreak matter most; early action can prevent escalation into a larger crisis.",
+            "Prevention remains the foundation of preparedness and is often more effective than treatment in low-resource settings.",
+            "Preventive actions reduce demand on fragile health systems, preserving care for those with severe illness or urgent needs.",
+            "Prevention strategies remain effective even when medicines, vaccines, and supplies are disrupted or unavailable.",
+            "Behavioral prevention—such as hand hygiene, safe water practices, food safety, masking, and distancing—can significantly reduce disease spread."
+          ]
+        }
       ],
       "image": null
     },
@@ -1122,12 +1840,17 @@
       "type": "panel",
       "header": "Conclusions (continued)",
       "body": [
-        "Prevention protects vulnerable populations, including infants, pregnant people, older adults, and those with chronic illness or malnutrition.",
-        "Slowing transmission “buys time” for communities to organize care, correct misinformation, and mobilize support.",
-        "Preparedness strengthens community self-reliance by emphasizing local knowledge, planning, and collective action.",
-        "Effective preparedness requires early communication, trusted leadership, and clear plans established before illness appears.",
-        "Community-based surveillance by CHWs is often faster and more effective than formal reporting systems alone.",
-        "Simple documentation and timely reporting can save lives, even without laboratory confirmation."
+        {
+          "type": "bullets",
+          "items": [
+            "Prevention protects vulnerable populations, including infants, pregnant people, older adults, and those with chronic illness or malnutrition.",
+            "Slowing transmission “buys time” for communities to organize care, correct misinformation, and mobilize support.",
+            "Preparedness strengthens community self-reliance by emphasizing local knowledge, planning, and collective action.",
+            "Effective preparedness requires early communication, trusted leadership, and clear plans established before illness appears.",
+            "Community-based surveillance by CHWs is often faster and more effective than formal reporting systems alone.",
+            "Simple documentation and timely reporting can save lives, even without laboratory confirmation."
+          ]
+        }
       ],
       "image": null
     },
@@ -1135,12 +1858,17 @@
       "type": "panel",
       "header": "Conclusions (continued)",
       "body": [
-        "During an outbreak, CHWs play key roles in risk reduction, education, case identification, and referral.",
-        "Clear, calm, and consistent communication helps counter fear, rumors, stigma, and harmful practices.",
-        "Trust built before an outbreak determines whether communities will follow guidance when it matters most.",
-        "CHWs support basic care within their scope while acting as bridges to higher-level medical services.",
-        "Prioritizing care for the most vulnerable reduces overall mortality, even when resources are limited.",
-        "Mental health impacts are real during outbreaks; listening, reassurance, and human connection are essential."
+        {
+          "type": "bullets",
+          "items": [
+            "During an outbreak, CHWs play key roles in risk reduction, education, case identification, and referral.",
+            "Clear, calm, and consistent communication helps counter fear, rumors, stigma, and harmful practices.",
+            "Trust built before an outbreak determines whether communities will follow guidance when it matters most.",
+            "CHWs support basic care within their scope while acting as bridges to higher-level medical services.",
+            "Prioritizing care for the most vulnerable reduces overall mortality, even when resources are limited.",
+            "Mental health impacts are real during outbreaks; listening, reassurance, and human connection are essential."
+          ]
+        }
       ],
       "image": null
     },
@@ -1148,11 +1876,16 @@
       "type": "panel",
       "header": "Conclusions (continued)",
       "body": [
-        "Protecting CHWs’ own health is critical—a sick health worker cannot protect the community.",
-        "Infection prevention measures for CHWs are ethical responsibilities, not optional precautions.",
-        "Recovery does not end when cases decline; communities must rebuild trust, restore services, and learn from experience.",
-        "Reflecting on lessons learned strengthens preparedness and resilience for future emergencies.",
-        "Well-trained, trusted, and protected community health workers save lives, even when health systems fail."
+        {
+          "type": "bullets",
+          "items": [
+            "Protecting CHWs’ own health is critical—a sick health worker cannot protect the community.",
+            "Infection prevention measures for CHWs are ethical responsibilities, not optional precautions.",
+            "Recovery does not end when cases decline; communities must rebuild trust, restore services, and learn from experience.",
+            "Reflecting on lessons learned strengthens preparedness and resilience for future emergencies.",
+            "Well-trained, trusted, and protected community health workers save lives, even when health systems fail."
+          ]
+        }
       ],
       "image": null
     },
@@ -1363,7 +2096,14 @@
           ],
           "correct_option_id": "D",
           "explanation": "Outbreaks are often intensified when people live in overcrowded settings with poor sanitation and limited access to clean water, which can increase transmission and worsen community impact."
-        },
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "quiz_scope": "final",
+      "quiz_type": "mcq",
+      "questions": [
         {
           "prompt": "A situation should be considered a health emergency mainly when it rapidly exceeds a community’s usual ability to cope, rather than because it feels frightening.",
           "options": [
@@ -1378,7 +2118,14 @@
           ],
           "correct_option_id": "A",
           "explanation": "A health emergency is defined operationally by how quickly normal coping capacity is overwhelmed, not by the level of fear it generates."
-        },
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "quiz_scope": "final",
+      "quiz_type": "mcq",
+      "questions": [
         {
           "prompt": "A community has a growing cluster of the same illness, but prevention measures, surveillance, and rapid response are delayed. How should a health worker interpret the most likely consequence of this delay?",
           "options": [
@@ -1431,7 +2178,14 @@
           ],
           "correct_option_id": "A",
           "explanation": "When key clinical resources are limited or may disappear during a crisis, preventing illness and injury becomes the primary approach to saving lives and preserving community stability."
-        },
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "quiz_scope": "final",
+      "quiz_type": "mcq",
+      "questions": [
         {
           "prompt": "A community health worker is explaining why a surge in illness during a disaster can rapidly strain local clinics in a low-resource area. Which interpretation best captures the underlying system factors that make this likely?",
           "options": [
@@ -1454,7 +2208,14 @@
           ],
           "correct_option_id": "D",
           "explanation": "Low-resource health systems may already be operating at or beyond capacity in routine conditions, and during emergencies facilities can rapidly become overwhelmed or even inaccessible—together explaining why a crisis can quickly strain care delivery."
-        },
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "quiz_scope": "final",
+      "quiz_type": "mcq",
+      "questions": [
         {
           "prompt": "A community is facing repeated disruptions in deliveries of medical supplies. Which statement best explains why prevention efforts can still be sustained locally, and what helps those efforts succeed?",
           "options": [
@@ -1507,7 +2268,14 @@
           ],
           "correct_option_id": "D",
           "explanation": "Collective preparedness is described as stronger than individual preparedness, and communities that talk through emergencies ahead of time are noted to respond more quickly and with less panic."
-        },
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "quiz_scope": "final",
+      "quiz_type": "mcq",
+      "questions": [
         {
           "prompt": "Which description best matches a community health worker’s role in outbreak preparedness?",
           "options": [
@@ -1530,7 +2298,14 @@
           ],
           "correct_option_id": "B",
           "explanation": "CHWs support preparedness through education and training that helps communities get ready mentally, socially, and practically, and this work starts with conversations and communication."
-        },
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "quiz_scope": "final",
+      "quiz_type": "mcq",
+      "questions": [
         {
           "prompt": "A community health worker notices that during a suspected outbreak, some people are hiding symptoms because they fear shame or punishment. Which communication approach is most likely to reduce stigma and encourage timely reporting?",
           "options": [
@@ -1583,7 +2358,14 @@
           ],
           "correct_option_id": "C",
           "explanation": "Key outbreak pattern data for CHWs include identifying who is getting sick, where they live, and how quickly symptoms are spreading."
-        },
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "quiz_scope": "final",
+      "quiz_type": "mcq",
+      "questions": [
         {
           "prompt": "In a suspected outbreak, what is the main reason a community health worker should report early through established channels?",
           "options": [
@@ -1606,7 +2388,14 @@
           ],
           "correct_option_id": "C",
           "explanation": "Early reporting is important because it enables supervisors, clinics, or district health authorities to confirm whether an outbreak is occurring and to mobilize support in response."
-        },
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "quiz_scope": "final",
+      "quiz_type": "mcq",
+      "questions": [
         {
           "prompt": "During an outbreak response, which set of actions best reflects how a community health worker should protect themself and their family while continuing essential work?",
           "options": [
@@ -1659,7 +2448,14 @@
           ],
           "correct_option_id": "C",
           "explanation": "CHWs may need to step in to correct harmful rumors, persuade people to avoid dangerous remedies, and explain both what is known and what remains unknown about the illness."
-        },
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "quiz_scope": "final",
+      "quiz_type": "mcq",
+      "questions": [
         {
           "prompt": "During an outbreak, a community health worker (CHW) has already earned strong community trust. What is the most likely benefit of using a clear, calm communication approach in this situation?",
           "options": [
@@ -1682,7 +2478,14 @@
           ],
           "correct_option_id": "B",
           "explanation": "When the community trusts CHWs, that trust enables effective communication; using a clear, calm style can help reduce panic, stigma, and resistance to care or prevention measures."
-        },
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "quiz_scope": "final",
+      "quiz_type": "mcq",
+      "questions": [
         {
           "prompt": "Which option best captures how a community health worker (CHW) should function during an outbreak when caring for sick people at home and deciding when to involve higher-level services, especially for those at greater risk of severe illness?",
           "options": [
@@ -1735,7 +2538,14 @@
           ],
           "correct_option_id": "B",
           "explanation": "The guidance emphasizes that you do not need the disease name to reduce risk; instead, you should assume a person may be infectious when they have symptoms like fever, cough, diarrhea, rash, or unexplained weakness."
-        },
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "quiz_scope": "final",
+      "quiz_type": "mcq",
+      "questions": [
         {
           "prompt": "Which option best describes effective hand hygiene for reducing infectious transmission, including in crowded, low-resource settings?",
           "options": [
@@ -1758,7 +2568,14 @@
           ],
           "correct_option_id": "B",
           "explanation": "The material states that alcohol-based hand rubs or soap and water significantly reduce transmission even in crowded, low-resource environments."
-        },
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "quiz_scope": "final",
+      "quiz_type": "mcq",
+      "questions": [
         {
           "prompt": "If a community health worker develops possible infectious symptoms during an outbreak response, the appropriate step is to stop direct contact with others because continuing to work while ill can worsen the outbreak.",
           "options": [

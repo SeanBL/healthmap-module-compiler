@@ -16,32 +16,37 @@ function renderEngage1(slide, container) {
 
   const items = Array.isArray(slide.items) ? slide.items : [];
 
-  function renderIntro() {
-    contentArea.innerHTML = "";
+  async function renderIntro() {
+  const nextContent = document.createDocumentFragment();
 
-    if (slide.intro) {
-      const intro = document.createElement("p");
-      intro.textContent = slide.intro;
-      intro.className = "engage1-intro";
-      contentArea.appendChild(intro);
-    }
+  const wrapper = document.createElement("div");
+  wrapper.className = "engage-fade-in";
 
-    if (slide.intro_image) {
-      const introImg = document.createElement("img");
-      introImg.src = `assets/${slide.intro_image}`;
-      introImg.alt = "Intro image";
-      introImg.className = "engage1-image";
-      contentArea.appendChild(introImg);
-    }
-  }
+  const block = document.createElement("div");
+  block.className = "engage-content-block";
+
+  const introBlock = await renderContentBlock({
+    textArray: slide.intro || [],
+    imageSrc: slide.intro_image ? `assets/${slide.intro_image}` : null,
+    alt: "Intro image"
+  });
+
+  block.appendChild(introBlock);
+
+  wrapper.appendChild(block);
+  nextContent.appendChild(wrapper);
+
+  replaceContent(contentArea, nextContent);
+}
 
   items.forEach((item, index) => {
     const btn = document.createElement("button");
+    btn.type = "button";
     btn.textContent = item.label || `Item ${index + 1}`;
     btn.className = "engage1-btn";
 
-    btn.addEventListener("click", () => {
-      renderEngage1Item(item, contentArea);
+    btn.addEventListener("click", async () => {
+      await renderEngage1Item(item, contentArea);
 
       Array.from(buttonContainer.children).forEach(b =>
         b.classList.remove("active")
@@ -56,7 +61,6 @@ function renderEngage1(slide, container) {
   wrapper.appendChild(contentArea);
   container.appendChild(wrapper);
 
-  // Always reset to intro
   renderIntro();
 }
 
@@ -64,22 +68,27 @@ function renderEngage1(slide, container) {
 // Render Engage1 Item Content
 // -------------------------
 
-function renderEngage1Item(item, contentArea) {
-  contentArea.innerHTML = "";
+async function renderEngage1Item(item, contentArea) {
+  const nextContent = document.createDocumentFragment();
 
-  if (item.image) {
-    const img = document.createElement("img");
-    img.src = `assets/${item.image}`;
-    img.alt = item.label || "Item image";
-    img.className = "engage1-image";
-    contentArea.appendChild(img);
-  }
+  const wrapper = document.createElement("div");
+  wrapper.className = "engage-fade-in";
 
-  if (item.text) {
-    const p = document.createElement("p");
-    p.textContent = item.text;
-    contentArea.appendChild(p);
-  }
+  const block = document.createElement("div");
+  block.className = "engage-content-block";
+
+  const contentBlock = await renderContentBlock({
+    textArray: item.text || [],
+    imageSrc: item.image ? `assets/${item.image}` : null,
+    alt: item.label || "Item image"
+  });
+
+  block.appendChild(contentBlock);
+
+  wrapper.appendChild(block);
+  nextContent.appendChild(wrapper);
+
+  replaceContent(contentArea, nextContent);
 }
 
 // -------------------------
@@ -95,24 +104,21 @@ function renderEngage2(slide, container) {
   const wrapper = document.createElement("div");
   wrapper.className = "engage2-wrapper";
 
-  // Intro
-  if (slide.intro) {
-    const intro = document.createElement("p");
-    intro.textContent = slide.intro;
-    intro.className = "engage2-intro";
-    wrapper.appendChild(intro);
-  }
+  // Intro (async-safe image)
+  async function renderIntro() {
+    const block = await renderContentBlock({
+      textArray: slide.intro ? [slide.intro] : [],
+      imageSrc: slide.intro_image ? `assets/${slide.intro_image}` : null,
+      alt: "Intro image",
+      imageClass: "engage2-image"
+    });
 
-  if (slide.intro_image) {
-    const introImg = document.createElement("img");
-    introImg.src = `assets/${slide.intro_image}`;
-    introImg.alt = "Intro image";
-    introImg.className = "engage2-image";
-    wrapper.appendChild(introImg);
+    wrapper.appendChild(block);
   }
 
   // Reveal Button
   const revealBtn = document.createElement("button");
+  revealBtn.type = "button";
   revealBtn.textContent = slide.button_label || "Continue";
   revealBtn.className = "engage2-btn";
 
@@ -122,7 +128,6 @@ function renderEngage2(slide, container) {
 
   const layers = Array.isArray(slide.layers) ? slide.layers : [];
 
-  // Restore revealed layers
   let revealedCount = 0;
   if (
     typeof engage.revealedCount === "number" &&
@@ -131,29 +136,31 @@ function renderEngage2(slide, container) {
     revealedCount = Math.min(engage.revealedCount, layers.length);
   }
 
-  for (let i = 0; i < revealedCount; i++) {
-    appendEngage2Layer(layers[i], stackArea);
-  }
-
   let currentLayerIndex = revealedCount;
 
-  // Disable button if already complete
-  if (currentLayerIndex >= layers.length) {
-    revealBtn.disabled = true;
-  }
-
-  revealBtn.addEventListener("click", () => {
-    if (currentLayerIndex >= layers.length) return;
-
-    appendEngage2Layer(layers[currentLayerIndex], stackArea);
-    currentLayerIndex++;
-
-    // Persist progress
-    engage.revealedCount = currentLayerIndex;
-    saveProgress();
+  async function restoreLayers() {
+    for (let i = 0; i < revealedCount; i++) {
+      await appendEngage2Layer(layers[i], stackArea);
+    }
 
     if (currentLayerIndex >= layers.length) {
       revealBtn.disabled = true;
+    }
+  }
+
+  revealBtn.addEventListener("click", async () => {
+    if (currentLayerIndex >= layers.length) return;
+
+    revealBtn.disabled = true;
+
+    await appendEngage2Layer(layers[currentLayerIndex], stackArea);
+    currentLayerIndex++;
+
+    engage.revealedCount = currentLayerIndex;
+    saveProgress();
+
+    if (currentLayerIndex < layers.length) {
+      revealBtn.disabled = false;
     }
   });
 
@@ -161,34 +168,77 @@ function renderEngage2(slide, container) {
   wrapper.appendChild(stackArea);
   container.appendChild(wrapper);
 
-  // Persist default (even if 0 layers revealed)
-  if (typeof engage.revealedCount !== "number") {
-    engage.revealedCount = revealedCount;
-    saveProgress();
-  }
+  // IMPORTANT: Run async flow in order to prevent flicker
+  (async () => {
+    await renderIntro();
+    await restoreLayers();
+
+    if (typeof engage.revealedCount !== "number") {
+      engage.revealedCount = revealedCount;
+      saveProgress();
+    }
+  })();
 }
 
 // -------------------------
 // Append Engage2 Layer
 // -------------------------
 
-function appendEngage2Layer(layer, stackArea) {
+async function appendEngage2Layer(layer, stackArea) {
   const layerWrapper = document.createElement("div");
-  layerWrapper.className = "engage2-layer";
+  layerWrapper.className = "engage2-layer engage-fade-in";
 
-  if (layer.image) {
-    const img = document.createElement("img");
-    img.src = `assets/${layer.image}`;
-    img.alt = "Layer image";
-    img.className = "engage2-image";
-    layerWrapper.appendChild(img);
-  }
+  const block = await renderContentBlock({
+    textArray: layer.text ? [layer.text] : [],
+    imageSrc: layer.image ? `assets/${layer.image}` : null,
+    alt: "Layer image",
+    imageClass: "engage2-image"
+  });
 
-  if (layer.text) {
-    const p = document.createElement("p");
-    p.textContent = layer.text;
-    layerWrapper.appendChild(p);
-  }
-
+  layerWrapper.appendChild(block);
   stackArea.appendChild(layerWrapper);
+}
+
+// -------------------------
+// Helpers
+// -------------------------
+
+async function replaceContent(container, newContent) {
+  // 1. Lock current height
+  const startHeight = container.offsetHeight;
+  container.style.height = startHeight + "px";
+
+  // 2. Replace content (invisible to user because height is locked)
+  container.replaceChildren(newContent);
+
+  // 3. Wait for next frame so DOM updates
+  await new Promise(requestAnimationFrame);
+
+  // 4. Measure new height
+  const endHeight = container.scrollHeight;
+
+  // 5. Animate height change
+  container.style.transition = "height 0.25s ease";
+  container.style.height = endHeight + "px";
+
+  // 6. Cleanup after animation
+  setTimeout(() => {
+    container.style.height = "";
+    container.style.transition = "";
+  }, 250);
+}
+
+function createReadyImage(src, alt, className) {
+  return new Promise((resolve) => {
+    const img = document.createElement("img");
+    img.src = src;
+    img.alt = alt || "";
+    if (className) img.className = className;
+
+    img.onload = () => resolve(img);
+    img.onerror = () => resolve(img);
+
+    // fallback in case onload never fires
+    setTimeout(() => resolve(img), 500);
+  });
 }

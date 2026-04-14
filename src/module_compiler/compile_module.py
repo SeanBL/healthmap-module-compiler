@@ -14,7 +14,8 @@ STRICT_ASSET_MODE = True  # Fail-fast if asset missing
 
 def compile_module(input_path: Path, output_path: Path) -> None:
     # Step 1: Structural extraction
-    raw_slides = extract_raw_slides(input_path)
+    stage1_output = extract_raw_slides(input_path)
+    raw_slides = stage1_output["slides"]
 
     # Step 2: Normalize (Stage 2)
     normalized_slides = normalize_slides(raw_slides)
@@ -25,19 +26,27 @@ def compile_module(input_path: Path, output_path: Path) -> None:
 
     # Step 3: Build runtime module
     module = build_module(
-        module_id=input_path.stem,
+        module_id=stage1_output["module_id"],
         raw_slides=normalized_slides,
     )
 
     # Step 4: Write JSON (development output copy)
     output_path.parent.mkdir(parents=True, exist_ok=True)
+    final_json = {
+        "module_title": stage1_output["module_title"],
+        "module_id": stage1_output["module_id"],
+        "version": "1.0",
+        "slides": [s.model_dump() for s in module.slides]
+    }
+    print("FINAL JSON:", final_json)
+
     output_path.write_text(
-        json.dumps(module.model_dump(), indent=2, ensure_ascii=False),
+        json.dumps(final_json, indent=2, ensure_ascii=False),
         encoding="utf-8",
     )
 
     # Step 5: Package runtime
-    package_runtime(module, input_path)
+    package_runtime(module, input_path, stage1_output)
 
     print(f"✅ Compiled module: {input_path.name}")
     print(f"📄 Slides: {len(module.slides)}")
@@ -115,7 +124,7 @@ def stage3_audit(module, export_assets_dir: Path):
 # 🔹 Runtime Packaging
 # --------------------------------------------------
 
-def package_runtime(module, input_path: Path) -> None:
+def package_runtime(module, input_path: Path, stage1_output) -> None:
     BASE_DIR = Path(__file__).resolve().parent
     PROJECT_ROOT = BASE_DIR.parents[1]
 
@@ -131,8 +140,36 @@ def package_runtime(module, input_path: Path) -> None:
     export_dir.mkdir(parents=True, exist_ok=True)
     export_assets_dir.mkdir(parents=True, exist_ok=True)
 
+    # --------------------------------------------------
+    # 🔹 Resource Processing (PDFs)
+    # --------------------------------------------------
+
+    resources_source_dir = input_path.parent / "resources" / input_path.stem
+    export_resources_dir = export_assets_dir / "resources"
+
+    export_resources_dir.mkdir(parents=True, exist_ok=True)
+
+    if resources_source_dir.exists():
+        for file in resources_source_dir.iterdir():
+            if file.is_file():
+                shutil.copy(file, export_resources_dir / file.name)
+                print(f"[Resource] Copied: {file.name}")
+    else:
+        print("[Resource] No resources folder found for this module.")
+
     # Copy runtime templates
-    for filename in ["index.html", "runtime_core.js", "runtime_drawer.js", "runtime_engage.js", "runtime_resume.js", "runtime.js", "runtime_state.js", "runtime_quiz.js", "styles.css"]:
+    for filename in [
+        "index.html",
+        "runtime_core.js",
+        "runtime_drawer.js",
+        "runtime_engage.js",
+        "runtime_resume.js",
+        "runtime.js",
+        "runtime_state.js",
+        "runtime_quiz.js",
+        "runtime_bridge.js",
+        "styles.css"
+    ]:
         shutil.copy(templates_dir / filename, export_dir / filename)
 
     # --------------------------------------------------
@@ -199,14 +236,38 @@ def package_runtime(module, input_path: Path) -> None:
                     layer.image = filename_map[layer.image]
 
     # --------------------------------------------------
+    # 🔹 Collect Resources Automatically
+    # --------------------------------------------------
+
+    resources = []
+
+    resources_source_dir = input_path.parent / "resources" / input_path.stem
+
+    if resources_source_dir.exists():
+        for file in resources_source_dir.iterdir():
+            if file.is_file() and file.suffix.lower() == ".pdf":
+                resources.append({
+                    "title": file.stem.replace("-", " "),
+                    "file": file.name
+                })
+                
+    # ✅ Sort alphabetically (case-insensitive)
+    resources.sort(key=lambda r: r["title"].lower())
+
+    # --------------------------------------------------
     # 🔹 Write final module.json
     # --------------------------------------------------
 
     (export_dir / "module.json").write_text(
-        json.dumps(module.model_dump(), indent=2, ensure_ascii=False),
+        json.dumps({
+            "module_title": stage1_output["module_title"],
+            "module_id": stage1_output["module_id"],
+            "version": "1.0",
+            "resources": resources,
+            "slides": [s.model_dump() for s in module.slides]
+        }, indent=2, ensure_ascii=False),
         encoding="utf-8",
     )
-
     # --------------------------------------------------
     # 🔹 Stage 3 Audit
     # --------------------------------------------------

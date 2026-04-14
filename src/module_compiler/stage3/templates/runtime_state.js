@@ -11,6 +11,10 @@ const RuntimeState = window.RuntimeState = {
 
   // quizState[slideIndex][questionIndex] = { selectedOptionId, submitted, correct }
   quizState: {},
+    shuffle: {
+    seed: null,
+    optionOrder: {}
+  },
 
   // we will store computed final quiz results here too
   final: {
@@ -99,3 +103,11 @@ window.loadProgress = loadProgress;
 window.saveProgress = saveProgress;
 window.hasSavedProgress = hasSavedProgress;
 window.ensureEngageState = ensureEngageState;
+
+// -------------------------
+// Runtime UI State
+// -------------------------
+
+const RuntimeUI = window.RuntimeUI = {
+  resultsShown: false
+};

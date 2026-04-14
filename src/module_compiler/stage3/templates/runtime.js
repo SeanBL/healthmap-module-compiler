@@ -41,3 +41,40 @@ window.HealthMAPRuntime = {
   })
 };
 
+// -------------------------
+// Global Button Press Handler
+// -------------------------
+
+document.addEventListener("pointerdown", (e) => {
+  if (
+    e.target.classList.contains("engage1-btn") ||
+    e.target.classList.contains("engage2-btn")
+  ) {
+    e.target.classList.add("pressed");
+  }
+});
+
+document.addEventListener("pointerup", (e) => {
+  if (
+    e.target.classList.contains("engage1-btn") ||
+    e.target.classList.contains("engage2-btn")
+  ) {
+    e.target.classList.remove("pressed");
+  }
+});
+
+document.addEventListener("pointercancel", (e) => {
+  if (
+    e.target.classList.contains("engage1-btn") ||
+    e.target.classList.contains("engage2-btn")
+  ) {
+    e.target.classList.remove("pressed");
+  }
+});
+
+RuntimeState.resources = [
+  {
+    title: "PHCFM PDF",
+    file: "PHCFM-15-3204.pdf"
+  }
+];

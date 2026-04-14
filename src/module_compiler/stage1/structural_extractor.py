@@ -43,10 +43,13 @@ def normalize(text: str) -> str:
 
 
 def is_list_paragraph(p) -> bool:
-    pPr = p._p.pPr
-    if pPr is None:
+    try:
+        pPr = p._p.pPr
+        if pPr is None:
+            return False
+        return pPr.find(qn("w:numPr")) is not None
+    except Exception:
         return False
-    return pPr.find(qn("w:numPr")) is not None
 
 
 def canonical_col_label(raw: str) -> str:
@@ -96,12 +99,138 @@ def extract_quiz_scope(marker: str) -> str:
 
     return "inline"
 
+def extract_module_metadata(doc) -> dict:
+    module_title = None
+    module_id = None
+
+    for block in iter_block_items(doc):
+        if isinstance(block, Paragraph):
+            text = normalize(block.text)
+
+            if text.lower().startswith("module title"):
+                parts = text.split(":", 1)
+                if len(parts) == 2:
+                    module_title = parts[1].strip()
+
+            if text.lower().startswith("module id"):
+                parts = text.split(":", 1)
+                if len(parts) == 2:
+                    module_id = parts[1].strip()
+
+        # Stop early once both found (SAFE optimization)
+        if module_title and module_id:
+            break
+
+    return {
+        "module_title": module_title,
+        "module_id": module_id
+    }
+
+def is_real_bullet(p):
+    try:
+        # Case 1: standard numbering (works for some bullets)
+        pPr = p._element.pPr
+        if pPr is not None and pPr.numPr is not None:
+            return True
+
+        # Case 2: style-based bullets (VERY common in tables)
+        style_name = p.style.name.lower()
+        if "list" in style_name:
+            return True
+
+    except Exception:
+        pass
+
+    return False
+
+def extract_cell_blocks(cell) -> List[Block]:
+    blocks: List[Block] = []
+    bullet_items: List[str] = []
+
+    def flush_bullets():
+        nonlocal bullet_items
+        if bullet_items:
+            blocks.append(
+                BulletsBlock(
+                    type="bullets",
+                    items=bullet_items.copy()
+                )
+            )
+            bullet_items = []
+
+    for p in cell.paragraphs:
+        text = normalize(p.text)
+        if not text:
+            flush_bullets()
+            continue
+
+        # Detect bullet manually OR fallback pattern
+        is_bullet = False
+
+        # Case 1: real bullet character
+        if text.startswith("•"):
+            is_bullet = True
+            text = text.replace("•", "").strip()
+
+        # Case 2: dash bullet (YOUR CURRENT CASE)
+        elif text.startswith("- "):
+            is_bullet = True
+            text = text[2:].strip()   # removes "- "
+
+        # Case 3: Word list formatting
+        elif is_real_bullet(p):
+            is_bullet = True
+
+        # # Case 4: semantic list (colon trigger)
+        # elif (
+        #     len(blocks) > 0
+        #     and isinstance(blocks[-1], ParagraphBlock)
+        #     and blocks[-1].text.strip().endswith(":")
+        #     and text[0].isupper()  # basic guard
+        #     and not text.endswith(".")  # prevents full sentences from joining bullets
+        # ):
+        #     is_bullet = True
+
+        # Final decision
+        if is_bullet:
+            # FIX: prevent intro line from being treated as bullet
+            if not bullet_items and text.endswith(":"):
+                flush_bullets()
+                blocks.append(
+                    ParagraphBlock(
+                        type="paragraph",
+                        text=text
+                    )
+                )
+            else:
+                bullet_items.append(text)
+        else:
+            flush_bullets()
+            blocks.append(
+                ParagraphBlock(
+                    type="paragraph",
+                    text=text
+                )
+            )
+
+    flush_bullets()
+    if any("One person with a fever" in (getattr(b, "text", "") or "") for b in blocks):
+        print("🔍 DEBUG TARGET BLOCKS:", blocks)
+    return blocks
+
 # --------------------------------------------------
 # Structural Extraction
 # --------------------------------------------------
 
-def extract_raw_slides(docx_path: Path) -> List[RawSlide]:
+def extract_raw_slides(docx_path: Path) -> dict:
     doc = Document(str(docx_path))
+    metadata = extract_module_metadata(doc)
+
+    if not metadata["module_title"]:
+        raise ValueError("Missing 'Module title:' in Word document")
+
+    if not metadata["module_id"]:
+        raise ValueError("Missing 'Module id:' in Word document")
 
     slides: List[RawSlide] = []
     slide_index = 0
@@ -123,6 +252,10 @@ def extract_raw_slides(docx_path: Path) -> List[RawSlide]:
         # -----------------------------
         if isinstance(block, Paragraph):
             text = normalize(block.text)
+
+            # Skip metadata rows
+            if text.lower().startswith("module title") or text.lower().startswith("module id"):
+                continue
 
             print("PARAGRAPH:", repr(text))
 
@@ -188,30 +321,47 @@ def extract_raw_slides(docx_path: Path) -> List[RawSlide]:
                                 f"Engage1 slide {current_slide.slide_id} has no buttons"
                             )
 
-                        if not current_slide.body:
+                        if not current_slide.body or not any(
+                            isinstance(b, (ParagraphBlock, BulletsBlock))
+                            for b in current_slide.body
+                        ):
                             raise ValueError(
-                                f"Engage1 slide {current_slide.slide_id} has no content paragraphs"
+                                f"Engage1 slide {current_slide.slide_id} has no content blocks"
                             )
 
-                        paragraphs = current_slide.body
+                        blocks = current_slide.body
 
-                        # First paragraph becomes intro
-                        intro = paragraphs[0]
-                        content_paragraphs = paragraphs[1:]
+                        expanded_blocks = []
 
-                        if len(content_paragraphs) != len(pending_button_labels):
+                        for b in current_slide.body:
+                            if isinstance(b, BulletsBlock):
+                                # Split bullets into individual paragraph blocks
+                                for item in b.items:
+                                    expanded_blocks.append(
+                                        ParagraphBlock(type="paragraph", text=item)
+                                    )
+                            else:
+                                expanded_blocks.append(b)
+
+                        blocks = expanded_blocks
+
+                        # First block becomes intro (NOT just paragraph)
+                        intro = blocks[0]
+                        content_blocks = blocks[1:]
+
+                        if len(content_blocks) != len(pending_button_labels):
                             raise ValueError(
                                 f"Engage1 slide {current_slide.slide_id} paragraph/button mismatch"
                             )
 
                         engage1_items = []
 
-                        for label, paragraph in zip(pending_button_labels, content_paragraphs):
+                        for label, block in zip(pending_button_labels, content_blocks):
                             engage1_items.append(
                                 RawEngage1Item(
                                     label=label,
-                                    body=[paragraph],
-                                    image=getattr(paragraph, "image", None),
+                                    body=[block],   # ✅ now supports bullets too
+                                    image=getattr(block, "image", None),
                                 )
                             )
 
@@ -222,9 +372,12 @@ def extract_raw_slides(docx_path: Path) -> List[RawSlide]:
 
                     if current_slide.slide_type == "engage2":
 
-                        if not current_slide.body:
+                        if not current_slide.body or not any(
+                            isinstance(b, (ParagraphBlock, BulletsBlock))
+                            for b in current_slide.body
+                        ):
                             raise ValueError(
-                                f"Engage2 slide {current_slide.slide_id} has no content paragraphs"
+                                f"Engage2 slide {current_slide.slide_id} has no content blocks"
                             )
 
                         paragraphs = current_slide.body
@@ -378,13 +531,23 @@ def extract_raw_slides(docx_path: Path) -> List[RawSlide]:
                 label = col_labels[idx]
                 if not label:
                     continue
-                texts = [
-                    normalize(p.text)
-                    for p in cell.paragraphs
-                    if normalize(p.text)
-                ]
-                if texts:
-                    row_data[label] = texts
+
+                # ✅ ONLY convert english to structured blocks
+                if label == "english":
+                    cell_blocks = extract_cell_blocks(cell)
+                    if cell_blocks:
+                        existing = row_data.get(label, [])
+                        existing.extend(cell_blocks)
+                        row_data[label] = existing
+                else:
+                    # ✅ Keep everything else as plain text (UNCHANGED)
+                    texts = [
+                        normalize(p.text)
+                        for p in cell.paragraphs
+                        if normalize(p.text)
+                    ]
+                    if texts:
+                        row_data[label] = texts
 
             notes = row_data.get("notes", [])
             english = row_data.get("english", [])
@@ -403,28 +566,34 @@ def extract_raw_slides(docx_path: Path) -> List[RawSlide]:
             # -----------------------------
             # ENGAGE1 PARSING (Correct Layout Handling)
             # -----------------------------
-            if current_slide.slide_type == "engage1":
+            if current_slide.slide_type == "engage1" and english:
 
-                # If this row contains button definitions
-                if english and any(line.lower().startswith("[button]") for line in english):
+                row_has_button = any(
+                    isinstance(block, ParagraphBlock)
+                    and block.text.lower().startswith("[button]")
+                    for block in english
+                )
 
-                    for line in english:
-                        if line.lower().startswith("[button]"):
-                            label = line[8:].strip()
-                            pending_button_labels.append(label)
+                # Button-definition row
+                if row_has_button:
+                    for block in english:
+                        if isinstance(block, ParagraphBlock):
+                            text = block.text.strip()
+                            if text.lower().startswith("[button]"):
+                                label = text[8:].strip()
+                                pending_button_labels.append(label)
 
-                # Otherwise collect content paragraphs at slide level
-                elif english:
+                # Content row
+                else:
                     blocks = current_slide.body or []
 
-                    for line in english:
-                        blocks.append(
-                            ParagraphBlock(
-                                type="paragraph",
-                                text=line,
-                                image=image[0] if image else None
-                            )
-                        )
+                    for block in english:
+                        if isinstance(block, ParagraphBlock):
+                            if image:
+                                block.image = image[0]
+                            blocks.append(block)
+                        else:
+                            blocks.append(block)
 
                     current_slide.body = blocks
 
@@ -435,33 +604,40 @@ def extract_raw_slides(docx_path: Path) -> List[RawSlide]:
 
                 blocks = current_slide.body or []
 
-                for line in english:
+                for block in english:
 
-                    cleaned = line.strip()
+                    # Handle ParagraphBlock
+                    if isinstance(block, ParagraphBlock):
+                        text = block.text.strip()
 
-                    # 🔹 Filter control artifacts like "[Button] Next"
-                    if cleaned.lower().startswith("[button]"):
-                        button_label = cleaned[8:].strip()
-                        current_slide.engage2_button_label = button_label
-                        continue
+                        if text.lower().startswith("[button]"):
+                            button_label = text[8:].strip()
+                            current_slide.engage2_button_label = button_label
+                            continue
 
-                    blocks.append(
-                        ParagraphBlock(
-                            type="paragraph",
-                            text=cleaned,
-                            image=image[0] if image else None
-                        )
-                    )
+                        if image:
+                            block.image = image[0]
+
+                        blocks.append(block)
+
+                    # Handle BulletsBlock
+                    else:
+                        blocks.append(block)
 
                 current_slide.body = blocks
 
 
             if current_slide.slide_type == "panel" and english:
                 blocks = current_slide.body or []
-                for line in english:
-                    blocks.append(
-                        ParagraphBlock(type="paragraph", text=line)
-                    )
+
+                for block in english:
+                    if isinstance(block, ParagraphBlock):
+                        if image:
+                            block.image = image[0]
+                        blocks.append(block)
+                    else:
+                        blocks.append(block)
+
                 current_slide.body = blocks
 
             if image:
@@ -481,9 +657,12 @@ def extract_raw_slides(docx_path: Path) -> List[RawSlide]:
 
         if current_slide.slide_type == "engage2":
 
-            if not current_slide.body:
+            if not current_slide.body or not any(
+                isinstance(b, (ParagraphBlock, BulletsBlock))
+                for b in current_slide.body
+            ):
                 raise ValueError(
-                    f"Engage2 slide {current_slide.slide_id} has no content paragraphs"
+                    f"Engage2 slide {current_slide.slide_id} has no content blocks"
                 )
 
             paragraphs = current_slide.body
@@ -506,6 +685,10 @@ def extract_raw_slides(docx_path: Path) -> List[RawSlide]:
 
         slides.append(current_slide)
 
-    return slides
+    return {
+        "module_title": metadata["module_title"],
+        "module_id": metadata["module_id"],
+        "slides": slides
+    }
 
     

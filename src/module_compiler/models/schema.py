@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import List, Optional, Literal
 from pydantic import BaseModel, Field
-
+from typing import Union, List, Dict
 
 # -------------------------
 # Quiz Models
@@ -37,7 +37,7 @@ class QuizSlide(BaseModel):
 class PanelSlide(BaseModel):
     type: Literal["panel"]
     header: str
-    body: List[str]
+    body: List[Union[str, Dict]]
     image: Optional[str] = None
 
 
@@ -47,14 +47,14 @@ class PanelSlide(BaseModel):
 
 class Engage1Item(BaseModel):
     label: str
-    text: str
-    image: Optional[str] = None
+    text: List[Union[str, Dict]]
+    image: Optional[str]
 
 
 class Engage1Slide(BaseModel):
     type: Literal["engage_1"]
     header: str
-    intro: str
+    intro: List[Union[str, Dict]]
     intro_image: Optional[str] = None
     items: List[Engage1Item]
 

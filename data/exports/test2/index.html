@@ -1,26 +1,68 @@
 <head>
   <meta charset="UTF-8">
-  <title>HealthMAP Module</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="data:,">
 </head>
 <body>
   <div id="app">
 
-    <header id="module-header">
-      <h1 id="module-title"></h1>
-    </header>
+    <!-- Landscape side nav (LEFT COLUMN) -->
+    <aside id="navigation-landscape" class="nav-shell" data-nav-root>
 
-    <main id="slide-container">
-      <!-- Slides render here -->
-    </main>
+      <div class="l-top">
+        <button type="button" data-nav="menu" class="nav-btn menu-btn">☰</button>
+        <button type="button" data-nav="prev" class="nav-btn blue-btn">‹ Prev</button>
+        <button type="button" data-nav="next" class="nav-btn blue-btn">Next ›</button>
+      </div>
 
-    <footer id="navigation">
-      <button id="menu-btn">&#9776;</button>
-      <button id="prev-btn">Previous</button>
-      <span id="slide-counter"></span>
-      <button id="next-btn">Next</button>
-    </footer>
+      <div class="l-middle">
+        <div class="progress-bar vertical">
+          <div class="progress-fill" data-role="progress-fill"></div>
+        </div>
+        <span class="slide-counter" data-role="counter"></span>
+      </div>
+
+      <div class="l-bottom">
+        <button type="button" data-nav="exit" class="nav-btn exit-btn">Exit</button>
+      </div>
+
+    </aside>
+
+    <!-- ✅ NEW WRAPPER -->
+    <div id="main-column">
+
+      <header id="module-header">
+        <div class="header-left">WiRED International</div>
+        <div class="header-right" id="module-title"></div>
+      </header>
+
+      <main id="slide-container">
+        <!-- Slides render here -->
+      </main>
+
+      <!-- Portrait bottom nav -->
+      <footer id="navigation-portrait" class="nav-shell" data-nav-root>
+
+        <div class="p-left">
+          <button type="button" data-nav="menu" class="nav-btn menu-btn">☰</button>
+          <button type="button" data-nav="exit" class="nav-btn exit-btn">Exit</button>
+        </div>
+
+        <div class="p-center">
+          <span class="slide-counter" data-role="counter"></span>
+          <div class="progress-bar horizontal">
+            <div class="progress-fill" data-role="progress-fill"></div>
+          </div>
+        </div>
+
+        <div class="p-right">
+          <button type="button" data-nav="prev" class="nav-btn blue-btn">‹ Prev</button>
+          <button type="button" data-nav="next" class="nav-btn blue-btn">Next ›</button>
+        </div>
+
+      </footer>
+
+    </div>
 
   </div>
 
@@ -51,6 +93,11 @@
         <button id="resume-restart">Restart</button>
       </div>
     </div>
+  </div>
+
+  <div id="image-viewer-overlay">
+    <button id="image-viewer-close" type="button" aria-label="Close image viewer">✕</button>
+    <img id="image-viewer-img" alt="Expanded module image">
   </div>
 
   <script src="runtime_state.js"></script>

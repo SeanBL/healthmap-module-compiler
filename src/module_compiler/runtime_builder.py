@@ -21,21 +21,22 @@ from .models.schema import (
 # --------------------------------------------------
 
 def blocks_to_strings(blocks):
-    """
-    Convert ParagraphBlock / BulletsBlock into plain text strings.
-    Bullets are joined into a single newline-separated string.
-    """
+    print("🚨 USING UPDATED blocks_to_strings")
     output = []
 
     for block in blocks:
         if block.type == "paragraph":
-            output.append(block.text)
+            output.append({
+                "type": "paragraph",
+                "text": block.text
+            })
         elif block.type == "bullets":
-            bullet_text = "\n".join(f"- {item}" for item in block.items)
-            output.append(bullet_text)
+            output.append({
+                "type": "bullets",
+                "items": block.items
+            })
 
     return output
-
 
 # --------------------------------------------------
 # Slide Conversion
@@ -54,8 +55,7 @@ def convert_slide(raw: RawSlide):
         items = []
 
         for item in raw.engage1_items or []:
-            text_blocks = blocks_to_strings(item.body)
-            combined_text = "\n".join(text_blocks)
+            combined_text = blocks_to_strings(item.body)
 
             items.append(
                 Engage1Item(
@@ -67,8 +67,7 @@ def convert_slide(raw: RawSlide):
 
         intro_text = ""
         if raw.engage1_intro:
-            intro_blocks = blocks_to_strings(raw.engage1_intro)
-            intro_text = "\n".join(intro_blocks)
+            intro_text = blocks_to_strings(raw.engage1_intro)
 
         return Engage1Slide(
             type="engage_1",
@@ -107,7 +106,7 @@ def convert_slide(raw: RawSlide):
         )
 
     if raw.slide_type == "quiz":
-        questions = []
+        slides = []
 
         for q in raw.quiz_questions or []:
             options = [
@@ -115,21 +114,23 @@ def convert_slide(raw: RawSlide):
                 for o in (q.options or [])
             ]
 
-            questions.append(
-                QuizQuestion(
-                    prompt=q.prompt,
-                    options=options,
-                    correct_option_id=q.correct_option_id,
-                    explanation=q.explanation,
+            question = QuizQuestion(
+                prompt=q.prompt,
+                options=options,
+                correct_option_id=q.correct_option_id,
+                explanation=q.explanation,
+            )
+
+            slides.append(
+                QuizSlide(
+                    type="quiz",
+                    quiz_scope=raw.quiz_scope or "inline",
+                    quiz_type=raw.quiz_type or "mcq",
+                    questions=[question],   # ← ONE QUESTION ONLY
                 )
             )
 
-        return QuizSlide(
-            type="quiz",
-            quiz_scope=raw.quiz_scope or "inline",
-            quiz_type=raw.quiz_type or "mcq",
-            questions=questions,
-        )
+        return slides
 
     raise ValueError(f"Unknown slide type: {raw.slide_type}")
 
@@ -139,7 +140,15 @@ def convert_slide(raw: RawSlide):
 # --------------------------------------------------
 
 def build_module(module_id: str, raw_slides: List[RawSlide]) -> Module:
-    slides = [convert_slide(s) for s in raw_slides]
+    slides = []
+
+    for s in raw_slides:
+        converted = convert_slide(s)
+
+        if isinstance(converted, list):
+            slides.extend(converted)
+        else:
+            slides.append(converted)
 
     return Module(
         module_id=module_id,
