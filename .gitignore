@@ -21,3 +21,8 @@ dist/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+data/raw/
+data/exports/
+*.zip
+*.docx

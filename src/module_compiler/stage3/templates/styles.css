@@ -1170,6 +1170,17 @@ body {
   animation: strokeCheck 0.4s 0.6s forwards;
 }
 
+.crossmark-circle {
+  stroke: #e53935;
+  stroke-width: 3;
+}
+
+.crossmark-x {
+  stroke: #e53935;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
 @keyframes strokeCircle {
   to {
     stroke-dashoffset: 0;
@@ -1185,6 +1196,61 @@ body {
 @keyframes scaleCheck {
   0% { transform: scale(0.8); }
   100% { transform: scale(1); }
+}
+
+/* =========================
+   RESULTS STATE STYLING
+========================= */
+
+.results-wrapper {
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+/* ✅ PASS (GREEN) */
+.results-pass-state {
+  background: linear-gradient(
+    180deg,
+    rgba(76, 175, 80, 0.08),
+    rgba(76, 175, 80, 0.03)
+  );
+  border: 2px solid rgba(76, 175, 80, 0.4);
+}
+
+/* ❌ FAIL (RED) */
+.results-fail-state {
+  background: linear-gradient(
+    180deg,
+    rgba(229, 57, 53, 0.08),
+    rgba(229, 57, 53, 0.03)
+  );
+  border: 2px solid rgba(229, 57, 53, 0.4);
+}
+
+.results-percent.pass {
+  color: #2e7d32;
+}
+
+.results-percent.fail {
+  color: #c62828;
+}
+
+/* =========================
+   SHAKE ANIMATION (FAIL)
+========================= */
+
+@keyframes shakeX {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(3px); }
+  100% { transform: translateX(0); }
+}
+
+.results-icon.shake {
+  animation: shakeX 0.5s ease;
 }
 
 /* -------------------------

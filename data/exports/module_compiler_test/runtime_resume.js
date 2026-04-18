@@ -4,10 +4,16 @@
 // Resume/Reset Option Prompt
 // -------------------------
 function resetModuleProgress() {
+
   RuntimeState.currentIndex = 0;
+
   RuntimeState.quizState = {};
   RuntimeState.engageState = {};
 
+  // ✅ Reset cursor
+  RuntimeState.finalCursor = 0;
+
+  // ✅ Reset final quiz completely
   RuntimeState.final = {
     total: 0,
     correct: 0,
@@ -15,6 +21,17 @@ function resetModuleProgress() {
     completed: false,
     attemptSeed: null,
     questionOrder: [],
+    optionOrder: {},
+    questions: []   // ✅ IMPORTANT
+  };
+
+  // ✅ Reset UI flags
+  RuntimeUI.resultsShown = false;
+  RuntimeState.reviewMode = false;
+
+  // Optional (safe)
+  RuntimeState.shuffle = {
+    seed: null,
     optionOrder: {}
   };
 

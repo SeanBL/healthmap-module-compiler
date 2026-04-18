@@ -237,6 +237,21 @@ function setupNavigation() {
     ------------------------- */
 
     if (action === "prev") {
+      if (
+        RuntimeState.slides[RuntimeState.currentIndex]?.type === "quiz" &&
+        (RuntimeState.slides[RuntimeState.currentIndex].quiz_scope || "inline") === "final"
+      ) {
+
+        // Move backward using cursor
+        if (RuntimeState.finalCursor > 0) {
+          RuntimeState.finalCursor--;
+        }
+
+        closeDrawer();
+        saveProgress();
+        renderSlide();
+        return;
+      }
 
       if (RuntimeState.currentIndex > 0) {
         RuntimeState.currentIndex--;
@@ -264,13 +279,36 @@ function setupNavigation() {
       // Prevent skipping unanswered FINAL quiz questions
       if (slide?.type === "quiz" && (slide.quiz_scope || "inline") === "final") {
 
-        const state = RuntimeState.quizState?.[RuntimeState.currentIndex]?.[0];
+        let effectiveSlideIndex = RuntimeState.currentIndex;
+
+        if (slide?.type === "quiz" && (slide.quiz_scope || "inline") === "final") {
+          const mapped = RuntimeState.final.questionOrder?.[RuntimeState.finalCursor];
+          if (typeof mapped === "number") {
+            effectiveSlideIndex = mapped;
+          }
+        }
+
+        const state = RuntimeState.quizState?.[effectiveSlideIndex]?.[0];
 
         if (!state || !state.submitted) {
           alert("Please answer the quiz question before continuing.");
           return;
         }
 
+        // ✅ Move cursor (NOT slide index)
+        RuntimeState.finalCursor++;
+        console.log("NEXT CLICK -> finalCursor:", RuntimeState.finalCursor, "currentIndex:", RuntimeState.currentIndex);
+
+        const total = RuntimeState.final.questionOrder.length;
+
+        if (RuntimeState.finalCursor >= total) {
+          RuntimeState.currentIndex = getResultsSlideIndex();
+        }
+
+        closeDrawer();
+        saveProgress();
+        renderSlide();
+        return;
       }
 
       const maxIndex = getMaxSlideIndex();
@@ -411,15 +449,20 @@ function updateNavigationUI() {
 
   const slide = RuntimeState.slides[RuntimeState.currentIndex] || null;
 
-  if (slide?.type === "quiz" && (slide.quiz_scope || "inline") === "final") {
+  let effectiveSlideIndex = RuntimeState.currentIndex;
 
-    const state =
-      RuntimeState.quizState?.[RuntimeState.currentIndex]?.[0];
+  if (slide?.type === "quiz" && (slide.quiz_scope || "inline") === "final") {
+    const mapped = RuntimeState.final.questionOrder?.[RuntimeState.finalCursor];
+
+    if (typeof mapped === "number") {
+      effectiveSlideIndex = mapped;
+    }
+
+    const state = RuntimeState.quizState?.[effectiveSlideIndex]?.[0];
 
     if (!state || !state.submitted) {
       disableNext = true;
     }
-
   }
 
   nextBtns.forEach(btn => {

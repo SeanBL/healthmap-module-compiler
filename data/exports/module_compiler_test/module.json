@@ -45,7 +45,7 @@
           "text": "HealthMAP is available for free in the Google Play Store and the Apple Store."
         }
       ],
-      "image": "healthmap.jpg"
+      "image": "healthmap.webp"
     },
     {
       "type": "panel",
@@ -68,7 +68,7 @@
           "text": "In many communities, doctors and nurses are no longer present, or they arrive too late."
         }
       ],
-      "image": "waiting-for-clinic.png"
+      "image": "waiting-for-clinic.webp"
     },
     {
       "type": "panel",
@@ -83,7 +83,7 @@
           "text": "You are becoming the first line of defense, the early warning system, and often the only source of organized health response when disease outbreaks occur."
         }
       ],
-      "image": "attending-child.png"
+      "image": "attending-child.webp"
     },
     {
       "type": "panel",
@@ -102,7 +102,7 @@
           "text": "Moreover, CHWs have taught hundreds of thousands of people how to live healthier lives and avoid disease. Thus, their role in illness prevention is key!"
         }
       ],
-      "image": "9.jpg"
+      "image": "9.webp"
     },
     {
       "type": "panel",
@@ -117,7 +117,7 @@
           "text": "You will be called on to assist more people and to address more issues people will face with this growing list of health challenges."
         }
       ],
-      "image": "9.jpg"
+      "image": "9.webp"
     },
     {
       "type": "panel",
@@ -136,7 +136,7 @@
           "text": "This particular module is designed to help you become skilled in applying your CHW skills during what may become high-pressure settings, where the community you serve is facing a possible disease outbreak."
         }
       ],
-      "image": "outbreak.jpg"
+      "image": "outbreak.webp"
     },
     {
       "type": "panel",
@@ -202,7 +202,7 @@
           "text": "What is an outbreak? An outbreak is the occurrence of more cases of a specific illness than normally expected in a community over a given period of time. Outbreaks can begin suddenly or develop gradually."
         }
       ],
-      "image": "outbreak-define.jpg"
+      "image": "outbreak-define.webp"
     },
     {
       "type": "panel",
@@ -221,7 +221,7 @@
           "text": "Outbreaks are often intensified by overcrowding, poor sanitation, limited access to clean water. They can be made worse by disrupted health services and delays in detection and response."
         }
       ],
-      "image": "outbreak-b.png"
+      "image": "outbreak-b.webp"
     },
     {
       "type": "panel",
@@ -236,7 +236,7 @@
           "text": "This places severe strain on individuals, families, and health systems, including on CHWs who work directly in the communities that may be infected."
         }
       ],
-      "image": "outbreak-b.png"
+      "image": "outbreak-b.webp"
     },
     {
       "type": "panel",
@@ -259,7 +259,7 @@
           "text": "Pandemics are global—for instance, COVID-19 spreading across every continent."
         }
       ],
-      "image": "oep.jpg"
+      "image": "oep.webp"
     },
     {
       "type": "panel",
@@ -286,7 +286,7 @@
           "text": "Better still, as we will see, with good prevention practices, you might be able to head off the fire from ever starting!"
         }
       ],
-      "image": "fire.png"
+      "image": "fire.webp"
     },
     {
       "type": "quiz",
@@ -391,7 +391,7 @@
           "text": "Put simply, prevention aims to avoid the crisis, whereas preparedness aims to minimize the damage when a crisis is unavoidable."
         }
       ],
-      "image": "prev-and-prep.jpg"
+      "image": "prev-and-prep.webp"
     },
     {
       "type": "panel",
@@ -410,7 +410,7 @@
           "text": "Before we get to the larger topic of preparedness, we will spend a little time looking at the importance of prevention as part of the overall preparedness strategies."
         }
       ],
-      "image": "doc-a.jpg"
+      "image": "doc-a.webp"
     },
     {
       "type": "panel",
@@ -429,7 +429,7 @@
           "text": "Prevention reduces the number of people who become sick or injured in the first place, preserving scarce services for those who cannot be prevented from becoming ill. These may include people with severe disease, the very young or very old, obstetric emergencies, or trauma."
         }
       ],
-      "image": "doc-b.jpg"
+      "image": "doc-b.webp"
     },
     {
       "type": "panel",
@@ -444,7 +444,7 @@
           "text": "So, prevention addresses a community’s capacity to aid the most vulnerable."
         }
       ],
-      "image": "capacity.jpg"
+      "image": "capacity.webp"
     },
     {
       "type": "panel",
@@ -463,7 +463,7 @@
           "text": "WiRED strongly emphasizes behavioral prevention as key to community preparations in environments with limited medicines and vaccines. Basic behaviors, which is how we observe healthy measures, can prevent disease. With behavioral prevention, stronger community members can help more vulnerable members from being exposed to disease."
         }
       ],
-      "image": "bp.jpg"
+      "image": "bp.webp"
     },
     {
       "type": "panel",
@@ -486,7 +486,7 @@
           "text": "Slowing disease spread also reduces fear and panic, which themselves can worsen health outcomes."
         }
       ],
-      "image": "time-buffer.jpg"
+      "image": "time-buffer.webp"
     },
     {
       "type": "panel",
@@ -505,7 +505,7 @@
           "text": "When funding is limited or uncertain, prevention allows communities to stretch resources further. This can avoid high health costs, or worse, death, because those costs cannot be covered."
         }
       ],
-      "image": "money.jpg"
+      "image": "money.webp"
     },
     {
       "type": "panel",
@@ -524,7 +524,7 @@
           "text": "The CHWs’ role in community self-reliance is critical. This is one of your most important responsibilities!"
         }
       ],
-      "image": "reliance.jpg"
+      "image": "reliance.webp"
     },
     {
       "type": "panel",
@@ -543,7 +543,7 @@
           "text": "In this way, prevention supports not only health, but overall community resilience."
         }
       ],
-      "image": "resilience.jpg"
+      "image": "resilience.webp"
     },
     {
       "type": "panel",
@@ -566,7 +566,7 @@
           "text": "When people see that preventive actions are practical and effective, they are more likely to cooperate, seek care early, and follow guidance during an emergency."
         }
       ],
-      "image": "teaching-a.jpg"
+      "image": "teaching-a.webp"
     },
     {
       "type": "panel",
@@ -585,7 +585,7 @@
           "text": "It supports fairness by offering protection to everyone, not only those who manage to reach a health facility or who have the means to purchase treatments not available to others."
         }
       ],
-      "image": "avoid-suffering.jpg"
+      "image": "avoid-suffering.webp"
     },
     {
       "type": "quiz",
@@ -690,7 +690,7 @@
           "text": "And so, we now move our discussion from prevention to preparedness."
         }
       ],
-      "image": "p-to-p.jpg"
+      "image": "p-to-p.webp"
     },
     {
       "type": "panel",
@@ -709,7 +709,7 @@
           "text": "In the next section, we look at the key elements of preparedness from the CHW’s perspective."
         }
       ],
-      "image": "meeting.png"
+      "image": "meeting.webp"
     },
     {
       "type": "panel",
@@ -728,7 +728,7 @@
           "text": "As a CHW, your role is to help communities prepare mentally, socially, and practically through education and training."
         }
       ],
-      "image": "meeting.png"
+      "image": "meeting.webp"
     },
     {
       "type": "panel",
@@ -757,7 +757,7 @@
           ]
         }
       ],
-      "image": "group-b.png"
+      "image": "group-b.webp"
     },
     {
       "type": "panel",
@@ -776,7 +776,7 @@
           "text": "Communities that trust their CHWs are more likely to follow guidance when it matters most."
         }
       ],
-      "image": "group-b.png"
+      "image": "group-b.webp"
     },
     {
       "type": "panel",
@@ -803,7 +803,7 @@
           "text": "In WiRED’s CHW Basic Training Curriculum we offer an entire module in community health surveillance. Students studying this preparedness module may wish to review the surveillance module."
         }
       ],
-      "image": "chs.jpg"
+      "image": "chs.webp"
     },
     {
       "type": "panel",
@@ -836,7 +836,7 @@
           "text": "When you notice a pattern, document it. Write down dates, symptoms, ages, and locations. Even simple records can show trends. Immediately report your findings to your CHW supervisor."
         }
       ],
-      "image": "signs.jpg"
+      "image": "signs.webp"
     },
     {
       "type": "panel",
@@ -863,7 +863,7 @@
           "text": "Silence delays response. Surveillance saves lives."
         }
       ],
-      "image": "clinician.png"
+      "image": "clinician.webp"
     },
     {
       "type": "quiz",
@@ -972,7 +972,7 @@
           "text": "Next, we will consider several important steps that describe a practical, field-ready sequence you can follow during an outbreak. These recognize limited supplies, fragile infrastructure, and high community reliance on your guidance."
         }
       ],
-      "image": "responding.jpg"
+      "image": "responding.webp"
     },
     {
       "type": "panel",
@@ -1007,7 +1007,7 @@
           "text": "Even without laboratory confirmation, recognizing that “something is different” is critical!"
         }
       ],
-      "image": "wwh.jpg"
+      "image": "wwh.webp"
     },
     {
       "type": "panel",
@@ -1038,7 +1038,7 @@
           "text": "Delays in reporting can cost lives."
         }
       ],
-      "image": "nsr.jpg"
+      "image": "nsr.webp"
     },
     {
       "type": "panel",
@@ -1061,7 +1061,7 @@
           "text": "See the upcoming section for more details on CHWs protecting themselves."
         }
       ],
-      "image": "handwashing.png"
+      "image": "handwashing.webp"
     },
     {
       "type": "panel",
@@ -1084,7 +1084,7 @@
           ]
         }
       ],
-      "image": "three-signs.jpg"
+      "image": "three-signs.webp"
     },
     {
       "type": "panel",
@@ -1103,7 +1103,7 @@
           "text": "This includes educating families on practical actions such as handwashing, safe water use, food hygiene, respiratory etiquette, isolation of sick individuals when feasible, and safe care practices within the home."
         }
       ],
-      "image": "family-group.png"
+      "image": "family-group.webp"
     },
     {
       "type": "panel",
@@ -1122,7 +1122,7 @@
           "text": "It should be simple, culturally appropriate, and consistent, emphasizing what people can do even when resources are scarce."
         }
       ],
-      "image": "teaching-b.jpg"
+      "image": "teaching-b.webp"
     },
     {
       "type": "quiz",
@@ -1223,7 +1223,7 @@
           "text": "These perceptions of trust become critical when the community is under stress, when illness is at the door."
         }
       ],
-      "image": "communication-a.jpg"
+      "image": "communication-a.webp"
     },
     {
       "type": "panel",
@@ -1246,7 +1246,7 @@
           "text": "With trust assumed, CHWs can employ clear, calm communication to reduce panic, stigma, and resistance to care or prevention measures."
         }
       ],
-      "image": "comm--trust.jpg"
+      "image": "comm--trust.webp"
     },
     {
       "type": "panel",
@@ -1269,7 +1269,7 @@
           "text": "They also may monitor vital signs and the conditions of infected people as they work through the illness."
         }
       ],
-      "image": "water-for-child.png"
+      "image": "water-for-child.webp"
     },
     {
       "type": "panel",
@@ -1284,7 +1284,7 @@
           "text": "As we have often stated, CHWs are bridges to higher level care, and this is especially important in an outbreak. CHW supervisors will establish criteria that flag patients who must move to the next level of care."
         }
       ],
-      "image": "helping-a.jpg"
+      "image": "helping-a.webp"
     },
     {
       "type": "panel",
@@ -1299,7 +1299,7 @@
           "text": "That’s a delicate balance. Bringing patients to higher level treatment when not necessary can overload the system. Waiting too long can threaten the life of the patient."
         }
       ],
-      "image": "walking-e.png"
+      "image": "walking-e.webp"
     },
     {
       "type": "panel",
@@ -1314,7 +1314,7 @@
           "text": "(Note that WiRED offers a vaccination training program that teaches advanced CHWs the skills needed to set up a vaccination clinic and administer inoculations. Administrators should contact WiRED for details.)"
         }
       ],
-      "image": "helping-b.jpg"
+      "image": "helping-b.webp"
     },
     {
       "type": "panel",
@@ -1333,7 +1333,7 @@
           "text": "CHWs should be aware of these more vulnerable people in their community and be sure to check in on them and give them special attention."
         }
       ],
-      "image": "helping-c.jpg"
+      "image": "helping-c.webp"
     },
     {
       "type": "panel",
@@ -1361,7 +1361,7 @@
           "text": "CHWs may prioritize them for clean water, food, information, and reduced exposure. They may need more frequent vital signs measurement and symptoms checking, and, if they get sick, they may require higher level care sooner than others."
         }
       ],
-      "image": "vulnerable.jpg"
+      "image": "vulnerable.webp"
     },
     {
       "type": "quiz",
@@ -1462,7 +1462,7 @@
           "text": "WiRED offers a number of modules on mental health topics for CHWs and even a special study series for CHWs with a particular interest in mental health during outbreaks and at more normal times."
         }
       ],
-      "image": "depressed.jpg"
+      "image": "depressed.webp"
     },
     {
       "type": "panel",
@@ -1485,7 +1485,7 @@
           "text": "They walk into infected communities to help the sick and that exposes them to the pathogens that cause the illness."
         }
       ],
-      "image": "chw-with-mask.png"
+      "image": "chw-with-mask.webp"
     },
     {
       "type": "panel",
@@ -1500,7 +1500,7 @@
           "text": "If you have a certificate from WiRED’s Basic CHW Training program, you know a lot about how illnesses spread. You have studied water-borne, air-borne, food-borne, vector-borne illnesses and more. So, you know a lot about infectious diseases and how they spread through a population."
         }
       ],
-      "image": "chw-advising.png"
+      "image": "chw-advising.webp"
     },
     {
       "type": "panel",
@@ -1527,7 +1527,7 @@
           "text": "You do not need to know the name of a disease to reduce your risk. You need to assume that any person with fever, cough, diarrhea, rash, or unexplained weakness may be infectious."
         }
       ],
-      "image": "three-ways.jpg"
+      "image": "three-ways.webp"
     },
     {
       "type": "engage_1",
@@ -1538,7 +1538,7 @@
           "text": "Simply put, the aim to avoid illness is to minimize exposure to the conditions that are contributing to the outbreak."
         }
       ],
-      "intro_image": "chw-advising-b.png",
+      "intro_image": "chw-advising-b.webp",
       "items": [
         {
           "label": "Hand Hygiene",
@@ -1548,7 +1548,7 @@
               "text": "Hand hygiene is one of the most effective interventions ever studied. The use of plastic gloves is highly effective, but so are alcohol-based hand rubs or soap and water. They significantly reduce transmission, even in crowded, low-resource environments."
             }
           ],
-          "image": "gloves.png"
+          "image": "gloves.webp"
         },
         {
           "label": "Use Masks",
@@ -1558,7 +1558,7 @@
               "text": "Masks, when properly worn, reduce respiratory transmission. N-95 masks are excellent, but even simple cloth masks reduce spread when used consistently. Masks protect you and others. When everyone uses them, risk drops dramatically."
             }
           ],
-          "image": "mask.png"
+          "image": "mask.webp"
         },
         {
           "label": "Maintain Distance",
@@ -1568,7 +1568,7 @@
               "text": "Distance matters. The closer and longer the contact, the higher the risk. Keeping even one to two meters of distance from a sick person, when possible, reduces transmission substantially."
             }
           ],
-          "image": "distance.png"
+          "image": "distance.webp"
         }
       ]
     },
@@ -1585,7 +1585,7 @@
           "text": "Protecting yourself is not selfish. It is an ethical responsibility to your community."
         }
       ],
-      "image": "feeling-ill.png"
+      "image": "feeling-ill.webp"
     },
     {
       "type": "panel",
@@ -1604,7 +1604,7 @@
           "text": "PDF: Infectious disease training material here"
         }
       ],
-      "image": "healthmap.jpg"
+      "image": "healthmap.webp"
     },
     {
       "type": "quiz",
@@ -1713,7 +1713,7 @@
           "text": "CHW teams can help document lessons learned, rebuild preventive practices, and strengthen preparedness over time."
         }
       ],
-      "image": "briefing.png"
+      "image": "briefing.webp"
     },
     {
       "type": "panel",
@@ -1732,7 +1732,7 @@
           "text": "Resilience is not endurance alone. It is adaptation informed by evidence."
         }
       ],
-      "image": "briefing.png"
+      "image": "briefing.webp"
     },
     {
       "type": "panel",
@@ -1751,7 +1751,7 @@
           "text": "Your knowledge, your presence, and your leadership matter more than ever."
         }
       ],
-      "image": "two-chws.png"
+      "image": "two-chws.webp"
     },
     {
       "type": "panel",
@@ -1770,7 +1770,7 @@
           "text": "Additionally, it provides a ten-item checklist for families to create \"mini-isolation wards\" using shelf-stable foods, do-it-yourself rehydration supplies, and specific hygiene protocols to maintain self-sufficiency during emergencies."
         }
       ],
-      "image": "checklist.jpg"
+      "image": "checklist.webp"
     },
     {
       "type": "panel",
