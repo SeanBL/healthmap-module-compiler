@@ -8,6 +8,7 @@ import shutil
 from .stage1.structural_extractor import extract_raw_slides
 from .stage2.normalize import normalize_slides
 from .runtime_builder import build_module
+from .utils.image_utils import convert_to_webp
 
 STRICT_ASSET_MODE = True  # Fail-fast if asset missing
 
@@ -206,12 +207,30 @@ def package_runtime(module, input_path: Path, stage1_output) -> None:
 
         source_path = asset_lookup[key]
 
-        normalized_name = normalize_filename(source_path.name)
-        target_path = export_assets_dir / normalized_name
+        ext = source_path.suffix.lower()
 
-        shutil.copy(source_path, target_path)
+        SUPPORTED_IMAGE_EXTENSIONS = (".png", ".jpg", ".jpeg", ".webp")
 
-        filename_map[img_name] = normalized_name
+        if ext not in SUPPORTED_IMAGE_EXTENSIONS:
+            continue
+
+        # Convert to WebP if needed
+        if ext != ".webp":
+            new_filename = normalize_filename(source_path.stem) + ".webp"
+            target_path = export_assets_dir / new_filename
+
+            convert_to_webp(source_path, target_path)
+
+            filename_map[img_name] = new_filename
+
+        else:
+            # Already WebP → just copy
+            normalized_name = normalize_filename(source_path.name)
+            target_path = export_assets_dir / normalized_name
+
+            shutil.copy(source_path, target_path)
+
+            filename_map[img_name] = normalized_name
 
     # --------------------------------------------------
     # 🔹 Update module object with normalized filenames

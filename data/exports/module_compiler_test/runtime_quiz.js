@@ -24,12 +24,30 @@ function renderQuiz(slide, container) {
     wrapper.appendChild(p);
   } else {
 
+    let effectiveSlideIndex = RuntimeState.currentIndex;
+
+    if (scope === "final") {
+
+      ensureFinalShufflePlan();
+
+      const mapped = RuntimeState.final.questionOrder[RuntimeState.finalCursor];
+
+      if (typeof mapped === "number") {
+        effectiveSlideIndex = mapped;
+      }
+    }
+
+    console.log("RENDER QUIZ -> finalCursor:", RuntimeState.finalCursor, "effectiveSlideIndex:", effectiveSlideIndex);
+
+    const effectiveSlide = RuntimeState.slides[effectiveSlideIndex];
+    const effectiveQ = effectiveSlide?.questions?.[0];
+
     const block = renderQuizQuestionBlock(
-        slide,
-        q,
-        0,
-        RuntimeState.currentIndex,
-        scope
+      effectiveSlide,
+      effectiveQ,
+      0,
+      effectiveSlideIndex,
+      scope
     );
 
     wrapper.appendChild(block);
@@ -284,19 +302,33 @@ function renderFinalResults(container) {
   const icon = document.createElement("div");
   icon.className = "results-icon";
 
-  icon.innerHTML = `
-    <svg viewBox="0 0 52 52" class="checkmark">
-      <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
-      <path class="checkmark-check" fill="none" d="M14 27l7 7 16-16"/>
-    </svg>
-  `;
+  if (passed) {
+    // ✅ GREEN CHECK
+    icon.innerHTML = `
+      <svg viewBox="0 0 52 52" class="checkmark">
+        <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+        <path class="checkmark-check" fill="none" d="M14 27l7 7 16-16"/>
+      </svg>
+    `;
+  } else {
+    // ❌ RED X
+    icon.innerHTML = `
+      <svg viewBox="0 0 52 52" class="crossmark">
+        <circle class="crossmark-circle" cx="26" cy="26" r="25" fill="none"/>
+        <path class="crossmark-x" fill="none" d="M16 16 36 36 M36 16 16 36"/>
+      </svg>
+    `;
+  }
 
   // Score
   const score = document.createElement("div");
   score.className = "results-score";
 
   const percentText = document.createElement("div");
-  percentText.className = "results-percent";
+  percentText.className = passed
+    ? "results-percent pass"
+    : "results-percent fail";
+
   percentText.textContent = `${percent}%`;
 
   const scoreLabel = document.createElement("div");
@@ -308,6 +340,13 @@ function renderFinalResults(container) {
 
   // Add icon ABOVE score
   left.appendChild(icon);
+
+  // ❌ Trigger shake if failed
+  if (!passed) {
+    setTimeout(() => {
+      icon.classList.add("shake");
+    }, 100);
+  }
   left.appendChild(score);
 
   // Correct count
@@ -348,7 +387,12 @@ function renderFinalResults(container) {
   reviewBtn.textContent = "Review Quiz";
   reviewBtn.onclick = () => {
     RuntimeState.reviewMode = true;
+
+    // ✅ Reset cursor so review starts at first question
+    RuntimeState.finalCursor = 0;
+
     RuntimeState.currentIndex = findFirstFinalQuizSlide();
+
     saveProgress();
     renderSlide();
   };
@@ -410,8 +454,11 @@ function resetFinalQuizOnly() {
     completed: false,
     attemptSeed: null,
     questionOrder: [],
-    optionOrder: {}
+    optionOrder: {},
+    cursorMap: []
   };
+
+  RuntimeState.finalCursor = 0;
 
   RuntimeState.slides.forEach((slide, index) => {
     if (slide.type === "quiz" && (slide.quiz_scope || "inline") === "final") {
@@ -449,7 +496,7 @@ function buildFinalQuizIndex() {
     });
 
   });
-
+  console.log("FINAL QUESTIONS INDEX:", JSON.stringify(RuntimeState.final.questions, null, 2));
 }
 
 // -------------------------
@@ -488,7 +535,11 @@ function recomputeFinalScoreAndRender() {
   let correct = 0;
   let allSubmitted = true;
 
-  RuntimeState.final.questions.forEach(({slideIndex, qIndex}) => {
+  const order = RuntimeState.final.questionOrder || [];
+
+  order.forEach((slideIndex) => {
+
+    const qIndex = 0; // your system uses single-question slides
 
     total++;
 
@@ -543,6 +594,11 @@ function getResultsSlideIndex() {
   if (lastFinal === -1) return null;
 
   return lastFinal + 1; // virtual results slide
+}
+
+function getFinalSlideIndexByCursor(cursor) {
+  const order = RuntimeState.final.questionOrder || [];
+  return order[cursor] ?? null;
 }
 
 // -------------------------
@@ -642,6 +698,10 @@ async function saveScoreForCme() {
 }
 
 function clearFinalQuizFromLocalStorage() {
+  RuntimeState.finalCursor = 0;
+  RuntimeUI.resultsShown = false;
+  RuntimeState.reviewMode = false;
+
   // Reset inline quiz shuffle
   RuntimeState.shuffle = {
     seed: null,
@@ -656,7 +716,8 @@ function clearFinalQuizFromLocalStorage() {
     completed: false,
     attemptSeed: null,
     questionOrder: [],
-    optionOrder: {}
+    optionOrder: {},
+    questions: [] 
   };
 
   // Remove only final-scope quiz entries
@@ -707,6 +768,19 @@ function inlineKey(slideIndex, qIndex) {
   return `${slideIndex}:${qIndex}`;
 }
 
+function getOrderedFinalSlideIndices() {
+  return RuntimeState.final.questionOrder || [];
+}
+
+function getNextOrderedFinalSlideIndex(currentIndex) {
+  const order = getOrderedFinalSlideIndices();
+  const pos = order.indexOf(currentIndex);
+
+  if (pos === -1) return null;
+
+  return order[pos + 1] ?? null;
+}
+
 function ensureGlobalShufflePlan() {
   if (typeof RuntimeState.shuffle?.seed === "number") return;
 
@@ -748,24 +822,24 @@ function ensureFinalShufflePlan() {
   const rand = seededRng(RuntimeState.final.attemptSeed);
 
   // Collect ALL final questions across slides
-  const finalQuestions = [];
+  const finalSlides = [];
+
   RuntimeState.slides.forEach((s, slideIndex) => {
     if (s.type !== "quiz") return;
     if ((s.quiz_scope || "inline") !== "final") return;
-    if (!Array.isArray(s.questions)) return;
 
-    s.questions.forEach((q, qIndex) => {
-      finalQuestions.push({ slideIndex, qIndex });
-    });
+    finalSlides.push(slideIndex);
   });
 
   // Shuffle question order
-  RuntimeState.final.questionOrder = seededShuffleArray(finalQuestions, rand);
+  RuntimeState.final.questionOrder = seededShuffleArray(finalSlides, rand);
 
   // Shuffle options per question (store option ID order)
   RuntimeState.final.optionOrder = {};
 
-  RuntimeState.final.questionOrder.forEach(({ slideIndex, qIndex }) => {
+  RuntimeState.final.questionOrder.forEach((slideIndex) => {
+    const qIndex = 0;
+
     const q = RuntimeState.slides[slideIndex]?.questions?.[qIndex];
     if (!q) return;
 
@@ -776,5 +850,13 @@ function ensureFinalShufflePlan() {
       seededShuffleArray(optionIds, rand);
   });
 
+  // Build cursor map (index → slideIndex)
+  RuntimeState.final.cursorMap = [];
+
+  RuntimeState.final.questionOrder.forEach((slideIndex, i) => {
+    RuntimeState.final.cursorMap[i] = slideIndex;
+  });
+
+  console.log("SHUFFLED ORDER:", RuntimeState.final.questionOrder);
   saveProgress();
 }

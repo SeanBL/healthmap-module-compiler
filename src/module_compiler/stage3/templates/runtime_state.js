@@ -9,6 +9,9 @@ const RuntimeState = window.RuntimeState = {
   resources: [],
   currentIndex: 0,
 
+  currentIndex: 0,
+  finalCursor: 0, 
+
   // quizState[slideIndex][questionIndex] = { selectedOptionId, submitted, correct }
   quizState: {},
     shuffle: {
@@ -44,6 +47,9 @@ function loadProgress() {
     const saved = JSON.parse(raw);
 
     if (typeof saved.currentIndex === "number") RuntimeState.currentIndex = saved.currentIndex;
+    if (typeof saved.finalCursor === "number") {
+      RuntimeState.finalCursor = saved.finalCursor;
+    }
     if (saved.quizState) RuntimeState.quizState = saved.quizState;
     if (saved.final) {
       RuntimeState.final = {
@@ -63,6 +69,7 @@ function saveProgress() {
   try {
     const payload = {
       currentIndex: RuntimeState.currentIndex,
+      finalCursor: RuntimeState.finalCursor,
       quizState: RuntimeState.quizState,
       final: RuntimeState.final,
 
