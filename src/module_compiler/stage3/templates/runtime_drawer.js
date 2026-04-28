@@ -279,6 +279,15 @@ function renderDrawerMenu(container) {
 
     // ✅ Navigation behavior
     item.addEventListener("click", () => {
+
+      // 🔥 HANDLE DISCLAIMER (special case)
+      if (section.special === "disclaimer") {
+        closeDrawer();
+        renderDisclaimerPage();
+        return;
+      }
+
+      // Normal slide navigation
       RuntimeState.currentIndex = section.slideIndex;
       closeDrawer();
       renderSlide();

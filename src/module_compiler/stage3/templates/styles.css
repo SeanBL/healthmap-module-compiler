@@ -304,12 +304,11 @@ body {
   }
 
   .panel-content {
-    display: flex;
     flex-direction: row;
-    font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  }
 
-    align-items: flex-start;
-    gap: 2rem;  /* 🔥 more breathing room */
+  .panel-content-block {
+    flex-direction: row;
   }
 
   /* TEXT SIDE */
@@ -319,7 +318,7 @@ body {
 
   /* IMAGE SIDE */
   .panel-content img {
-    flex: 1.1;
+    flex: 1.2;
     max-width: 100%;
     max-height: 70vh;   /* 🔥 bigger image */
   }
@@ -460,7 +459,7 @@ body {
 
 .panel-content {
   display: flex;
-  flex-direction: row;
+  flex-direction: column; 
   align-items: flex-start;
   gap: var(--content-gap);
 
@@ -690,10 +689,19 @@ body {
     gap: 1.5rem;
   }
 
-  .panel-content img {
-    flex: 1.4;
+  /* TEXT COLUMN */
+  .panel-content > .panel-content-block:first-child {
+    flex: 2;
+  }
+
+  /* IMAGE COLUMN */
+  .panel-content > .panel-content-block:last-child {
+    flex: 1;
+  }
+
+  /* IMAGE ITSELF */
+  .panel-content .image-wrapper img {
     width: 100%;
-    max-width: 100%;
     height: auto;
     max-height: 70vh;
     object-fit: contain;
@@ -1063,11 +1071,11 @@ body {
 .results-score {
   font-size: 64px;
   font-weight: bold;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .results-percent {
-  font-size: 72px;
+  font-size: clamp(2.8rem, 10vw, 4.5rem);
   font-weight: 700;
   background: linear-gradient(90deg,#1e6ad8,#13c16c);
   -webkit-background-clip: text;
@@ -1090,6 +1098,23 @@ body {
   background: #ececec;
   padding: 12px;
   border-radius: 8px;
+}
+
+/* -------------------------
+   Adjust "Your Score" label
+------------------------- */
+
+.results-score .results-label {
+  font-size: clamp(1.2rem, 3.5vw, 1.6rem);  /* 🔥 override large parent */
+  font-weight: 500;
+
+  display: block;
+  text-align: center;
+
+  margin-top: 6px;
+
+  white-space: nowrap;   /* keep on one line */
+  line-height: 1.2;
 }
 
 /* Buttons */
@@ -1423,6 +1448,223 @@ li {
   .engage2-btn {
     width: 100%;               /* 🔥 full width buttons */
     justify-content: center;
+  }
+
+}
+
+@media (max-width: 420px) {
+
+  #navigation-portrait {
+    padding: 10px 10px;
+    gap: 8px;
+  }
+
+  .p-left .nav-btn,
+  .p-right .nav-btn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  .slide-counter {
+    font-size: 0.8rem;
+  }
+
+  .progress-bar.horizontal {
+    width: 80px;
+    height: 5px;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  #slide-container {
+    padding: 6px 10px 10px 10px;
+  }
+
+  .panel-content-block p,
+  .engage-content-block p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .panel-content-block img,
+  .engage-content-block img {
+    max-height: 40vh;
+  }
+
+}
+
+@media (max-width: 360px) {
+
+  #module-title {
+    font-size: 1.2rem;
+  }
+
+  .panel-content-block p {
+    font-size: 0.9rem;
+  }
+
+}
+
+@media (max-width: 700px) and (orientation: landscape) {
+
+  #navigation-landscape {
+    width: 65px;
+    min-width: 65px;
+    padding: 12px 0;
+  }
+
+  .l-top .nav-btn {
+    width: 50px;
+    padding: 10px 0;
+    font-size: 0.8rem;
+  }
+
+  .l-bottom .nav-btn {
+    width: 50px;
+    padding: 8px 0;
+  }
+
+  .progress-bar.vertical {
+    height: 60px;
+  }
+
+  .slide-counter {
+    font-size: 0.75rem;
+  }
+
+}
+
+/* 🔥 SMALL LANDSCAPE FIX (DO NOT TOUCH 700px RULE) */
+@media (max-width: 699px) and (orientation: landscape) {
+
+  .panel-content {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  /* TEXT */
+  .panel-content > .panel-content-block:first-child {
+    flex: 2;
+  }
+
+  /* IMAGE */
+  .panel-content > .panel-content-block:last-child {
+    flex: 1;
+  }
+
+  .panel-content .image-wrapper img {
+    width: 100%;
+    height: auto;
+    max-height: 60vh;
+    object-fit: contain;
+  }
+
+}
+
+@media (max-height: 420px) and (orientation: landscape) {
+
+  #navigation-landscape {
+    padding: 8px 0;
+    gap: 10px;
+  }
+
+  .l-top {
+    gap: 6px;
+  }
+
+  .l-top .nav-btn {
+    width: 48px;
+    padding: 8px 0;
+    font-size: 0.75rem;
+  }
+
+  .l-middle {
+    gap: 6px;
+  }
+
+  .progress-bar.vertical {
+    height: 45px;   /* 🔥 shrink bar */
+  }
+
+  .slide-counter {
+    font-size: 0.7rem;
+  }
+
+  .l-bottom .nav-btn {
+    width: 48px;
+    padding: 6px 0;
+  }
+
+}
+
+/* 🔥 MEDIUM PHONES — PORTRAIT ONLY */
+@media (min-width: 421px) and (max-width: 900px) and (orientation: portrait) {
+
+  #navigation-portrait {
+    padding: 16px 18px;
+    gap: 16px;
+  }
+
+  .p-left .nav-btn,
+  .p-right .nav-btn {
+    padding: 12px 18px;
+    font-size: 1.05rem;
+    border-radius: 12px;
+  }
+
+  .progress-bar.horizontal {
+    width: 130px;
+    height: 7px;
+  }
+
+  .slide-counter {
+    font-size: 1rem;
+  }
+
+}
+
+/* 🔥 MEDIUM PHONES — LANDSCAPE (CONTROL HEIGHT) */
+@media (min-width: 421px) and (max-width: 900px) and (orientation: landscape) {
+
+  #navigation-landscape {
+    width: 75px;
+    min-width: 75px;
+    padding: 14px 0;
+  }
+
+  .l-top {
+    gap: 10px;
+  }
+
+  .l-top .nav-btn {
+    width: 54px;
+    padding: 10px 0;
+    font-size: 0.85rem;
+  }
+
+  .l-middle {
+    gap: 8px;
+  }
+
+  .progress-bar.vertical {
+    height: 65px;
+  }
+
+  .slide-counter {
+    font-size: 0.85rem;
+  }
+
+  .l-bottom .nav-btn {
+    width: 56px;
+    padding: 8px 0;
   }
 
 }

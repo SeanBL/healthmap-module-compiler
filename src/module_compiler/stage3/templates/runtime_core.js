@@ -194,6 +194,13 @@ function getMenuSections() {
     visibleIndex++;
   });
 
+  sections.push({
+    slideIndex: null,
+    label: "",
+    title: "Disclaimer",
+    special: "disclaimer"
+  });
+
   return sections;
 }
 
@@ -202,13 +209,6 @@ function getMenuSections() {
 // -------------------------
 
 function getMaxSlideIndex() {
-
-  const resultsIndex = getResultsSlideIndex();
-
-  if (resultsIndex !== null) {
-    return resultsIndex;
-  }
-
   return RuntimeState.slides.length - 1;
 }
 
@@ -271,8 +271,13 @@ function setupNavigation() {
 
       const resultsIndex = getResultsSlideIndex();
 
-      // Prevent Next from running on Results page
-      if (RuntimeState.currentIndex === resultsIndex) return;
+      // Allow moving past results if there are more slides
+      if (
+        RuntimeState.currentIndex === resultsIndex &&
+        resultsIndex === RuntimeState.slides.length - 1
+      ) {
+        return;
+      }
 
       const slide = RuntimeState.slides[RuntimeState.currentIndex];
 
@@ -525,42 +530,99 @@ async function renderContentBlock({
   imageSrc = null,
   alt = ""
 }) {
-  const block = document.createElement("div");
-  block.className = "engage-content-block";
+  console.log("🚨 NEW renderContentBlock version running");
+  // 🔥 OUTER CONTAINER (THIS controls layout)
+  const container = document.createElement("div");
+  container.className = "panel-content";
 
-  // Text
+  // -------------------------
+  // RESOURCE BUTTONS (SHARED DATA SOURCE)
+  // -------------------------
+  if (RuntimeState.slides[RuntimeState.currentIndex]?.header === "Additional Resources") {
+
+    const resources = RuntimeState.resources || [];
+
+    const buttonContainer = document.createElement("div");
+    buttonContainer.style.display = "flex";
+    buttonContainer.style.flexDirection = "column";
+    buttonContainer.style.gap = "0.6rem";
+
+    resources.forEach(resource => {
+      if (!resource || !resource.file) return;
+
+      const filePath = `assets/resources/${resource.file}`;
+      const label = resource.label || resource.file;
+
+      const btn = document.createElement("a");
+      btn.href = filePath;
+      btn.textContent = `📄 ${label}`;
+      btn.target = "_blank";
+
+      // Theme styling
+      btn.style.padding = "0.75rem 1rem";
+      btn.style.background = "var(--engage-btn-bg)";
+      btn.style.color = "var(--engage-btn-text)";
+      btn.style.border = "1px solid var(--engage-btn-border)";
+      btn.style.borderRadius = "8px";
+      btn.style.textDecoration = "none";
+      btn.style.fontWeight = "500";
+      btn.style.transition = "all 0.15s ease";
+      btn.style.cursor = "pointer";
+
+      btn.addEventListener("mouseenter", () => {
+        btn.style.background = "var(--engage-btn-bg-hover)";
+      });
+
+      btn.addEventListener("mouseleave", () => {
+        btn.style.background = "var(--engage-btn-bg)";
+      });
+
+      btn.addEventListener("mousedown", () => {
+        btn.style.transform = "scale(0.97)";
+      });
+
+      btn.addEventListener("mouseup", () => {
+        btn.style.transform = "scale(1)";
+      });
+
+      buttonContainer.appendChild(btn);
+    });
+
+    return buttonContainer;
+  }
+
+  // -------------------------
+  // TEXT BLOCK
+  // -------------------------
+  const textBlock = document.createElement("div");
+  textBlock.className = "panel-content-block";
+
   if (textArray.length) {
     const textWrapper = document.createElement("div");
     textWrapper.className = "engage-text";
 
-    textArray.forEach(block => {
-      if (!block) return;
+    textArray.forEach(item => {
+      if (!item) return;
 
-      // -------------------------
-      // Paragraph
-      // -------------------------
-      if (typeof block === "string") {
+      if (typeof item === "string") {
         const p = document.createElement("p");
-        p.textContent = block;
+        p.textContent = item;
         textWrapper.appendChild(p);
         return;
       }
 
-      if (block.type === "paragraph") {
+      if (item.type === "paragraph") {
         const p = document.createElement("p");
-        p.textContent = block.text;
+        p.textContent = item.text;
         textWrapper.appendChild(p);
       }
 
-      // -------------------------
-      // Bullets
-      // -------------------------
-      else if (block.type === "bullets") {
+      else if (item.type === "bullets") {
         const ul = document.createElement("ul");
 
-        block.items.forEach(item => {
+        item.items.forEach(liText => {
           const li = document.createElement("li");
-          li.textContent = item;
+          li.textContent = liText;
           ul.appendChild(li);
         });
 
@@ -568,29 +630,28 @@ async function renderContentBlock({
       }
     });
 
-    block.appendChild(textWrapper);
+    textBlock.appendChild(textWrapper);
   }
 
-  // Image (FIXED)
-  if (imageSrc) {
-    const img = await createReadyImage(
-      imageSrc,
-      alt,
-      ""
-    );
+  // Always append text
+  container.appendChild(textBlock);
 
-    // -------------------------
-    // Image Wrapper
-    // -------------------------
+  // -------------------------
+  // IMAGE BLOCK (SEPARATE!)
+  // -------------------------
+  if (imageSrc) {
+    const imageBlock = document.createElement("div");
+    imageBlock.className = "panel-content-block";
+
+    const img = await createReadyImage(imageSrc, alt, "");
+
     const wrapper = document.createElement("div");
     wrapper.className = "image-wrapper";
 
-    // Overlay label
     const overlay = document.createElement("div");
     overlay.className = "image-overlay";
     overlay.textContent = "Tap to expand";
 
-    // Add click behavior
     wrapper.addEventListener("click", () => {
       openImageViewer(img.src);
     });
@@ -598,10 +659,12 @@ async function renderContentBlock({
     wrapper.appendChild(img);
     wrapper.appendChild(overlay);
 
-    block.appendChild(wrapper);
+    imageBlock.appendChild(wrapper);
+
+    container.appendChild(imageBlock);
   }
 
-  return block;
+  return container;
 }
 
 // -------------------------
@@ -623,6 +686,97 @@ async function renderPanel(slide, container) {
 
   contentWrapper.appendChild(block);
   container.appendChild(contentWrapper);
+}
+
+// -------------------------
+// Disclaimer Page
+// -------------------------
+function renderDisclaimerPage() {
+  const container = document.getElementById("slide-container");
+  if (!container) return;
+
+  closeDrawer();
+  document.body.style.overflow = "";
+  container.innerHTML = "";
+  container.scrollTop = 0;
+
+  const wrapper = document.createElement("div");
+  wrapper.className = "panel-content";
+
+  // -------------------------
+  // 🔙 BACK BUTTON
+  // -------------------------
+  const backBtn = document.createElement("button");
+  backBtn.textContent = "← Back to Module";
+  backBtn.className = "drawer-resource-btn";
+  backBtn.style.marginBottom = "1rem";
+
+  backBtn.addEventListener("click", () => {
+    renderSlide();
+  });
+
+  wrapper.appendChild(backBtn);
+
+  // -------------------------
+  // HEADER
+  // -------------------------
+  const header = document.createElement("h2");
+  header.textContent = "WiRED International Disclaimer";
+  wrapper.appendChild(header);
+
+  // -------------------------
+  // TEXT CONTENT
+  // -------------------------
+  const textBlock = document.createElement("div");
+  textBlock.className = "panel-content-block";
+
+  const textWrapper = document.createElement("div");
+  textWrapper.className = "engage-text";
+
+  const paragraphs = [
+    "Some WiRED Community Health Information modules may provide links to material prepared by other institutions. These are offered as a convenience. WiRED is not responsible for the content of this material, nor does WiRED endorse, warrant or guarantee the products, services or information described or offered.",
+    "It is not WiRED's intention to provide specific medical advice to users of its modules. Instead we provide information to help users better understand health issues and the current approaches related to treatment, prevention, screening, and supportive care. WiRED urges users to consult with a qualified health care professional for diagnosis and answers to their personal medical questions.",
+    "Use of This Information",
+    "WiRED does not charge NGOs, community groups and other not-for-profit organizations for the use of this Community Health Information database. However, any individual or group wishing to use this material must receive written permission from WiRED before the material can be copied or displayed. Moreover, no individual or group using this material may charge for access. The material from the WiRED modules may not be revised, extracted or used outside the context of the modules as they appear in the original database.",
+    "Contact Information",
+    "WiRED International\nP.O. Box 371132\nMontara, CA 94037\nUSA\nEmail: CHIprogram@wiredinternational.org\nWeb: www.wiredinternational.org"
+  ];
+
+  paragraphs.forEach(text => {
+
+    // -------------------------
+    // 🧠 SECTION HEADERS
+    // -------------------------
+    if (
+      text === "Use of This Information" ||
+      text === "Contact Information"
+    ) {
+      const h3 = document.createElement("h3");
+      h3.textContent = text;
+      h3.style.marginTop = "1.2rem";
+      h3.style.marginBottom = "0.4rem";
+      h3.style.fontWeight = "600";
+      textWrapper.appendChild(h3);
+      return;
+    }
+
+    // -------------------------
+    // NORMAL PARAGRAPH
+    // -------------------------
+    const p = document.createElement("p");
+    p.textContent = text;
+    p.style.marginBottom = "0.75rem";
+    textWrapper.appendChild(p);
+  });
+
+  textBlock.appendChild(textWrapper);
+  wrapper.appendChild(textBlock);
+  container.appendChild(wrapper);
+
+  // Disable navigation buttons (clean UX)
+  document.querySelectorAll('[data-nav="prev"], [data-nav="next"]').forEach(btn => {
+    btn.disabled = true;
+  });
 }
 
 // -------------------------
