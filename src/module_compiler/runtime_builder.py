@@ -154,3 +154,35 @@ def build_module(module_id: str, raw_slides: List[RawSlide]) -> Module:
         module_id=module_id,
         slides=slides,
     )
+
+def build_disclaimer_slide():
+    return PanelSlide(
+        type="panel",
+        header="WiRED International Disclaimer",
+        body=[
+            {
+                "type": "paragraph",
+                "text": "Some WiRED Community Health Information modules may provide links to material prepared by other institutions. These are offered as a convenience. WiRED is not responsible for the content of this material, nor does WiRED endorse, warrant or guarantee the products, services or information described or offered."
+            },
+            {
+                "type": "paragraph",
+                "text": "It is not WiRED's intention to provide specific medical advice to users of its modules. Instead we provide information to help users better understand health issues and the current approaches related to treatment, prevention, screening, and supportive care. WiRED urges users to consult with a qualified health care professional for diagnosis and answers to their personal medical questions."
+            },
+            {
+                "type": "paragraph",
+                "text": "Use of This Information"
+            },
+            {
+                "type": "paragraph",
+                "text": "WiRED does not charge NGOs, community groups and other not-for-profit organizations for the use of this Community Health Information database. However, any individual or group wishing to use this material must receive written permission from WiRED before the material can be copied or displayed. Moreover, no individual or group using this material may charge for access. The material from the WiRED modules may not be revised, extracted or used outside the context of the modules as they appear in the original database."
+            },
+            {
+                "type": "paragraph",
+                "text": "Contact Information"
+            },
+            {
+                "type": "paragraph",
+                "text": "WiRED International\nP.O. Box 371132\nMontara, CA 94037\nUSA\nEmail: CHIprogram@wiredinternational.org\nWeb: www.wiredinternational.org"
+            }
+        ]
+    )
