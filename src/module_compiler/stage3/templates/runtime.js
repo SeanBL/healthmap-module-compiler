@@ -9,14 +9,19 @@ function loadModule() {
   RuntimeState.moduleId = data.module_id || 0;
   RuntimeState.title = data.module_title || "Module";
 
-  // ✅ THIS IS THE IMPORTANT LINE
   RuntimeState.resources = data.resources || [];
 
   RuntimeState.slides = data.slides || [];
+
+  const theme = getThemeForModule(RuntimeState.moduleId);
+  applyModuleTheme(theme);
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+  console.log("🚀 INIT START"); // 👈 add this
+
   await loadModule();
+  console.log("🚀 MODULE LOADED");
   setupNavigation();
   setupDrawer();
   setupResume();
