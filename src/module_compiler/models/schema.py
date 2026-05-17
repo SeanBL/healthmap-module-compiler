@@ -39,6 +39,7 @@ class PanelSlide(BaseModel):
     header: str
     body: List[Union[str, Dict]]
     image: Optional[str] = None
+    panel_pdf: Optional[str] = None
 
 
 # -------------------------
@@ -91,3 +92,4 @@ class Module(BaseModel):
     module_id: str
     version: str = Field(default="1.0")
     slides: List[Slide]
+
