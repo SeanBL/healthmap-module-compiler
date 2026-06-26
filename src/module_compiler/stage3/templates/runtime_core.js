@@ -490,12 +490,27 @@ function updateNavigationUI() {
      SLIDE COUNT
   ------------------------- */
 
+  const currentSlide =
+    RuntimeState.slides[RuntimeState.currentIndex];
+
+  const isFinalQuiz =
+    currentSlide?.type === "quiz" &&
+    (currentSlide.quiz_scope || "inline") === "final";
+
   const totalSlides =
     resultsIndex !== null
       ? resultsIndex + 1
       : RuntimeState.slides.length;
 
   counters.forEach(counter => {
+
+    if (isFinalQuiz) {
+      counter.style.visibility = "hidden";
+      return;
+    }
+
+    counter.style.visibility = "visible";
+
     counter.textContent =
       `${RuntimeState.currentIndex + 1} / ${totalSlides}`;
   });
@@ -614,8 +629,6 @@ async function renderContentBlock({
     const textWrapper = document.createElement("div");
     textWrapper.className = "engage-text";
 
-    let sharedImageModifiers = [];
-
     textArray.forEach(item => {
       if (!item) return;
 
@@ -629,13 +642,18 @@ async function renderContentBlock({
       if (item.type === "paragraph") {
         const p = document.createElement("p");
 
-        p.textContent = item.text;
+        const rawText = item.text || "";
+
+        const imageOnlyCenter =
+          rawText.includes("[IMAGE_ONLY_CENTER]");
+
+        p.textContent = rawText
+          .replace("[IMAGE_ONLY_CENTER]", "")
+          .trim();
 
         const paragraphModifiers = Array.isArray(item.modifiers)
           ? item.modifiers
           : [];
-
-        sharedImageModifiers = paragraphModifiers;
 
         if (
           panelPdf &&
@@ -680,6 +698,10 @@ async function renderContentBlock({
 
         }
 
+        if (imageOnlyCenter) {
+          textBlock.style.display = "none";
+        }
+
         textWrapper.appendChild(p);
       }
 
@@ -706,34 +728,82 @@ async function renderContentBlock({
   // IMAGE BLOCK (SEPARATE!)
   // -------------------------
   if (imageSrc) {
+
     const imageBlock = document.createElement("div");
     imageBlock.className = "panel-content-block";
 
-    const img = await createReadyImage(imageSrc, alt, "");
+    if (textBlock.style.display === "none") {
+      imageBlock.style.width = "100%";
+      imageBlock.style.display = "flex";
+      imageBlock.style.justifyContent = "center";
+    }
 
-    const wrapper = document.createElement("div");
-    wrapper.className = "image-wrapper";
+    // -------------------------
+    // Detect Media Type
+    // -------------------------
 
-    if (Array.isArray(sharedImageModifiers)) {
+    const extension = imageSrc
+      .split(".")
+      .pop()
+      .toLowerCase();
 
-      if (sharedImageModifiers.includes("center_image")) {
-        wrapper.classList.add("center-image");
-      }
+    const isVideo = ["mp4", "webm"].includes(extension);
+
+    // ==================================================
+    // VIDEO
+    // ==================================================
+
+    if (isVideo) {
+
+      const video = document.createElement("video");
+
+      video.src = imageSrc;
+
+      const posterSrc =
+        imageSrc.replace(/\.(mp4|webm)$/i, "_poster.jpg");
+
+      video.poster = posterSrc;
+
+      video.controls = true;
+      video.playsInline = true;
+      video.preload = "metadata";
+
+      // Reuse existing image styling
+      video.className = "panel-image";
+
+      // Prevent giant videos
+      video.style.width = "100%";
+      video.style.maxWidth = "100%";
+      video.style.borderRadius = "12px";
+
+      imageBlock.appendChild(video);
 
     }
 
-    const overlay = document.createElement("div");
-    overlay.className = "image-overlay";
-    overlay.textContent = "Tap to expand";
+    // ==================================================
+    // IMAGE
+    // ==================================================
 
-    wrapper.addEventListener("click", () => {
-      openImageViewer(img.src);
-    });
+    else {
 
-    wrapper.appendChild(img);
-    wrapper.appendChild(overlay);
+      const img = await createReadyImage(imageSrc, alt, "");
 
-    imageBlock.appendChild(wrapper);
+      const wrapper = document.createElement("div");
+      wrapper.className = "image-wrapper";
+
+      const overlay = document.createElement("div");
+      overlay.className = "image-overlay";
+      overlay.textContent = "Tap to expand";
+
+      wrapper.addEventListener("click", () => {
+        openImageViewer(img.src);
+      });
+
+      wrapper.appendChild(img);
+      wrapper.appendChild(overlay);
+
+      imageBlock.appendChild(wrapper);
+    }
 
     container.appendChild(imageBlock);
   }
